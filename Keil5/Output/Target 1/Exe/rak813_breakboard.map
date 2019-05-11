@@ -1,0 +1,1804 @@
+
+
+***************************************************************************************
+***                                                                                 ***
+***                                LINK INFORMATION                                 ***
+***                                                                                 ***
+***************************************************************************************
+
+Copyright (c) 2017-2019 SEGGER Microcontroller GmbH    www.segger.com
+SEGGER Linker 2.30a compiled Mar 28 2019 14:56:11
+
+Command line:
+  --add-region
+  FLASH=0x00080000@0x00000000
+  --add-region
+  RAM=0x00010000@0x20000000
+  --defsym=__STACKSIZE__=1024
+  --defsym=__STACKSIZE_PROCESS__=0
+  --defsym=__HEAPSIZE__=1024
+  --full-section-headers
+  -ereset_handler
+  --defsym=__vfprintf=__vfprintf_int_nwp
+  --defsym=__vfscanf=__vfscanf_int
+  --silent
+  --list-all-undefineds
+  --fatal-warnings
+  -EL
+  -mcpu=cortex-m4
+  --gc-sections
+  -T/Applications/SEGGER Embedded Studio for ARM 4.16/samples/SEGGER_Flash.icf
+  -Map
+  Output/Target 1/Exe/rak813_breakboard.map
+  -u_vectors
+  -o
+  Output/Target 1/Exe/rak813_breakboard.elf
+  --emit-relocs
+  --start-group
+  Output/rak813_breakboard Target 1/Obj/Cortex_M_Startup.o
+  Output/rak813_breakboard Target 1/Obj/SEGGER_THUMB_Startup.o
+  Output/rak813_breakboard Target 1/Obj/main.o
+  Output/rak813_breakboard Target 1/Obj/boards.o
+  Output/rak813_breakboard Target 1/Obj/bsp.o
+  Output/rak813_breakboard Target 1/Obj/bsp_btn_ble.o
+  Output/rak813_breakboard Target 1/Obj/bsp_nfc.o
+  Output/rak813_breakboard Target 1/Obj/system_nrf52.o
+  Output/rak813_breakboard Target 1/Obj/board.o
+  Output/rak813_breakboard Target 1/Obj/gpio-board.o
+  Output/rak813_breakboard Target 1/Obj/rtc-board.o
+  Output/rak813_breakboard Target 1/Obj/spi-board.o
+  Output/rak813_breakboard Target 1/Obj/sx1276-board.o
+  Output/rak813_breakboard Target 1/Obj/timer.o
+  Output/rak813_breakboard Target 1/Obj/utilities.o
+  Output/rak813_breakboard Target 1/Obj/utils.o
+  Output/rak813_breakboard Target 1/Obj/app_lora.o
+  Output/rak813_breakboard Target 1/Obj/rak_i2c_sht31.o
+  Output/rak813_breakboard Target 1/Obj/rak_spi_drv.o
+  Output/rak813_breakboard Target 1/Obj/lis3dh_driver.o
+  Output/rak813_breakboard Target 1/Obj/rak_i2c_drv.o
+  Output/rak813_breakboard Target 1/Obj/rak_i2c_gps_max7.o
+  Output/rak813_breakboard Target 1/Obj/rak_i2c_lis3dh.o
+  Output/rak813_breakboard Target 1/Obj/rak_i2c_oled.o
+  Output/rak813_breakboard Target 1/Obj/LoRaMac.o
+  Output/rak813_breakboard Target 1/Obj/LoRaMacCrypto.o
+  Output/rak813_breakboard Target 1/Obj/Region.o
+  Output/rak813_breakboard Target 1/Obj/RegionAS923.o
+  Output/rak813_breakboard Target 1/Obj/RegionAU915.o
+  Output/rak813_breakboard Target 1/Obj/RegionCommon.o
+  Output/rak813_breakboard Target 1/Obj/RegionEU868.o
+  Output/rak813_breakboard Target 1/Obj/RegionIN865.o
+  Output/rak813_breakboard Target 1/Obj/RegionKR920.o
+  Output/rak813_breakboard Target 1/Obj/RegionUS915.o
+  Output/rak813_breakboard Target 1/Obj/RegionUS915-Hybrid.o
+  Output/rak813_breakboard Target 1/Obj/RegionCN470.o
+  Output/rak813_breakboard Target 1/Obj/RegionCN779.o
+  Output/rak813_breakboard Target 1/Obj/RegionEU433.o
+  Output/rak813_breakboard Target 1/Obj/sx1276.o
+  Output/rak813_breakboard Target 1/Obj/aes.o
+  Output/rak813_breakboard Target 1/Obj/cmac.o
+  Output/rak813_breakboard Target 1/Obj/gps.o
+  Output/rak813_breakboard Target 1/Obj/ble_advertising.o
+  Output/rak813_breakboard Target 1/Obj/ble_advdata.o
+  Output/rak813_breakboard Target 1/Obj/ble_conn_params.o
+  Output/rak813_breakboard Target 1/Obj/ble_conn_state.o
+  Output/rak813_breakboard Target 1/Obj/ble_srv_common.o
+  Output/rak813_breakboard Target 1/Obj/nrf_ble_gatt.o
+  Output/rak813_breakboard Target 1/Obj/gatt_cache_manager.o
+  Output/rak813_breakboard Target 1/Obj/gatts_cache_manager.o
+  Output/rak813_breakboard Target 1/Obj/id_manager.o
+  Output/rak813_breakboard Target 1/Obj/peer_data_storage.o
+  Output/rak813_breakboard Target 1/Obj/peer_database.o
+  Output/rak813_breakboard Target 1/Obj/peer_id.o
+  Output/rak813_breakboard Target 1/Obj/peer_manager.o
+  Output/rak813_breakboard Target 1/Obj/pm_buffer.o
+  Output/rak813_breakboard Target 1/Obj/pm_mutex.o
+  Output/rak813_breakboard Target 1/Obj/security_dispatcher.o
+  Output/rak813_breakboard Target 1/Obj/security_manager.o
+  Output/rak813_breakboard Target 1/Obj/ble_nus.o
+  Output/rak813_breakboard Target 1/Obj/ble_db_discovery.o
+  Output/rak813_breakboard Target 1/Obj/nrf_drv_clock.o
+  Output/rak813_breakboard Target 1/Obj/nrf_drv_common.o
+  Output/rak813_breakboard Target 1/Obj/nrf_drv_gpiote.o
+  Output/rak813_breakboard Target 1/Obj/nrf_drv_rtc.o
+  Output/rak813_breakboard Target 1/Obj/nrf_drv_spi.o
+  Output/rak813_breakboard Target 1/Obj/nrf_drv_twi.o
+  Output/rak813_breakboard Target 1/Obj/nrf_drv_uart.o
+  Output/rak813_breakboard Target 1/Obj/app_button.o
+  Output/rak813_breakboard Target 1/Obj/app_fifo.o
+  Output/rak813_breakboard Target 1/Obj/nrf_fstorage.o
+  Output/rak813_breakboard Target 1/Obj/nrf_fstorage_sd.o
+  Output/rak813_breakboard Target 1/Obj/fds.o
+  Output/rak813_breakboard Target 1/Obj/app_uart_fifo.o
+  Output/rak813_breakboard Target 1/Obj/nrf_strerror.o
+  Output/rak813_breakboard Target 1/Obj/nrf_section_iter.o
+  Output/rak813_breakboard Target 1/Obj/nrf_memobj.o
+  Output/rak813_breakboard Target 1/Obj/nrf_atfifo.o
+  Output/rak813_breakboard Target 1/Obj/nrf_balloc.o
+  Output/rak813_breakboard Target 1/Obj/nrf_fprintf.o
+  Output/rak813_breakboard Target 1/Obj/nrf_fprintf_format.o
+  Output/rak813_breakboard Target 1/Obj/app_error.o
+  Output/rak813_breakboard Target 1/Obj/app_error_weak.o
+  Output/rak813_breakboard Target 1/Obj/app_util_platform.o
+  Output/rak813_breakboard Target 1/Obj/sdk_mapped_flags.o
+  Output/rak813_breakboard Target 1/Obj/retarget.o
+  Output/rak813_breakboard Target 1/Obj/nrf_pwr_mgmt.o
+  Output/rak813_breakboard Target 1/Obj/nrf_assert.o
+  Output/rak813_breakboard Target 1/Obj/app_timer.o
+  Output/rak813_breakboard Target 1/Obj/app_scheduler.o
+  Output/rak813_breakboard Target 1/Obj/nrf_log_default_backends.o
+  Output/rak813_breakboard Target 1/Obj/nrf_log_frontend.o
+  Output/rak813_breakboard Target 1/Obj/nrf_log_str_formatter.o
+  Output/rak813_breakboard Target 1/Obj/nrf_log_backend_rtt.o
+  Output/rak813_breakboard Target 1/Obj/nrf_log_backend_serial.o
+  Output/rak813_breakboard Target 1/Obj/SEGGER_RTT.o
+  Output/rak813_breakboard Target 1/Obj/SEGGER_RTT_printf.o
+  Output/rak813_breakboard Target 1/Obj/SEGGER_RTT_Syscalls_KEIL.o
+  Output/rak813_breakboard Target 1/Obj/nrf_sdh_soc.o
+  Output/rak813_breakboard Target 1/Obj/nrf_sdh.o
+  Output/rak813_breakboard Target 1/Obj/nrf_sdh_ble.o
+  /Applications/SEGGER Embedded Studio for ARM 4.16/lib/libdebugio_mempoll_v7em_fpv4_sp_d16_hard_t_le_eabi.a
+  /Applications/SEGGER Embedded Studio for ARM 4.16/lib/libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a
+  /Applications/SEGGER Embedded Studio for ARM 4.16/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a
+  /Applications/SEGGER Embedded Studio for ARM 4.16/lib/libcpp_v7em_fpv4_sp_d16_hard_t_le_eabi.a
+  /Applications/SEGGER Embedded Studio for ARM 4.16/lib/libdebugio_v7em_fpv4_sp_d16_hard_t_le_eabi.a
+  /Applications/SEGGER Embedded Studio for ARM 4.16/lib/libvfprintf_v7em_fpv4_sp_d16_hard_t_le_eabi.o
+  /Applications/SEGGER Embedded Studio for ARM 4.16/lib/libvfscanf_v7em_fpv4_sp_d16_hard_t_le_eabi.o
+  --end-group
+
+
+***************************************************************************************
+***                                                                                 ***
+***                                  LINKER SCRIPT                                  ***
+***                                                                                 ***
+***************************************************************************************
+
+Read linker script from '/Applications/SEGGER Embedded Studio for ARM 4.16/samples/SEGGER_Flash.icf':
+  
+  // **********************************************************************
+  // *                    SEGGER Microcontroller GmbH                     *
+  // *                        The Embedded Experts                        *
+  // **********************************************************************
+  // *                                                                    *
+  // *            (c) 2014 - 2019 SEGGER Microcontroller GmbH             *
+  // *            (c) 2001 - 2019 Rowley Associates Limited               *
+  // *                                                                    *
+  // *           www.segger.com     Support: support@segger.com           *
+  // *                                                                    *
+  // **********************************************************************
+  // *                                                                    *
+  // * All rights reserved.                                               *
+  // *                                                                    *
+  // * Redistribution and use in source and binary forms, with or         *
+  // * without modification, are permitted provided that the following    *
+  // * conditions are met:                                                *
+  // *                                                                    *
+  // * - Redistributions of source code must retain the above copyright   *
+  // *   notice, this list of conditions and the following disclaimer.    *
+  // *                                                                    *
+  // * - Neither the name of SEGGER Microcontroller GmbH                  *
+  // *   nor the names of its contributors may be used to endorse or      *
+  // *   promote products derived from this software without specific     *
+  // *   prior written permission.                                        *
+  // *                                                                    *
+  // * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND             *
+  // * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,        *
+  // * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF           *
+  // * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE           *
+  // * DISCLAIMED.                                                        *
+  // * IN NO EVENT SHALL SEGGER Microcontroller GmbH BE LIABLE FOR        *
+  // * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR           *
+  // * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT  *
+  // * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;    *
+  // * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF      *
+  // * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT          *
+  // * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE  *
+  // * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH   *
+  // * DAMAGE.                                                            *
+  // *                                                                    *
+  // **********************************************************************
+  
+  define memory with size = 4G;
+  //
+  // Block definitions
+  //
+  define block ctors { section .ctors, section .ctors.*, block with alphabetical order { init_array } };
+  define block dtors { section .dtors, section .dtors.*, block with reverse alphabetical order { fini_array } };
+  define block exidx { section .ARM.exidx, section .ARM.exidx.* };
+  define block tbss  { section .tbss,  section .tbss.*  };
+  define block tdata { section .tdata, section .tdata.* };
+  define block tls   { block tbss, block tdata };
+  define block tdata_load { copy of block tdata };
+  define block heap  with size = __HEAPSIZE__,  alignment = 8, /* fill =0x00, */ readwrite access { };
+  define block stack with size = __STACKSIZE__, alignment = 8, /* fill =0xCD, */ readwrite access { };
+  //
+  // Explicit initialization settings for sections
+  //
+  do not initialize                           { section .non_init, section .non_init.* };
+  initialize by copy /* with packing=auto */  { section .data, section .data.* };
+  initialize by copy /* with packing=auto */  { section .fast, section .fast.* };
+  //
+  // ROM Placement
+  //
+  place at start of FLASH                 { 
+                                             section .vectors                         // Vector table section
+                                          };
+  place in FLASH with minimum size order  { 
+                                             section .init, section .init.*,          // Init code section
+                                             section .text, section .text.*,          // Code section
+                                             section .rodata, section .rodata.*,      // Read-only data section
+                                             section .segger.*,                       // Auto-generated initialization
+                                             block exidx,                             // ARM exception unwinding block
+                                             block ctors,                             // Constructors block
+                                             block dtors                              // Destructors block
+                                           };
+  place in FLASH                           { 
+                                             block tdata_load                       // Thread-local-storage load image
+                                           };
+  //                                      
+  // RAM Placement                        
+  //                                      
+  place in RAM                             {                                          // Special sections
+                                             section .non_init, section .non_init.*,  // No initialization section
+                                             block tls                                // Thread-local-storage block
+                                           };
+  place in RAM with auto order             {                                          // Initialized sections
+                                             section .fast, section .fast.*,          // "ramfunc" section
+                                             section .data, section .data.*,          // Initialized data section
+                                             section .bss, section .bss.*             // Static data section
+                                           };
+  place in RAM                             { 
+                                             /* expandable */ block heap              // Heap reserved block
+                                           };
+  place at end of RAM                      { 
+                                             block stack                              // Stack reserved block at the end
+                                           };
+
+
+***************************************************************************************
+***                                                                                 ***
+***                                PLACEMENT SUMMARY                                ***
+***                                                                                 ***
+***************************************************************************************
+
+place at 0x00000000
+
+  Section                  Type  Address       Size  Align  Object
+  -------                  ----  -------       ----  -----  ------
+  .vectors                 Code  00000000      0xc0      2  Cortex_M_Startup.o
+
+place at 0x20010000
+
+  Section                  Type  Address       Size  Align  Object
+  -------                  ----  -------       ----  -----  ------
+
+place in [0x00000000 to 0x0007ffff] with maximum packing
+
+  Section                  Type  Address       Size  Align  Object
+  -------                  ----  -------       ----  -----  ------
+  .text.SX1276SetChannel   Code  000000c0      0x6c      8  sx1276.o
+  .text.RxChainCalibration
+                           Code  00000130      0xd4      8  sx1276.o
+  .text.SX1276SetRxConfig  Code  00000208     0x460      8  sx1276.o
+  .text.SX1276SetTxConfig  Code  00000668     0x374      8  sx1276.o
+  .text.SX1276GetTimeOnAir
+                           Code  000009e0     0x390      8  sx1276.o
+  .text.SX1276OnDio2Irq    Code  00000d70     0x18c      8  sx1276.o
+  .text.libc.ceil          Code  00000f00      0xc0      8  libm2.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.floor         Code  00000fc0      0xc0      8  libm2.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .init                    Code  00001080      0x74      4  Cortex_M_Startup.o
+  .init                    Code  000010f4      0x64      4  SEGGER_THUMB_Startup.o
+  .text.nrf_drv_spi_init   Code  00001158     0x178      4  nrf_drv_spi.o
+  .text.nrf_drv_spi_xfer   Code  000012d0      0xb4      4  nrf_drv_spi.o
+  .text.apply_config       Code  00001384     0x160      4  nrf_drv_uart.o
+  .text.interrupts_enable  Code  000014e4      0xd4      4  nrf_drv_uart.o
+  .text.uart_enable        Code  000015b8      0x3c      4  nrf_drv_uart.o
+  .text.nrf_drv_uart_init  Code  000015f4      0x90      4  nrf_drv_uart.o
+  .text.nrf_drv_uart_tx_for_uart
+                           Code  00001684      0xe4      4  nrf_drv_uart.o
+  .text.nrf_drv_uart_tx_for_uarte
+                           Code  00001768      0xbc      4  nrf_drv_uart.o
+  .text.nrf_drv_uart_tx    Code  00001824      0xa0      4  nrf_drv_uart.o
+  .text.nrf_drv_uart_tx_in_progress
+                           Code  000018c4      0x28      4  nrf_drv_uart.o
+  .text.nrf_drv_uart_rx_for_uart
+                           Code  000018ec     0x158      4  nrf_drv_uart.o
+  .text.nrf_drv_uart_rx_for_uarte
+                           Code  00001a44     0x130      4  nrf_drv_uart.o
+  .text.nrf_drv_uart_rx    Code  00001b74     0x158      4  nrf_drv_uart.o
+  .text.nrf_drv_uart_rx_enable
+                           Code  00001ccc      0x54      4  nrf_drv_uart.o
+  .text.detection_delay_timeout_handler
+                           Code  00001d20      0xd8      4  app_button.o
+  .text.gpiote_event_handler
+                           Code  00001df8      0xa0      4  app_button.o
+  .text.app_button_init    Code  00001e98      0xe4      4  app_button.o
+  .text.app_button_enable  Code  00001f7c      0x44      4  app_button.o
+  .text.nrf_fstorage_is_busy
+                           Code  00001fc0      0x88      4  nrf_fstorage.o
+  .text.queue_free         Code  00002048      0x18      4  nrf_fstorage_sd.o
+  .text.queue_load_next    Code  00002060      0x30      4  nrf_fstorage_sd.o
+  .text.queue_process      Code  00002090      0xb8      4  nrf_fstorage_sd.o
+  .text.queue_start        Code  00002148      0x38      4  nrf_fstorage_sd.o
+  .text.on_operation_success
+                           Code  00002180      0x78      4  nrf_fstorage_sd.o
+  .text.on_operation_failure
+                           Code  000021f8      0x2c      4  nrf_fstorage_sd.o
+  .text.init               Code  00002224      0x4c      4  nrf_fstorage_sd.o
+  .text.uninit             Code  00002270      0x2c      4  nrf_fstorage_sd.o
+  .text.write              Code  0000229c      0x70      4  nrf_fstorage_sd.o
+  .text.erase              Code  0000230c      0x74      4  nrf_fstorage_sd.o
+  .text.is_busy            Code  00002380      0x1c      4  nrf_fstorage_sd.o
+  .text.nrf_fstorage_sys_evt_handler
+                           Code  0000239c      0xa8      4  nrf_fstorage_sd.o
+  .text.uart_event_handler
+                           Code  00002444      0xf8      4  app_uart_fifo.o
+  .text.app_uart_init      Code  0000253c     0x128      4  app_uart_fifo.o
+  .text.app_uart_get       Code  00002664      0x5c      4  app_uart_fifo.o
+  .text.app_uart_put       Code  000026c0      0x60      4  app_uart_fifo.o
+  .text.nrf_strerror_get   Code  00002720      0x28      4  nrf_strerror.o
+  .text.nrf_strerror_find  Code  00002748      0x68      4  nrf_strerror.o
+  .text.unsigned_print     Code  000027b0     0x130      4  nrf_fprintf_format.o
+  .text.nrf_fprintf_fmt    Code  000028e0     0x3ec      4  nrf_fprintf_format.o
+  .text.NVIC_SystemReset   Code  00002ccc      0x24      4  app_error_weak.o
+  .text.app_error_fault_handler
+                           Code  00002cf0      0x68      4  app_error_weak.o
+  .text.sd_nvic_critical_region_enter
+                           Code  00002d58      0x74      4  app_util_platform.o
+  .text.sd_nvic_critical_region_exit
+                           Code  00002dcc      0x54      4  app_util_platform.o
+  .text.NVIC_EnableIRQ     Code  00002e20      0x2c      4  app_timer.o
+  .text.NVIC_DisableIRQ    Code  00002e4c      0x30      4  app_timer.o
+  .text.NVIC_SetPendingIRQ
+                           Code  00002e7c      0x30      4  app_timer.o
+  .text.NVIC_ClearPendingIRQ
+                           Code  00002eac      0x30      4  app_timer.o
+  .text.NVIC_SetPriority   Code  00002edc      0x50      4  app_timer.o
+  .text.rtc1_stop          Code  00002f2c      0x50      4  app_timer.o
+  .text.nrf_delay_us       Code  00002f7c      0xa0      4  app_timer.o
+  .text.rtc1_init          Code  0000301c      0x24      4  app_timer.o
+  .text.rtc1_counter_get   Code  00003040      0x10      4  app_timer.o
+  .text.user_op_enque      Code  00003050      0x1c      4  app_timer.o
+  .text.user_op_alloc      Code  0000306c      0x5c      4  app_timer.o
+  .text.app_timer_init     Code  000030c8      0x68      4  app_timer.o
+  .text.app_timer_create   Code  00003130      0x60      4  app_timer.o
+  .text.app_timer_start    Code  00003190      0x64      4  app_timer.o
+  .text.app_timer_stop     Code  000031f4      0x44      4  app_timer.o
+  .text.nrf_log_default_backends_init
+                           Code  00003238      0x2c      4  nrf_log_default_backends.o
+  .text.nrf_log_init       Code  00003264      0x98      4  nrf_log_frontend.o
+  .text.nrf_log_module_cnt_get
+                           Code  000032fc      0x14      4  nrf_log_frontend.o
+  .text.module_idx_get     Code  00003310      0x6c      4  nrf_log_frontend.o
+  .text.nrf_log_module_name_get
+                           Code  0000337c      0x40      4  nrf_log_frontend.o
+  .text.nrf_log_color_id_get
+                           Code  000033bc      0x70      4  nrf_log_frontend.o
+  .text.log_skip           Code  0000342c     0x10c      4  nrf_log_frontend.o
+  .text.std_header_set     Code  00003538      0x98      4  nrf_log_frontend.o
+  .text.buf_prealloc       Code  000035d0      0xb4      4  nrf_log_frontend.o
+  .text.std_n              Code  00003684      0x90      4  nrf_log_frontend.o
+  .text.buffer_is_empty    Code  00003714      0x1c      4  nrf_log_frontend.o
+  .text.nrf_log_frontend_dequeue
+                           Code  00003730     0x384      4  nrf_log_frontend.o
+  .text.backend_id_assign  Code  00003ab4      0x68      4  nrf_log_frontend.o
+  .text.nrf_log_backend_add
+                           Code  00003b1c      0x68      4  nrf_log_frontend.o
+  .text.nrf_log_panic      Code  00003b84      0x3c      4  nrf_log_frontend.o
+  .text.prefix_process     Code  00003bc0      0x80      4  nrf_log_str_formatter.o
+  .text.postfix_process    Code  00003c40      0x68      4  nrf_log_str_formatter.o
+  .text.nrf_log_std_entry_process
+                           Code  00003ca8     0x144      4  nrf_log_str_formatter.o
+  .text.nrf_log_hexdump_entry_process
+                           Code  00003dec      0xe8      4  nrf_log_str_formatter.o
+  .text.nrf_log_backend_rtt_put
+                           Code  00003ed4      0x28      4  nrf_log_backend_rtt.o
+  .text.__aeabi_read_tp    Code  00003efc       0x8      4  SEGGER_THUMB_Startup.o
+  .text.gap_params_init    Code  00003f04      0x94      4  main.o
+  .text.set_handler        Code  00003f98     0x148      4  main.o
+  .text.parse_lora_config  Code  000040e0      0xc8      4  main.o
+  .text.nus_data_handler   Code  000041a8      0xe4      4  main.o
+  .text.services_init      Code  0000428c      0x40      4  main.o
+  .text.on_conn_params_evt
+                           Code  000042cc      0x38      4  main.o
+  .text.conn_params_init   Code  00004304      0x64      4  main.o
+  .text.gatt_evt_handler   Code  00004368      0x60      4  main.o
+  .text.gatt_init          Code  000043c8      0x48      4  main.o
+  .text.bsp_event_handler  Code  00004410      0x8c      4  main.o
+  .text.uart_event_handle  Code  0000449c      0xf8      4  main.o
+  .text.uart_init          Code  00004594      0x60      4  main.o
+  .text.advertising_init   Code  000045f4      0x78      4  main.o
+  .text.buttons_leds_init  Code  0000466c      0x30      4  main.o
+  .text.nRF_hardware_init  Code  0000469c      0x40      4  main.o
+  .text.nRF_BLE_init       Code  000046dc      0x28      4  main.o
+  .text.nRF_lora_init      Code  00004704      0x34      4  main.o
+  .text.main               Code  00004738      0x70      4  main.o
+  .text.bsp_button_event_handler
+                           Code  000047a8     0x130      4  bsp.o
+  .text.leds_off           Code  000048d8      0x3c      4  bsp.o
+  .text.bsp_led_indication
+                           Code  00004914     0x490      4  bsp.o
+  .text.leds_timer_handler
+                           Code  00004da4      0x2c      4  bsp.o
+  .text.bsp_indication_set
+                           Code  00004dd0      0x34      4  bsp.o
+  .text.bsp_init           Code  00004e04      0xd8      4  bsp.o
+  .text.bsp_event_to_button_action_assign
+                           Code  00004edc      0xa4      4  bsp.o
+  .text.NVIC_SystemReset   Code  00004f80      0x24      4  system_nrf52.o
+  .text.SystemCoreClockUpdate
+                           Code  00004fa4      0x14      4  system_nrf52.o
+  .text.SystemInit         Code  00004fb8     0x2bc      4  system_nrf52.o
+  .text.errata_12          Code  00005274      0x58      4  system_nrf52.o
+  .text.errata_16          Code  000052cc      0x38      4  system_nrf52.o
+  .text.errata_31          Code  00005304      0x58      4  system_nrf52.o
+  .text.errata_32          Code  0000535c      0x38      4  system_nrf52.o
+  .text.errata_36          Code  00005394      0x58      4  system_nrf52.o
+  .text.errata_37          Code  000053ec      0x38      4  system_nrf52.o
+  .text.errata_57          Code  00005424      0x38      4  system_nrf52.o
+  .text.errata_66          Code  0000545c      0x38      4  system_nrf52.o
+  .text.errata_108         Code  00005494      0x58      4  system_nrf52.o
+  .text.errata_136         Code  000054ec      0x58      4  system_nrf52.o
+  .text.GetBoardPowerSource
+                           Code  00005544      0x18      4  board.o
+  .text.BoardBatteryMeasureVolage
+                           Code  0000555c       0xc      4  board.o
+  .text.BoardGetBatteryLevel
+                           Code  00005568      0xb4      4  board.o
+  .text.BoardDisableIrq    Code  0000561c      0x14      4  board.o
+  .text.BoardEnableIrq     Code  00005630      0x1c      4  board.o
+  .text.pin_event_handler  Code  0000564c      0x30      4  gpio-board.o
+  .text.GpioInit           Code  0000567c      0xf0      4  gpio-board.o
+  .text.GpioSetInterrupt   Code  0000576c      0xd8      4  gpio-board.o
+  .text.rtc_handler        Code  00005844      0x5c      4  rtc-board.o
+  .text.rtc_get_timestamp  Code  000058a0      0x30      4  rtc-board.o
+  .text.RtcInit            Code  000058d0      0x64      4  rtc-board.o
+  .text.SpiInit            Code  00005934      0xb0      4  spi-board.o
+  .text.SX1276IoInit       Code  000059e4      0xac      4  sx1276-board.o
+  .text.SX1276IoIrqInit    Code  00005a90      0x5c      4  sx1276-board.o
+  .text.SX1276SetRfTxPower
+                           Code  00005aec     0x17c      4  sx1276-board.o
+  .text.SX1276SetAntSwLowPower
+                           Code  00005c68      0x44      4  sx1276-board.o
+  .text.SX1276AntSwInit    Code  00005cac      0x3c      4  sx1276-board.o
+  .text.SX1276AntSwDeInit  Code  00005ce8      0x1c      4  sx1276-board.o
+  .text.SX1276SetAntSw     Code  00005d04      0x34      4  sx1276-board.o
+  .text.nrf_delay_us       Code  00005d38      0xa0      4  utilities.o
+  .text.rand1              Code  00005dd8      0x3c      4  utilities.o
+  .text.srand1             Code  00005e14      0x14      4  utilities.o
+  .text.fstorage_evt_handler
+                           Code  00005e28      0x7c      4  app_lora.o
+  .text.u_fs_init          Code  00005ea4      0x34      4  app_lora.o
+  .text.u_fs_check_lora_cfg
+                           Code  00005ed8      0x34      4  app_lora.o
+  .text.u_fs_read_lora_cfg
+                           Code  00005f0c      0x34      4  app_lora.o
+  .text.u_fs_write_lora_cfg
+                           Code  00005f40      0xa0      4  app_lora.o
+  .text.dump_hex2str       Code  00005fe0      0x54      4  app_lora.o
+  .text.PrepareTxFrame     Code  00006034      0xb4      4  app_lora.o
+  .text.SendFrame          Code  000060e8      0xb0      4  app_lora.o
+  .text.OnTxNextPacketTimerEvent
+                           Code  00006198      0x58      4  app_lora.o
+  .text.McpsConfirm        Code  000061f0      0x38      4  app_lora.o
+  .text.McpsIndication     Code  00006228     0x370      4  app_lora.o
+  .text.MlmeConfirm        Code  00006598      0x78      4  app_lora.o
+  .text.lora_init          Code  00006610      0x14      4  app_lora.o
+  .text.lora_process       Code  00006624     0x218      4  app_lora.o
+  .text.OnRadioTxDone      Code  0000683c     0x19c      4  LoRaMac.o
+  .text.PrepareRxDoneAbort
+                           Code  000069d8      0x50      4  LoRaMac.o
+  .text.OnRadioRxDone      Code  00006a28     0x948      4  LoRaMac.o
+  .text.OnRadioTxTimeout   Code  00007370      0x44      4  LoRaMac.o
+  .text.OnRadioRxError     Code  000073b4      0x98      4  LoRaMac.o
+  .text.OnRadioRxTimeout   Code  0000744c      0xbc      4  LoRaMac.o
+  .text.OnMacStateCheckTimerEvent
+                           Code  00007508     0x498      4  LoRaMac.o
+  .text.OnTxDelayedTimerEvent
+                           Code  000079a0      0xb8      4  LoRaMac.o
+  .text.OnRxWindow1TimerEvent
+                           Code  00007a58      0xc8      4  LoRaMac.o
+  .text.OnRxWindow2TimerEvent
+                           Code  00007b20      0xc0      4  LoRaMac.o
+  .text.OnAckTimeoutTimerEvent
+                           Code  00007be0      0x50      4  LoRaMac.o
+  .text.RxWindowSetup      Code  00007c30      0x38      4  LoRaMac.o
+  .text.ValidatePayloadLength
+                           Code  00007c68      0xa0      4  LoRaMac.o
+  .text.AddMacCommand      Code  00007d08     0x2c8      4  LoRaMac.o
+  .text.ParseMacCommandsToRepeat
+                           Code  00007fd0     0x108      4  LoRaMac.o
+  .text.ProcessMacCommands
+                           Code  000080d8     0x58c      4  LoRaMac.o
+  .text.Send               Code  00008664      0xc0      4  LoRaMac.o
+  .text.ScheduleTx         Code  00008724     0x1cc      4  LoRaMac.o
+  .text.CalculateBackOff   Code  000088f0      0x8c      4  LoRaMac.o
+  .text.ResetMacParameters
+                           Code  0000897c     0x13c      4  LoRaMac.o
+  .text.PrepareFrame       Code  00008ab8     0x5a8      4  LoRaMac.o
+  .text.SendFrameOnChannel
+                           Code  00009060     0x100      4  LoRaMac.o
+  .text.SetTxContinuousWave
+                           Code  00009160      0x84      4  LoRaMac.o
+  .text.SetTxContinuousWave1
+                           Code  000091e4      0x54      4  LoRaMac.o
+  .text.rw_Region2Str      Code  00009238      0x9c      4  LoRaMac.o
+  .text.LoRaMacInitialization
+                           Code  000092d4     0x40c      4  LoRaMac.o
+  .text.LoRaMacQueryTxPossible
+                           Code  000096e0     0x144      4  LoRaMac.o
+  .text.LoRaMacMibGetRequestConfirm
+                           Code  00009824     0x274      4  LoRaMac.o
+  .text.LoRaMacMibSetRequestConfirm
+                           Code  00009a98     0x4bc      4  LoRaMac.o
+  .text.LoRaMacMlmeRequest
+                           Code  00009f54     0x21c      4  LoRaMac.o
+  .text.LoRaMacMcpsRequest
+                           Code  0000a170     0x1f8      4  LoRaMac.o
+  .text.LoRaMacTestSetDutyCycleOn
+                           Code  0000a368      0x40      4  LoRaMac.o
+  .text.LoRaMacComputeMic  Code  0000a3a8      0xd4      4  LoRaMacCrypto.o
+  .text.LoRaMacPayloadEncrypt
+                           Code  0000a47c     0x188      4  LoRaMacCrypto.o
+  .text.LoRaMacJoinComputeMic
+                           Code  0000a604      0x68      4  LoRaMacCrypto.o
+  .text.LoRaMacJoinDecrypt
+                           Code  0000a66c      0x54      4  LoRaMacCrypto.o
+  .text.LoRaMacJoinComputeSKeys
+                           Code  0000a6c0      0xac      4  LoRaMacCrypto.o
+  .text.RegionCommonGetJoinDc
+                           Code  0000a76c      0x48      4  RegionCommon.o
+  .text.RegionCommonComputeSymbolTimeLoRa
+                           Code  0000a7b4      0x5c      4  RegionCommon.o
+  .text.RegionCommonComputeSymbolTimeFsk
+                           Code  0000a810      0x40      4  RegionCommon.o
+  .text.RegionCommonComputeRxWindowParameters
+                           Code  0000a850     0x184      4  RegionCommon.o
+  .text.GetBandwidth       Code  0000a9d4      0x34      4  RegionEU868.o
+  .text.VerifyTxFreq       Code  0000aa08      0xec      4  RegionEU868.o
+  .text.RegionEU868GetPhyParam
+                           Code  0000aaf4     0x1a8      4  RegionEU868.o
+  .text.RegionEU868SetBandTxDone
+                           Code  0000ac9c      0x40      4  RegionEU868.o
+  .text.RegionEU868InitDefaults
+                           Code  0000acdc      0x80      4  RegionEU868.o
+  .text.RegionEU868Verify  Code  0000ad5c     0x120      4  RegionEU868.o
+  .text.RegionEU868ChanMaskSet
+                           Code  0000ae7c      0x4c      4  RegionEU868.o
+  .text.RegionEU868AdrNext
+                           Code  0000aec8      0xe4      4  RegionEU868.o
+  .text.RegionEU868ComputeRxWindowParameters
+                           Code  0000afac      0xb8      4  RegionEU868.o
+  .text.RegionEU868RxConfig
+                           Code  0000b064     0x1ac      4  RegionEU868.o
+  .text.RegionEU868TxConfig
+                           Code  0000b210     0x190      4  RegionEU868.o
+  .text.RegionEU868LinkAdrReq
+                           Code  0000b3a0     0x238      4  RegionEU868.o
+  .text.RegionEU868RxParamSetupReq
+                           Code  0000b5d8      0x84      4  RegionEU868.o
+  .text.RegionEU868NewChannelReq
+                           Code  0000b65c      0xd0      4  RegionEU868.o
+  .text.RegionEU868DlChannelReq
+                           Code  0000b72c      0x90      4  RegionEU868.o
+  .text.RegionEU868AlternateDr
+                           Code  0000b7bc      0xa8      4  RegionEU868.o
+  .text.RegionEU868CalcBackOff
+                           Code  0000b864      0x54      4  RegionEU868.o
+  .text.RegionEU868NextChannel
+                           Code  0000b8b8     0x124      4  RegionEU868.o
+  .text.RegionEU868ChannelAdd
+                           Code  0000b9dc     0x1b4      4  RegionEU868.o
+  .text.RegionEU868ChannelsRemove
+                           Code  0000bb90      0x54      4  RegionEU868.o
+  .text.RegionEU868SetContinuousWave
+                           Code  0000bbe4      0xa8      4  RegionEU868.o
+  .text.SX1276Init         Code  0000bc8c      0xc8      4  sx1276.o
+  .text.SX1276GetStatus    Code  0000bd54      0x10      4  sx1276.o
+  .text.GetFskBandwidthRegValue
+                           Code  0000bd64      0x5c      4  sx1276.o
+  .text.SX1276Send         Code  0000bdc0     0x180      4  sx1276.o
+  .text.SX1276SetSleep     Code  0000bf40      0x2c      4  sx1276.o
+  .text.SX1276SetStby      Code  0000bf6c      0x2c      4  sx1276.o
+  .text.SX1276SetRx        Code  0000bf98     0x30c      4  sx1276.o
+  .text.SX1276SetTx        Code  0000c2a4      0xec      4  sx1276.o
+  .text.SX1276StartCad     Code  0000c390      0x4c      4  sx1276.o
+  .text.SX1276SetTxContinuousWave
+                           Code  0000c3dc      0xac      4  sx1276.o
+  .text.SX1276ReadRssi     Code  0000c488      0x88      4  sx1276.o
+  .text.SX1276Reset        Code  0000c510      0x44      4  sx1276.o
+  .text.SX1276SetModem     Code  0000c554      0xb4      4  sx1276.o
+  .text.SX1276Write        Code  0000c608      0x30      4  sx1276.o
+  .text.SX1276Read         Code  0000c638      0x2c      4  sx1276.o
+  .text.SX1276WriteBuffer  Code  0000c664      0x30      4  sx1276.o
+  .text.SX1276ReadBuffer   Code  0000c694      0x30      4  sx1276.o
+  .text.SX1276WriteFifo    Code  0000c6c4      0x28      4  sx1276.o
+  .text.SX1276ReadFifo     Code  0000c6ec      0x28      4  sx1276.o
+  .text.SX1276SetMaxPayloadLength
+                           Code  0000c714      0x64      4  sx1276.o
+  .text.SX1276SetPublicNetwork
+                           Code  0000c778      0x40      4  sx1276.o
+  .text.SX1276OnTimeoutIrq
+                           Code  0000c7b8     0x15c      4  sx1276.o
+  .text.SX1276OnDio0Irq    Code  0000c914     0x488      4  sx1276.o
+  .text.SX1276OnDio1Irq    Code  0000cd9c     0x1c4      4  sx1276.o
+  .text.SX1276OnDio3Irq    Code  0000cf60      0x80      4  sx1276.o
+  .text.SX1276OnDio4Irq    Code  0000cfe0      0x34      4  sx1276.o
+  .text.shift_sub_rows     Code  0000d014     0x13c      4  aes.o
+  .text.mix_sub_columns    Code  0000d150     0x3d4      4  aes.o
+  .text.aes_set_key        Code  0000d524     0x218      4  aes.o
+  .text.adv_mode_next_avail_get
+                           Code  0000d73c      0x88      4  ble_advertising.o
+  .text.ble_advertising_start
+                           Code  0000d7c4     0x1cc      4  ble_advertising.o
+  .text.instance_get       Code  0000d990      0x50      4  ble_conn_params.o
+  .text.send_error_evt     Code  0000d9e0      0x24      4  ble_conn_params.o
+  .text.update_timeout_handler
+                           Code  0000da04      0xb0      4  ble_conn_params.o
+  .text.ble_conn_params_init
+                           Code  0000dab4      0xd4      4  ble_conn_params.o
+  .text.ble_nus_init       Code  0000db88      0xb0      4  ble_nus.o
+  .text.NVIC_EnableIRQ     Code  0000dc38      0x2c      4  nrf_drv_common.o
+  .text.NVIC_ClearPendingIRQ
+                           Code  0000dc64      0x30      4  nrf_drv_common.o
+  .text.NVIC_SetPriority   Code  0000dc94      0x50      4  nrf_drv_common.o
+  .text.nrf_gpiote_int_enable
+                           Code  0000dce4      0x18      4  nrf_drv_gpiote.o
+  .text.nrf_gpiote_int_disable
+                           Code  0000dcfc      0x18      4  nrf_drv_gpiote.o
+  .text.nrf_gpiote_event_enable
+                           Code  0000dd14      0x2c      4  nrf_drv_gpiote.o
+  .text.nrf_gpiote_event_disable
+                           Code  0000dd40      0x2c      4  nrf_drv_gpiote.o
+  .text.nrf_gpiote_event_configure
+                           Code  0000dd6c      0x64      4  nrf_drv_gpiote.o
+  .text.nrf_gpiote_task_configure
+                           Code  0000ddd0      0x7c      4  nrf_drv_gpiote.o
+  .text.nrf_gpiote_te_default
+                           Code  0000de4c      0x1c      4  nrf_drv_gpiote.o
+  .text.pin_in_use         Code  0000de68      0x28      4  nrf_drv_gpiote.o
+  .text.pin_in_use_by_te   Code  0000de90      0x3c      4  nrf_drv_gpiote.o
+  .text.pin_in_use_by_port
+                           Code  0000decc      0x24      4  nrf_drv_gpiote.o
+  .text.pin_in_use_by_gpiote
+                           Code  0000def0      0x24      4  nrf_drv_gpiote.o
+  .text.pin_in_use_by_te_set
+                           Code  0000df14      0x50      4  nrf_drv_gpiote.o
+  .text.pin_in_use_set     Code  0000df64      0x1c      4  nrf_drv_gpiote.o
+  .text.pin_in_use_clear   Code  0000df80      0x1c      4  nrf_drv_gpiote.o
+  .text.channel_port_get   Code  0000df9c      0x1c      4  nrf_drv_gpiote.o
+  .text.channel_handler_get
+                           Code  0000dfb8      0x18      4  nrf_drv_gpiote.o
+  .text.channel_port_alloc
+                           Code  0000dfd0      0x7c      4  nrf_drv_gpiote.o
+  .text.channel_free       Code  0000e04c      0x38      4  nrf_drv_gpiote.o
+  .text.nrf_drv_gpiote_init
+                           Code  0000e084      0x90      4  nrf_drv_gpiote.o
+  .text.nrf_drv_gpiote_is_init
+                           Code  0000e114      0x18      4  nrf_drv_gpiote.o
+  .text.nrf_drv_gpiote_in_init
+                           Code  0000e12c      0xb4      4  nrf_drv_gpiote.o
+  .text.nrf_drv_gpiote_in_event_enable
+                           Code  0000e1e0      0xe8      4  nrf_drv_gpiote.o
+  .text.nrf_drv_rtc_init   Code  0000e2c8      0xc8      4  nrf_drv_rtc.o
+  .text.nrf_drv_rtc_enable
+                           Code  0000e390      0x34      4  nrf_drv_rtc.o
+  .text.nrf_drv_rtc_max_ticks_get
+                           Code  0000e3c4      0x50      4  nrf_drv_rtc.o
+  .text.NVIC_EnableIRQ     Code  0000e414      0x2c      4  nrf_sdh.o
+  .text.NVIC_DisableIRQ    Code  0000e440      0x30      4  nrf_sdh.o
+  .text.NVIC_SetPriority   Code  0000e470      0x50      4  nrf_sdh.o
+  .text.NVIC_GetPriority   Code  0000e4c0      0x48      4  nrf_sdh.o
+  .text.__sd_nvic_app_accessible_irq
+                           Code  0000e508      0x58      4  nrf_sdh.o
+  .text.sd_nvic_EnableIRQ  Code  0000e560      0x8c      4  nrf_sdh.o
+  .text.sd_nvic_DisableIRQ
+                           Code  0000e5ec      0x6c      4  nrf_sdh.o
+  .text.sdh_request_observer_notify
+                           Code  0000e658      0x64      4  nrf_sdh.o
+  .text.sdh_state_observer_notify
+                           Code  0000e6bc      0x58      4  nrf_sdh.o
+  .text.nrf_sdh_enable_request
+                           Code  0000e714      0x88      4  nrf_sdh.o
+  .text.nrf_sdh_disable_request
+                           Code  0000e79c      0x6c      4  nrf_sdh.o
+  .text.nrf_sdh_request_continue
+                           Code  0000e808      0x38      4  nrf_sdh.o
+  .text.nrf_sdh_is_enabled
+                           Code  0000e840       0xc      4  nrf_sdh.o
+  .text.nrf_sdh_ble_app_ram_start_get
+                           Code  0000e84c      0x24      4  nrf_sdh_ble.o
+  .text.nrf_sdh_ble_default_cfg_set
+                           Code  0000e870     0x204      4  nrf_sdh_ble.o
+  .text.nrf_sdh_ble_enable
+                           Code  0000ea74      0x90      4  nrf_sdh_ble.o
+  .text._DoInit            Code  0000eb04      0x9c      4  SEGGER_RTT.o
+  .text.SEGGER_RTT_WriteNoLock
+                           Code  0000eba0      0x9c      4  SEGGER_RTT.o
+  .text.libc.__float64_mul
+                           Code  0000ec3c     0x16c      4  libm_asm.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__float64_div
+                           Code  0000eda8     0x214      4  libm_asm.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.round         Code  0000efbc      0xa0      4  fdlibm.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__RAL_ascii_isctype
+                           Code  0000f05c      0x1c      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__RAL_ascii_iswctype
+                           Code  0000f078      0x1c      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__RAL_isctype
+                           Code  0000f094      0x14      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.toupper       Code  0000f0a8      0x14      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__aeabi_errno_addr
+                           Code  0000f0bc      0x14      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.printf        Code  0000f0d0      0x40      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__vfprintf_int_nwp
+                           Code  0000f110     0x4f0      4  libvfprintf_v7em_fpv4_sp_d16_hard_t_le_eabi.o
+  .rodata                  Cnst  0000f600      0x20      4  app_uart_fifo.o
+  .rodata                  Cnst  0000f620     0x308      4  nrf_strerror.o
+  .rodata                  Cnst  0000012c       0x4      4  gpio-board.o
+  .rodata                  Cnst  0000f928      0x24      4  RegionEU868.o
+  .rodata                  Cnst  0000f94c      0x10      4  ble_nus.o
+  .rodata                  Cnst  0000f95c       0xc      4  nrf_sdh.o
+  .rodata.m_detection_delay_timer_id
+                           Cnst  00000204       0x4      4  app_button.o
+  .rodata.m_flash_info     Cnst  0000f968       0xc      4  nrf_fstorage_sd.o
+  .rodata.nrf_fstorage_sd  Cnst  0000f974      0x20      4  nrf_fstorage_sd.o
+  .rodata.nrf_strerror_array
+                           Cnst  0000f994      0xf0      4  nrf_strerror.o
+  .rodata._aV2C.7663       Cnst  0000fa84      0x10      4  nrf_fprintf_format.o
+  .rodata.mempool          Cnst  0000fa94      0x14      4  nrf_log_frontend.o
+  .rodata.nrf_log_backend_rtt_api
+                           Cnst  0000faa8       0xc      4  nrf_log_backend_rtt.o
+  .rodata.m_leds_timer_id  Cnst  000009dc       0x4      4  bsp.o
+  .rodata.m_alert_timer_id
+                           Cnst  00000efc       0x4      4  bsp.o
+  .rodata.m_button_timer_id
+                           Cnst  0000fab4       0x4      4  bsp.o
+  .rodata.app_buttons      Cnst  0000fab8       0x8      4  bsp.o
+  .rodata.rtc              Cnst  0000fac0       0x8      4  rtc-board.o
+  .rodata.Radio            Cnst  0000fac8      0x5c      4  sx1276-board.o
+  .rodata.g_def_cfg        Cnst  0000fb24      0x48      4  app_lora.o
+  .rodata.LoRaMacMaxEirpTable
+                           Cnst  0000fb6c      0x10      4  LoRaMac.o
+  .rodata.DataratesEU868   Cnst  0000fb7c       0x8      4  RegionEU868.o
+  .rodata.BandwidthsEU868  Cnst  0000fb84      0x20      4  RegionEU868.o
+  .rodata.MaxPayloadOfDatarateEU868
+                           Cnst  0000fba4       0x8      4  RegionEU868.o
+  .rodata.MaxPayloadOfDatarateRepeaterEU868
+                           Cnst  0000fbac       0x8      4  RegionEU868.o
+  .rodata.RadioRegsInit    Cnst  0000fbb4      0x30      4  sx1276.o
+  .rodata.FskBandwidths    Cnst  0000fbe4      0xb0      4  sx1276.o
+  .rodata.sbox             Cnst  0000fc94     0x100      4  aes.o
+  .rodata.gfm2_sbox        Cnst  0000fd94     0x100      4  aes.o
+  .rodata.gfm3_sbox        Cnst  0000fe94     0x100      4  aes.o
+  .rodata.sdh_req_observers
+                           Cnst  0000ff94       0xc      4  nrf_sdh.o
+  .rodata.sdh_state_observers
+                           Cnst  0000ffa0       0xc      4  nrf_sdh.o
+  .rodata.libc.__RAL_ascii_ctype_map
+                           Cnst  0000ffac      0x80      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .rodata.libc.__RAL_c_locale
+                           Cnst  0001002c       0xc      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .rodata.libc.__RAL_c_locale_data
+                           Cnst  00010038      0x58      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .rodata.libc.__RAL_codeset_ascii
+                           Cnst  00010090      0x20      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .rodata.libc.__RAL_hex_lc
+                           Cnst  000100b0      0x10      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .rodata.libc.__RAL_hex_uc
+                           Cnst  000100c0      0x10      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .rodata                  Cnst  000100d0      0x92      4  nrf_log_str_formatter.o
+  .text.nrf_spim_event_clear
+                           Code  00010162      0x2a      2  nrf_drv_spi.o
+  .rodata                  Cnst  0001018c       0x6      4  rtc-board.o
+  .text.nrf_spim_enable    Code  00010192      0x12      2  nrf_drv_spi.o
+  .rodata                  Cnst  000101a4     0x18a      4  app_lora.o
+  .text.nrf_spim_configure
+                           Code  0001032e      0x5e      2  nrf_drv_spi.o
+  .rodata.libc.__RAL_c_locale_day_names
+                           Cnst  0001038c      0x3a      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.nrf_spim_orc_set   Code  000103c6      0x1a      2  nrf_drv_spi.o
+  .rodata.libc.__RAL_data_utf8_period
+                           Cnst  000103e0       0x2      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.nrf_spim_tx_list_enable
+                           Code  000103e2      0x12      2  nrf_drv_spi.o
+  .rodata.libc.__RAL_find_locale.str1.4
+                           Cnst  000103f4       0xa      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.nrf_spim_tx_list_disable
+                           Code  000103fe      0x12      2  nrf_drv_spi.o
+  .rodata                  Cnst  00010410      0x19      4  app_error_weak.o
+  .text.nrf_spim_rx_list_enable
+                           Code  0001042a      0x12      2  nrf_drv_spi.o
+  .rodata                  Cnst  0001043c     0x1e1      4  main.o
+  .text.nrf_spim_rx_list_disable
+                           Code  0001061e      0x12      2  nrf_drv_spi.o
+  .rodata                  Cnst  00010630      0xdd      4  LoRaMac.o
+  .text.nrf_gpio_pin_port_decode
+                           Code  0001070e       0xe      2  nrf_drv_spi.o
+  .rodata                  Cnst  0001071c     0x24d      4  nrf_sdh_ble.o
+  .text.nrf_gpio_cfg       Code  0001096a      0x62      2  nrf_drv_spi.o
+  .rodata.libc.__RAL_ascii_ctype_mask
+                           Cnst  000109cc       0xd      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.nrf_gpio_cfg_output
+                           Code  000109da      0x22      2  nrf_drv_spi.o
+  .rodata.libc.__RAL_c_locale_abbrev_day_names
+                           Cnst  000109fc      0x1d      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.nrf_drv_spi_transfer
+                           Code  00010a1a      0x3e      2  nrf_drv_spi.o
+  .rodata.libc.__RAL_c_locale_abbrev_month_names
+                           Cnst  00010a58      0x31      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.nrf_uart_event_clear
+                           Code  00010a8a      0x2a      2  nrf_drv_uart.o
+  .rodata.libc.__RAL_c_locale_date_format
+                           Cnst  00010ab4       0x9      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.nrf_uart_enable    Code  00010abe      0x12      2  nrf_drv_uart.o
+  .rodata.libc.__RAL_c_locale_time_format
+                           Cnst  00010ad0       0x9      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.nrf_uart_txrx_pins_set
+                           Code  00010ada      0x1e      2  nrf_drv_uart.o
+  .rodata.libc.__RAL_data_empty_string
+                           Cnst  00010af8       0x1      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.nrf_uart_hwfc_pins_set
+                           Code  00010afa      0x1e      2  nrf_drv_uart.o
+  .rodata                  Cnst  00010b18      0x17      4  SEGGER_RTT.o
+  .rodata.m_unknown_str    Cnst  00010b30      0x13      4  nrf_strerror.o
+  .rodata.libc.__RAL_c_locale_am_pm_indicator
+                           Cnst  00010b44       0x7      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .rodata.libc.__RAL_c_locale_date_time_format
+                           Cnst  00010b4c       0xf      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .rodata.libc.__RAL_c_locale_month_names
+                           Cnst  00010b5c      0x57      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.nrf_uart_rxd_get   Code  00010bb4      0x12      2  nrf_drv_uart.o
+  .text.nrf_uart_txd_set   Code  00010bc6      0x1a      2  nrf_drv_uart.o
+  .text.nrf_uart_configure
+                           Code  00010be0      0x2a      2  nrf_drv_uart.o
+  .text.nrf_uarte_event_clear
+                           Code  00010c0a      0x2a      2  nrf_drv_uart.o
+  .text.nrf_uarte_enable   Code  00010c34      0x12      2  nrf_drv_uart.o
+  .text.nrf_uarte_txrx_pins_set
+                           Code  00010c46      0x1e      2  nrf_drv_uart.o
+  .text.nrf_uarte_hwfc_pins_set
+                           Code  00010c64      0x1e      2  nrf_drv_uart.o
+  .text.nrf_uarte_configure
+                           Code  00010c82      0x2a      2  nrf_drv_uart.o
+  .text.nrf_drv_get_IRQn   Code  00010cac      0x16      2  nrf_drv_uart.o
+  .text.nrf_gpio_pin_port_decode
+                           Code  00010cc2       0xe      2  nrf_drv_uart.o
+  .text.nrf_gpio_cfg       Code  00010cd0      0x62      2  nrf_drv_uart.o
+  .text.nrf_gpio_cfg_output
+                           Code  00010d32      0x22      2  nrf_drv_uart.o
+  .text.tx_byte            Code  00010d54      0x46      2  nrf_drv_uart.o
+  .text.rx_enable          Code  00010d9a      0x36      2  nrf_drv_uart.o
+  .text.fifo_peek          Code  00010dd0      0x2e      2  app_fifo.o
+  .text.app_fifo_put       Code  00010dfe      0x36      2  app_fifo.o
+  .text.app_fifo_get       Code  00010e34      0x2a      2  app_fifo.o
+  .text.nrf_fstorage_init  Code  00010e5e      0x36      2  nrf_fstorage.o
+  .text.nrf_fstorage_read  Code  00010e94      0x76      2  nrf_fstorage.o
+  .text.nrf_fstorage_erase
+                           Code  00010f0a      0x7a      2  nrf_fstorage.o
+  .text.addr_is_aligned32  Code  00010f84      0x1a      2  nrf_fstorage.o
+  .text.write_execute      Code  00010f9e      0x5a      2  nrf_fstorage_sd.o
+  .text.nrf_atomic_u32_fetch_store
+                           Code  00010ff8      0x2e      2  nrf_fstorage_sd.o
+  .text.event_send         Code  00011026      0x7e      2  nrf_fstorage_sd.o
+  .text.read               Code  000110a4      0x22      2  nrf_fstorage_sd.o
+  .text.rmap               Code  000110c6       0xe      2  nrf_fstorage_sd.o
+  .text.wmap               Code  000110d4       0xe      2  nrf_fstorage_sd.o
+  .text.nrf_memobj_pool_init
+                           Code  000110e2      0x16      2  nrf_memobj.o
+  .text.nrf_memobj_alloc   Code  000110f8      0xae      2  nrf_memobj.o
+  .text.nrf_memobj_free    Code  000111a6      0x72      2  nrf_memobj.o
+  .text.nrf_memobj_get     Code  00011218      0x1e      2  nrf_memobj.o
+  .text.nrf_atfifo_rspace_req
+                           Code  00011236      0x56      2  nrf_atfifo.o
+  .text.nrf_atfifo_init    Code  0001128c      0x66      2  nrf_atfifo.o
+  .text.nrf_atfifo_item_alloc
+                           Code  000112f2      0x2e      2  nrf_atfifo.o
+  .text.nrf_atfifo_item_get
+                           Code  00011320      0x2e      2  nrf_atfifo.o
+  .text.nrf_balloc_idx2block
+                           Code  0001134e      0x22      2  nrf_balloc.o
+  .text.nrf_balloc_block2idx
+                           Code  00011370      0x1e      2  nrf_balloc.o
+  .text.nrf_balloc_init    Code  0001138e      0x56      2  nrf_balloc.o
+  .text.nrf_balloc_free    Code  000113e4      0x42      2  nrf_balloc.o
+  .text.string_print       Code  00011426      0xc2      2  nrf_fprintf_format.o
+  .text.app_error_handler_bare
+                           Code  000114e8      0x2a      2  app_error.o
+  .text.__sd_nvic_irq_disable
+                           Code  00011512      0x16      2  app_util_platform.o
+  .text.__sd_nvic_irq_enable
+                           Code  00011528       0x6      2  app_util_platform.o
+  .text.timer_stop_op_schedule
+                           Code  0001152e      0x6e      2  app_timer.o
+  .text.nrf_log_backend_id_get
+                           Code  0001159c       0xe      2  nrf_log_frontend.o
+  .text.nrf_log_backend_is_enabled
+                           Code  000115aa       0xe      2  nrf_log_frontend.o
+  .text.nrf_log_frontend_std_1
+                           Code  000115b8      0x22      2  nrf_log_frontend.o
+  .text.nrf_log_backend_rtt_init
+                           Code  000115da       0xa      2  nrf_log_backend_rtt.o
+  .text.serial_tx          Code  000115e4      0x5e      2  nrf_log_backend_rtt.o
+  .text.nrf_log_backend_rtt_flush
+                           Code  00011642       0xa      2  nrf_log_backend_rtt.o
+  .text.nrf_log_backend_rtt_panic_set
+                           Code  0001164c       0xa      2  nrf_log_backend_rtt.o
+  .text.on_adv_evt         Code  00011656      0x42      2  main.o
+  .text.power_manage       Code  00011698      0x22      2  main.o
+  .text.nrf_gpio_pin_port_decode
+                           Code  000116ba       0xe      2  boards.o
+  .text.nrf_gpio_cfg       Code  000116c8      0x62      2  boards.o
+  .text.nrf_gpio_cfg_output
+                           Code  0001172a      0x22      2  boards.o
+  .text.nrf_gpio_pin_out_read
+                           Code  0001174c      0x2a      2  boards.o
+  .text.bsp_board_led_state_get
+                           Code  00011776      0x3e      2  boards.o
+  .text.bsp_board_led_invert
+                           Code  000117b4      0x16      2  boards.o
+  .text.bsp_board_leds_init
+                           Code  000117ca      0x2a      2  boards.o
+  .text.nrf_gpio_pin_port_decode
+                           Code  000117f4       0xe      2  bsp.o
+  .text.button_timer_handler
+                           Code  00011802      0x1a      2  bsp.o
+  .text.bsp_btn_ble_sleep_mode_prepare
+                           Code  0001181c      0x3e      2  bsp_btn_ble.o
+  .text.BoardInitMcu       Code  0001185a      0x2a      2  board.o
+  .text.GpioWrite          Code  00011884      0x42      2  gpio-board.o
+  .text.nrf_drv_rtc_counter_get
+                           Code  000118c6      0x1a      2  rtc-board.o
+  .text.SpiOut             Code  000118e0      0xae      2  spi-board.o
+  .text.TimerInit          Code  0001198e      0x3e      2  timer.o
+  .text.TimerGetElapsedTime
+                           Code  000119cc      0x2a      2  timer.o
+  .text.nrf_delay_ms       Code  000119f6      0x1e      2  utilities.o
+  .text.memcpy1            Code  00011a14      0x32      2  utilities.o
+  .text.memcpyr            Code  00011a46      0x3e      2  utilities.o
+  .text.memset1            Code  00011a84      0x32      2  utilities.o
+  .text.StrToHex           Code  00011ab6      0xaa      2  utils.o
+  .text.RegionApplyCFList  Code  00011b60      0x26      2  Region.o
+  .text.RegionAdrNext      Code  00011b86      0x32      2  Region.o
+  .text.RegionLinkAdrReq   Code  00011bb8      0x36      2  Region.o
+  .text.RegionCalcBackOff  Code  00011bee      0x26      2  Region.o
+  .text.RegionNextChannel  Code  00011c14      0x32      2  Region.o
+  .text.RegionSetContinuousWave
+                           Code  00011c46      0x26      2  Region.o
+  .text.CountChannels      Code  00011c6c      0x66      2  RegionCommon.o
+  .text.RegionCommonChanDisable
+                           Code  00011cd2      0x76      2  RegionCommon.o
+  .text.RegionCommonSetBandTxDone
+                           Code  00011d48      0x2e      2  RegionCommon.o
+  .text.RegionCommonLinkAdrReqVerifyParams
+                           Code  00011d76     0x12e      2  RegionCommon.o
+  .text.RegionCommonComputeTxPower
+                           Code  00011ea4      0x66      2  RegionCommon.o
+  .text.RegionCommonCalcBackOff
+                           Code  00011f0a     0x102      2  RegionCommon.o
+  .text.LimitTxPower       Code  0001200c      0x3a      2  RegionEU868.o
+  .text.CountNbOfEnabledChannels
+                           Code  00012046     0x18e      2  RegionEU868.o
+  .text.RegionEU868TxParamSetupReq
+                           Code  000121d4       0xe      2  RegionEU868.o
+  .text.SX1276IsChannelFree
+                           Code  000121e2      0x8a      2  sx1276.o
+  .text.copy_block         Code  0001226c      0xaa      2  aes.o
+  .text.copy_block_nn      Code  00012316      0x32      2  aes.o
+  .text.xor_block          Code  00012348     0x166      2  aes.o
+  .text.aes_encrypt        Code  000124ae      0x86      2  aes.o
+  .text.AES_CMAC_Update    Code  00012534     0x156      2  cmac.o
+  .text.AES_CMAC_Final     Code  0001268a     0x2a6      2  cmac.o
+  .text.addr_is_valid      Code  00012930      0x2e      2  ble_advertising.o
+  .text.flash_access_in_progress
+                           Code  0001295e       0xe      2  ble_advertising.o
+  .text.set_adv_mode_fast  Code  0001296c      0x7e      2  ble_advertising.o
+  .text.set_adv_mode_slow  Code  000129ea      0x7e      2  ble_advertising.o
+  .text.ble_advertising_conn_cfg_tag_set
+                           Code  00012a68      0x1a      2  ble_advertising.o
+  .text.ble_advertising_init
+                           Code  00012a82     0x21e      2  ble_advertising.o
+  .text.ble_device_addr_encode
+                           Code  00012ca0      0xce      2  ble_advdata.o
+  .text.name_encode        Code  00012d6e     0x13e      2  ble_advdata.o
+  .text.flags_encode       Code  00012eac      0x7e      2  ble_advdata.o
+  .text.tx_power_level_encode
+                           Code  00012f2a      0x7e      2  ble_advdata.o
+  .text.uuid_list_encode   Code  00012fa8      0x66      2  ble_advdata.o
+  .text.ble_advdata_encode
+                           Code  0001300e     0x1d2      2  ble_advdata.o
+  .text.instance_free      Code  000131e0      0x12      2  ble_conn_params.o
+  .text.link_init          Code  000131f2      0x2e      2  nrf_ble_gatt.o
+  .text.nrf_ble_gatt_init  Code  00013220      0x56      2  nrf_ble_gatt.o
+  .text.tx_char_add        Code  00013276     0x14a      2  ble_nus.o
+  .text.nrf_drv_common_irq_enable
+                           Code  000133c0      0x3e      2  nrf_drv_common.o
+  .text.nrf_gpiote_event_clear
+                           Code  000133fe      0x36      2  nrf_drv_gpiote.o
+  .text.nrf_gpiote_event_addr_get
+                           Code  00013434      0x1a      2  nrf_drv_gpiote.o
+  .text.nrf_gpio_pin_port_decode
+                           Code  0001344e       0xe      2  nrf_drv_gpiote.o
+  .text.nrf_gpio_cfg       Code  0001345c      0x62      2  nrf_drv_gpiote.o
+  .text.nrf_gpio_cfg_output
+                           Code  000134be      0x22      2  nrf_drv_gpiote.o
+  .text.nrf_gpio_cfg_default
+                           Code  000134e0      0x22      2  nrf_drv_gpiote.o
+  .text.nrf_gpio_pin_read  Code  00013502      0x2a      2  nrf_drv_gpiote.o
+  .text.nrf_drv_gpiote_in_uninit
+                           Code  0001352c      0x4a      2  nrf_drv_gpiote.o
+  .text.nrf_rtc_event_clear
+                           Code  00013576      0x2a      2  nrf_drv_rtc.o
+  .text.nrf_rtc_task_trigger
+                           Code  000135a0      0x1e      2  nrf_drv_rtc.o
+  .text.nrf_section_iter_get
+                           Code  000135be       0xe      2  nrf_sdh.o
+  .text.sd_nvic_SetPriority
+                           Code  000135cc      0x4a      2  nrf_sdh.o
+  .text.ram_end_address_get
+                           Code  00013616      0x1a      2  nrf_sdh_ble.o
+  .text._WriteBlocking     Code  00013630      0xb2      2  SEGGER_RTT.o
+  .text._WriteNoCheck      Code  000136e2      0x7e      2  SEGGER_RTT.o
+  .text.SEGGER_RTT_Init    Code  00013760       0xa      2  SEGGER_RTT.o
+  .text.libc.__int32_to_float64
+                           Code  0001376a      0x2e      2  libm_asm.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__uint32_to_float64
+                           Code  00013798      0x22      2  libm_asm.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__float64_to_int32
+                           Code  000137ba      0x4e      2  libm_asm.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__float64_cmpeq
+                           Code  00013808      0x32      2  libm_asm.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__printf_lock
+                           Code  0001383a       0x2      2  libc.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__printf_unlock
+                           Code  0001383c       0x2      2  libc.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__int64_udivmod
+                           Code  0001383e      0xce      2  libc_asm.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__RAL_ascii_wctomb
+                           Code  0001390c       0xe      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.isupper       Code  0001391a       0xa      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.islower       Code  00013924       0xa      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.isdigit       Code  0001392e       0xa      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.isspace       Code  00013938       0xa      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.isprint       Code  00013942       0xa      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.strtoul       Code  0001394c      0x96      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.memcpy        Code  000139e2      0x52      2  libc2_asm.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.memset        Code  00013a34      0x66      2  libc2_asm.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.strcmp        Code  00013a9a      0x4e      2  libc2_asm.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.nrf_spim_task_trigger
+                           Code  00013ae8      0x1c      2  nrf_drv_spi.o
+  .text.nrf_spim_event_check
+                           Code  00013b04      0x24      2  nrf_drv_spi.o
+  .text.nrf_spim_int_enable
+                           Code  00013b28      0x14      2  nrf_drv_spi.o
+  .text.nrf_spim_int_disable
+                           Code  00013b3c      0x14      2  nrf_drv_spi.o
+  .text.nrf_spim_pins_set  Code  00013b50      0x28      2  nrf_drv_spi.o
+  .text.nrf_spim_frequency_set
+                           Code  00013b78      0x14      2  nrf_drv_spi.o
+  .text.nrf_spim_tx_buffer_set
+                           Code  00013b8c      0x24      2  nrf_drv_spi.o
+  .text.nrf_spim_rx_buffer_set
+                           Code  00013bb0      0x24      2  nrf_drv_spi.o
+  .text.nrf_drv_is_in_RAM  Code  00013bd4      0x1c      2  nrf_drv_spi.o
+  .text.nrf_gpio_cfg_input
+                           Code  00013bf0      0x2c      2  nrf_drv_spi.o
+  .text.nrf_gpio_pin_set   Code  00013c1c      0x28      2  nrf_drv_spi.o
+  .text.nrf_gpio_pin_clear
+                           Code  00013c44      0x28      2  nrf_drv_spi.o
+  .text.nrf_gpio_port_out_set
+                           Code  00013c6c      0x14      2  nrf_drv_spi.o
+  .text.nrf_gpio_port_out_clear
+                           Code  00013c80      0x14      2  nrf_drv_spi.o
+  .text.spim_int_enable    Code  00013c94      0x34      2  nrf_drv_spi.o
+  .text.spim_list_enable_handle
+                           Code  00013cc8      0x40      2  nrf_drv_spi.o
+  .text.spim_xfer          Code  00013d08      0xf4      2  nrf_drv_spi.o
+  .text.nrf_uart_event_check
+                           Code  00013dfc      0x24      2  nrf_drv_uart.o
+  .text.nrf_uart_int_enable
+                           Code  00013e20      0x14      2  nrf_drv_uart.o
+  .text.nrf_uart_int_disable
+                           Code  00013e34      0x14      2  nrf_drv_uart.o
+  .text.nrf_uarte_int_disable
+                           Code  00013e48      0x14      2  nrf_drv_uart.o
+  .text.nrf_uart_task_trigger
+                           Code  00013e5c      0x1c      2  nrf_drv_uart.o
+  .text.nrf_uart_baudrate_set
+                           Code  00013e78      0x14      2  nrf_drv_uart.o
+  .text.nrf_uarte_event_check
+                           Code  00013e8c      0x24      2  nrf_drv_uart.o
+  .text.nrf_uarte_shorts_enable
+                           Code  00013eb0      0x1c      2  nrf_drv_uart.o
+  .text.nrf_uarte_int_enable
+                           Code  00013ecc      0x14      2  nrf_drv_uart.o
+  .text.nrf_uarte_task_trigger
+                           Code  00013ee0      0x1c      2  nrf_drv_uart.o
+  .text.nrf_uarte_baudrate_set
+                           Code  00013efc      0x14      2  nrf_drv_uart.o
+  .text.nrf_uarte_tx_buffer_set
+                           Code  00013f10      0x24      2  nrf_drv_uart.o
+  .text.nrf_uarte_rx_buffer_set
+                           Code  00013f34      0x24      2  nrf_drv_uart.o
+  .text.nrf_drv_is_in_RAM  Code  00013f58      0x1c      2  nrf_drv_uart.o
+  .text.nrf_gpio_cfg_input
+                           Code  00013f74      0x2c      2  nrf_drv_uart.o
+  .text.nrf_gpio_pin_set   Code  00013fa0      0x28      2  nrf_drv_uart.o
+  .text.nrf_gpio_port_out_set
+                           Code  00013fc8      0x14      2  nrf_drv_uart.o
+  .text.rx_byte            Code  00013fdc      0x54      2  nrf_drv_uart.o
+  .text.fifo_length        Code  00014030      0x18      2  app_fifo.o
+  .text.fifo_put           Code  00014048      0x30      2  app_fifo.o
+  .text.fifo_get           Code  00014078      0x24      2  app_fifo.o
+  .text.app_fifo_init      Code  0001409c      0x58      2  app_fifo.o
+  .text.nrf_fstorage_write
+                           Code  000140f4      0xa4      2  nrf_fstorage.o
+  .text.addr_within_bounds
+                           Code  00014198      0x34      2  nrf_fstorage.o
+  .text.sd_flash_write     Code  000141cc       0x8      2  nrf_fstorage_sd.o
+  .text.sd_flash_page_erase
+                           Code  000141d4       0x8      2  nrf_fstorage_sd.o
+  .text.nrf_atomic_u32_fetch_or
+                           Code  000141dc      0x30      2  nrf_fstorage_sd.o
+  .text.nrf_atomic_flag_set_fetch
+                           Code  0001420c      0x18      2  nrf_fstorage_sd.o
+  .text.erase_execute      Code  00014224      0x20      2  nrf_fstorage_sd.o
+  .text.fifo_length        Code  00014244      0x18      2  app_uart_fifo.o
+  .text.nrf_section_iter_init
+                           Code  0001425c      0x30      2  nrf_section_iter.o
+  .text.nrf_section_iter_next
+                           Code  0001428c      0x3c      2  nrf_section_iter.o
+  .text.nrf_atomic_u32_add
+                           Code  000142c8      0x30      2  nrf_memobj.o
+  .text.nrf_atomic_u32_sub
+                           Code  000142f8      0x30      2  nrf_memobj.o
+  .text.nrf_memobj_put     Code  00014328      0x34      2  nrf_memobj.o
+  .text.memobj_op          Code  0001435c      0xe8      2  nrf_memobj.o
+  .text.nrf_memobj_write   Code  00014444      0x24      2  nrf_memobj.o
+  .text.nrf_memobj_read    Code  00014468      0x24      2  nrf_memobj.o
+  .text.nrf_atfifo_wspace_req
+                           Code  0001448c      0x54      2  nrf_atfifo.o
+  .text.nrf_atfifo_wspace_close
+                           Code  000144e0      0x20      2  nrf_atfifo.o
+  .text.nrf_atfifo_rspace_close
+                           Code  00014500      0x20      2  nrf_atfifo.o
+  .text.nrf_atfifo_space_clear
+                           Code  00014520      0x48      2  nrf_atfifo.o
+  .text.nrf_atfifo_clear   Code  00014568      0x28      2  nrf_atfifo.o
+  .text.nrf_atfifo_item_put
+                           Code  00014590      0x28      2  nrf_atfifo.o
+  .text.nrf_atfifo_item_free
+                           Code  000145b8      0x28      2  nrf_atfifo.o
+  .text.nrf_balloc_alloc   Code  000145e0      0x7c      2  nrf_balloc.o
+  .text.nrf_fprintf_buffer_flush
+                           Code  0001465c      0x30      2  nrf_fprintf.o
+  .text.nrf_fprintf        Code  0001468c      0x30      2  nrf_fprintf.o
+  .text.buffer_add         Code  000146bc      0x3c      2  nrf_fprintf_format.o
+  .text.int_print          Code  000146f8     0x11c      2  nrf_fprintf_format.o
+  .text.app_util_critical_region_enter
+                           Code  00014814      0x14      2  app_util_platform.o
+  .text.app_util_critical_region_exit
+                           Code  00014828      0x1c      2  app_util_platform.o
+  .text.__putchar          Code  00014844      0x1c      2  retarget.o
+  .text.timer_list_handler_sched
+                           Code  00014860       0xc      2  app_timer.o
+  .text.timer_start_op_schedule
+                           Code  0001486c      0x88      2  app_timer.o
+  .text.nrf_log_backend_enable
+                           Code  000148f4      0x10      2  nrf_log_default_backends.o
+  .text.nrf_log_backend_put
+                           Code  00014904      0x1c      2  nrf_log_frontend.o
+  .text.nrf_log_backend_panic_set
+                           Code  00014920      0x18      2  nrf_log_frontend.o
+  .text.nrf_log_backend_id_set
+                           Code  00014938      0x18      2  nrf_log_frontend.o
+  .text.nrf_log_backend_enable
+                           Code  00014950      0x10      2  nrf_log_frontend.o
+  .text.nrf_atomic_u32_or  Code  00014960      0x30      2  nrf_log_frontend.o
+  .text.nrf_atomic_u32_fetch_and
+                           Code  00014990      0x30      2  nrf_log_frontend.o
+  .text.nrf_atomic_flag_set
+                           Code  000149c0      0x18      2  nrf_log_frontend.o
+  .text.nrf_atomic_flag_clear_fetch
+                           Code  000149d8      0x18      2  nrf_log_frontend.o
+  .text.nrf_log_frontend_std_0
+                           Code  000149f0      0x1c      2  nrf_log_frontend.o
+  .text.nrf_log_frontend_std_2
+                           Code  00014a0c      0x28      2  nrf_log_frontend.o
+  .text.nrf_log_backend_serial_put
+                           Code  00014a34     0x14c      2  nrf_log_backend_serial.o
+  .text.sd_power_system_off
+                           Code  00014b80       0x8      2  main.o
+  .text.sd_app_evt_wait    Code  00014b88       0x8      2  main.o
+  .text.sd_ble_gap_disconnect
+                           Code  00014b90       0x8      2  main.o
+  .text.sd_ble_gap_ppcp_set
+                           Code  00014b98       0x8      2  main.o
+  .text.sd_ble_gap_device_name_set
+                           Code  00014ba0       0x8      2  main.o
+  .text.conn_params_error_handler
+                           Code  00014ba8      0x14      2  main.o
+  .text.sleep_mode_enter   Code  00014bbc      0x50      2  main.o
+  .text.ble_stack_init     Code  00014c0c      0x5c      2  main.o
+  .text.log_init           Code  00014c68      0x28      2  main.o
+  .text.nrf_gpio_cfg_input
+                           Code  00014c90      0x2c      2  boards.o
+  .text.nrf_gpio_pin_set   Code  00014cbc      0x28      2  boards.o
+  .text.nrf_gpio_pin_clear
+                           Code  00014ce4      0x28      2  boards.o
+  .text.nrf_gpio_pin_toggle
+                           Code  00014d0c      0x44      2  boards.o
+  .text.nrf_gpio_pin_write
+                           Code  00014d50      0x24      2  boards.o
+  .text.nrf_gpio_port_out_read
+                           Code  00014d74      0x10      2  boards.o
+  .text.nrf_gpio_port_out_set
+                           Code  00014d84      0x14      2  boards.o
+  .text.nrf_gpio_port_out_clear
+                           Code  00014d98      0x14      2  boards.o
+  .text.bsp_board_led_on   Code  00014dac      0x18      2  boards.o
+  .text.bsp_board_led_off  Code  00014dc4      0x18      2  boards.o
+  .text.bsp_board_leds_off
+                           Code  00014ddc      0x24      2  boards.o
+  .text.bsp_board_leds_on  Code  00014e00      0x24      2  boards.o
+  .text.bsp_board_buttons_init
+                           Code  00014e24      0x28      2  boards.o
+  .text.bsp_board_pin_to_button_idx
+                           Code  00014e4c      0x34      2  boards.o
+  .text.bsp_board_button_idx_to_pin
+                           Code  00014e80       0xc      2  boards.o
+  .text.nrf_gpio_cfg_sense_set
+                           Code  00014e8c      0x5c      2  bsp.o
+  .text.alert_timer_handler
+                           Code  00014ee8      0x14      2  bsp.o
+  .text.bsp_wakeup_button_enable
+                           Code  00014efc      0x20      2  bsp.o
+  .text.GpioDeinit         Code  00014f1c      0x48      2  gpio-board.o
+  .text.nrf_rtc_counter_get
+                           Code  00014f64      0x10      2  rtc-board.o
+  .text.SpiIn              Code  00014f74      0x94      2  spi-board.o
+  .text.SX1276GetPaSelect  Code  00015008       0xc      2  sx1276-board.o
+  .text.SX1276CheckRfFrequency
+                           Code  00015014       0xc      2  sx1276-board.o
+  .text.TimerStart         Code  00015020      0x80      2  timer.o
+  .text.TimerStop          Code  000150a0      0x34      2  timer.o
+  .text.TimerSetValue      Code  000150d4      0x1c      2  timer.o
+  .text.TimerGetCurrentTime
+                           Code  000150f0       0xc      2  timer.o
+  .text.TimerLowPowerHandler
+                           Code  000150fc       0x4      2  timer.o
+  .text.randr              Code  00015100      0x2c      2  utilities.o
+  .text.DelayMs            Code  0001512c      0x14      2  utilities.o
+  .text.wait_for_flash_ready
+                           Code  00015140      0x20      2  app_lora.o
+  .text.LoRaMacPayloadDecrypt
+                           Code  00015160      0x34      2  LoRaMacCrypto.o
+  .text.RegionIsActive     Code  00015194      0x1c      2  Region.o
+  .text.RegionGetPhyParam  Code  000151b0      0x2c      2  Region.o
+  .text.RegionSetBandTxDone
+                           Code  000151dc      0x24      2  Region.o
+  .text.RegionInitDefaults
+                           Code  00015200      0x30      2  Region.o
+  .text.RegionVerify       Code  00015230      0x34      2  Region.o
+  .text.RegionChanMaskSet  Code  00015264      0x28      2  Region.o
+  .text.RegionComputeRxWindowParameters
+                           Code  0001528c      0x3c      2  Region.o
+  .text.RegionRxConfig     Code  000152c8      0x2c      2  Region.o
+  .text.RegionTxConfig     Code  000152f4      0x30      2  Region.o
+  .text.RegionRxParamSetupReq
+                           Code  00015324      0x28      2  Region.o
+  .text.RegionNewChannelReq
+                           Code  0001534c      0x28      2  Region.o
+  .text.RegionTxParamSetupReq
+                           Code  00015374      0x28      2  Region.o
+  .text.RegionDlChannelReq
+                           Code  0001539c      0x28      2  Region.o
+  .text.RegionAlternateDr  Code  000153c4      0x28      2  Region.o
+  .text.RegionApplyDrOffset
+                           Code  000153ec      0x4c      2  Region.o
+  .text.RegionCommonChanVerifyDr
+                           Code  00015438     0x10c      2  RegionCommon.o
+  .text.RegionCommonValueInRange
+                           Code  00015544      0x38      2  RegionCommon.o
+  .text.RegionCommonCountChannels
+                           Code  0001557c      0x70      2  RegionCommon.o
+  .text.RegionCommonChanMaskCopy
+                           Code  000155ec      0x54      2  RegionCommon.o
+  .text.RegionCommonUpdateBandTimeOff
+                           Code  00015640     0x1c0      2  RegionCommon.o
+  .text.RegionCommonParseLinkAdrReq
+                           Code  00015800      0xa0      2  RegionCommon.o
+  .text.GetNextLowerTxDr   Code  000158a0      0x40      2  RegionEU868.o
+  .text.RegionEU868ApplyCFList
+                           Code  000158e0      0xd4      2  RegionEU868.o
+  .text.RegionEU868ApplyDrOffset
+                           Code  000159b4      0x3c      2  RegionEU868.o
+  .text.SX1276Random       Code  000159f0      0x64      2  sx1276.o
+  .text.SX1276SetOpMode    Code  00015a54      0x54      2  sx1276.o
+  .text.copy_and_key       Code  00015aa8     0x168      2  aes.o
+  .text.add_round_key      Code  00015c10      0x18      2  aes.o
+  .text.AES_CMAC_Init      Code  00015c28      0x30      2  cmac.o
+  .text.AES_CMAC_SetKey    Code  00015c58      0x1c      2  cmac.o
+  .text.sd_ble_gap_adv_start
+                           Code  00015c74       0x8      2  ble_advertising.o
+  .text.sd_ble_gap_adv_stop
+                           Code  00015c7c       0x8      2  ble_advertising.o
+  .text.whitelist_has_entries
+                           Code  00015c84      0x10      2  ble_advertising.o
+  .text.set_adv_mode_directed
+                           Code  00015c94      0x30      2  ble_advertising.o
+  .text.set_adv_mode_directed_slow
+                           Code  00015cc4      0x38      2  ble_advertising.o
+  .text.ble_advertising_restart_without_whitelist
+                           Code  00015cfc      0x6c      2  ble_advertising.o
+  .text.sd_ble_gap_addr_get
+                           Code  00015d68       0x8      2  ble_advdata.o
+  .text.sd_ble_gap_adv_data_set
+                           Code  00015d70       0x8      2  ble_advdata.o
+  .text.sd_ble_gap_appearance_get
+                           Code  00015d78       0x8      2  ble_advdata.o
+  .text.sd_ble_gap_device_name_get
+                           Code  00015d80       0x8      2  ble_advdata.o
+  .text.sd_ble_uuid_encode
+                           Code  00015d88       0x8      2  ble_advdata.o
+  .text.uint16_encode      Code  00015d90      0x2c      2  ble_advdata.o
+  .text.appearance_encode  Code  00015dbc      0x9c      2  ble_advdata.o
+  .text.uuid_list_sized_encode
+                           Code  00015e58     0x150      2  ble_advdata.o
+  .text.conn_int_check     Code  00015fa8      0x78      2  ble_advdata.o
+  .text.conn_int_encode    Code  00016020      0xc0      2  ble_advdata.o
+  .text.manuf_specific_data_encode
+                           Code  000160e0      0xe0      2  ble_advdata.o
+  .text.service_data_encode
+                           Code  000161c0     0x108      2  ble_advdata.o
+  .text.advdata_check      Code  000162c8      0x1c      2  ble_advdata.o
+  .text.srdata_check       Code  000162e4      0x18      2  ble_advdata.o
+  .text.ble_advdata_set    Code  000162fc      0xb4      2  ble_advdata.o
+  .text.sd_ble_gap_conn_param_update
+                           Code  000163b0       0x8      2  ble_conn_params.o
+  .text.sd_ble_gap_disconnect
+                           Code  000163b8       0x8      2  ble_conn_params.o
+  .text.sd_ble_gap_ppcp_set
+                           Code  000163c0       0x8      2  ble_conn_params.o
+  .text.sd_ble_gap_ppcp_get
+                           Code  000163c8       0x8      2  ble_conn_params.o
+  .text.send_update_request
+                           Code  000163d0      0x40      2  ble_conn_params.o
+  .text.nrf_ble_gatt_att_mtu_periph_set
+                           Code  00016410      0x38      2  nrf_ble_gatt.o
+  .text.sd_ble_gatts_service_add
+                           Code  00016448       0x8      2  ble_nus.o
+  .text.sd_ble_gatts_characteristic_add
+                           Code  00016450       0x8      2  ble_nus.o
+  .text.sd_ble_gatts_hvx   Code  00016458       0x8      2  ble_nus.o
+  .text.sd_ble_uuid_vs_add
+                           Code  00016460       0x8      2  ble_nus.o
+  .text.rx_char_add        Code  00016468     0x104      2  ble_nus.o
+  .text.ble_nus_string_send
+                           Code  0001656c      0x78      2  ble_nus.o
+  .text.nrf_gpio_cfg_watcher
+                           Code  000165e4      0x38      2  nrf_drv_gpiote.o
+  .text.nrf_gpio_cfg_input
+                           Code  0001661c      0x2c      2  nrf_drv_gpiote.o
+  .text.nrf_gpio_cfg_sense_set
+                           Code  00016648      0x5c      2  nrf_drv_gpiote.o
+  .text.nrf_gpio_pin_set   Code  000166a4      0x28      2  nrf_drv_gpiote.o
+  .text.nrf_gpio_pin_clear
+                           Code  000166cc      0x28      2  nrf_drv_gpiote.o
+  .text.nrf_gpio_port_in_read
+                           Code  000166f4      0x10      2  nrf_drv_gpiote.o
+  .text.nrf_gpio_port_out_set
+                           Code  00016704      0x14      2  nrf_drv_gpiote.o
+  .text.nrf_gpio_port_out_clear
+                           Code  00016718      0x14      2  nrf_drv_gpiote.o
+  .text.nrf_drv_gpiote_out_init
+                           Code  0001672c      0x8c      2  nrf_drv_gpiote.o
+  .text.nrf_drv_gpiote_out_uninit
+                           Code  000167b8      0x44      2  nrf_drv_gpiote.o
+  .text.nrf_drv_gpiote_out_set
+                           Code  000167fc      0x14      2  nrf_drv_gpiote.o
+  .text.nrf_drv_gpiote_out_clear
+                           Code  00016810      0x14      2  nrf_drv_gpiote.o
+  .text.nrf_drv_gpiote_in_event_disable
+                           Code  00016824      0x50      2  nrf_drv_gpiote.o
+  .text.nrf_drv_gpiote_in_is_set
+                           Code  00016874      0x20      2  nrf_drv_gpiote.o
+  .text.nrf_rtc_int_enable
+                           Code  00016894      0x14      2  nrf_drv_rtc.o
+  .text.nrf_rtc_prescaler_set
+                           Code  000168a8      0x14      2  nrf_drv_rtc.o
+  .text.nrf_rtc_event_enable
+                           Code  000168bc      0x14      2  nrf_drv_rtc.o
+  .text.nrf_drv_rtc_tick_enable
+                           Code  000168d0      0x50      2  nrf_drv_rtc.o
+  .text.nrf_drv_rtc_overflow_enable
+                           Code  00016920      0x50      2  nrf_drv_rtc.o
+  .text.sd_softdevice_enable
+                           Code  00016970       0x8      2  nrf_sdh.o
+  .text.sd_softdevice_disable
+                           Code  00016978       0x8      2  nrf_sdh.o
+  .text.__sd_nvic_is_app_accessible_priority
+                           Code  00016980      0x2c      2  nrf_sdh.o
+  .text.softdevices_evt_irq_enable
+                           Code  000169ac      0x24      2  nrf_sdh.o
+  .text.softdevice_evt_irq_disable
+                           Code  000169d0      0x24      2  nrf_sdh.o
+  .text.swi_interrupt_priority_workaround
+                           Code  000169f4      0x40      2  nrf_sdh.o
+  .text.sd_ble_enable      Code  00016a34       0x8      2  nrf_sdh_ble.o
+  .text.sd_ble_cfg_set     Code  00016a3c       0x8      2  nrf_sdh_ble.o
+  .text._GetAvailWriteSpace
+                           Code  00016a44      0x3c      2  SEGGER_RTT.o
+  .text.libc.__float64_to_uint32
+                           Code  00016a80      0x2c      2  libm_asm.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__float32_to_float64
+                           Code  00016aac      0x38      2  libm_asm.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__float64_add
+                           Code  00016ae4     0x294      2  libm_asm.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__float64_cmpgt
+                           Code  00016d78      0x38      2  libm_asm.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__RAL_ascii_toupper
+                           Code  00016db0       0xc      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__RAL_ascii_tolower
+                           Code  00016dbc       0xc      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__RAL_ascii_towupper
+                           Code  00016dc8       0xc      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__RAL_ascii_towlower
+                           Code  00016dd4       0xc      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__RAL_ascii_mbtowc
+                           Code  00016de0      0x24      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__putc        Code  00016e04      0x34      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__digit       Code  00016e38      0x3c      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.__strtoul     Code  00016e74      0xe0      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.strchr        Code  00016f54      0x20      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.strncmp       Code  00016f74      0x40      2  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.strcpy        Code  00016fb4      0x44      2  libc2_asm.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .text.libc.strlen        Code  00016ff8      0x60      2  libc2_asm.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+
+place in [0x00000000 to 0x0007ffff] with auto order
+
+  Section                  Type  Address       Size  Align  Object
+  -------                  ----  -------       ----  -----  ------
+
+place in [0x20000000 to 0x2000ffff] with auto order
+
+  Section                  Type  Address       Size  Align  Object
+  -------                  ----  -------       ----  -----  ------
+  .tbss.errno_val          Data  20000000       0x4      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+
+place in [0x20000000 to 0x2000ffff] with auto order
+
+  Section                  Type  Address       Size  Align  Object
+  -------                  ----  -------       ----  -----  ------
+  .data.Bands              Data  20000004      0x50      4  RegionEU868.o
+  .data.m_colors           Data  20000054      0x24      4  nrf_log_str_formatter.o
+  .data.DioIrq             Data  20000078      0x18      4  sx1276.o
+  .data.severity_names     Data  20000090      0x14      4  nrf_log_str_formatter.o
+  .data.libc.__RAL_global_locale
+                           Data  200000a4      0x14      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .data.AppKey             Data  200000b8      0x10      4  app_lora.o
+  .data.MicBlockB0         Data  200000c8      0x10      4  LoRaMacCrypto.o
+  .data.aBlock             Data  200000d8      0x10      4  LoRaMacCrypto.o
+  .data.rtt_log_backend    Data  200000e8       0xc      4  nrf_log_default_backends.o
+  .data.app_uart_inst      Data  200000f4       0x8      4  app_uart_fifo.o
+  .data.DevEui             Data  200000fc       0x8      4  app_lora.o
+  .data.AppEui             Data  20000104       0x8      4  app_lora.o
+  .data.m_adv_uuids        Data  2000010c       0x4      4  main.o
+  .data.SystemCoreClock    Data  20000110       0x4      4  system_nrf52.o
+  .data.next               Data  20000114       0x4      4  utilities.o
+  .data.lora_cfg           Data  20000118       0x4      4  app_lora.o
+  .data.m_conn_handle      Data  2000011c       0x2      2  main.o
+  .data.m_ble_nus_max_data_len
+                           Data  2000011e       0x2      2  main.o
+  .data.BatteryVoltage     Data  20000120       0x2      2  board.o
+  .data.AppPort            Data  20000122       0x1      1  app_lora.o
+  .data.AppDataSize        Data  20000123       0x1      1  app_lora.o
+  .data.NextTx             Data  20000124       0x1      1  app_lora.o
+  .data.IsRxWindowsEnabled
+                           Data  20000125       0x1      1  LoRaMac.o
+  .data.AckTimeoutRetries  Data  20000126       0x1      1  LoRaMac.o
+  .data.AckTimeoutRetriesCounter
+                           Data  20000127       0x1      1  LoRaMac.o
+  .bss.m_log_data          Data  20000128     0x420      4  nrf_log_frontend.o
+  .bss._acUpBuffer         Data  20000548     0x200      4  SEGGER_RTT.o
+  .bss.AesCmacCtx          Data  20000748     0x118      4  LoRaMacCrypto.o
+  .bss.m_op_queue          Data  20000860     0x10c      4  app_timer.o
+  .bss.rx_buf.13203        Data  2000096c     0x100      4  main.o
+  .bss.tx_buf.13204        Data  20000a6c     0x100      4  main.o
+  .bss.RxTxBuffer          Data  20000b6c     0x100      4  sx1276.o
+  .bss.LoRaMacBuffer       Data  20000c6c      0xff      4  LoRaMac.o
+  .bss.LoRaMacRxPayload    Data  20000d6c      0xff      4  LoRaMac.o
+  .bss.data_array.13185    Data  20000e6c      0xf4      4  main.o
+  .bss.AppData             Data  20000f60      0xf2      4  app_lora.o
+  .bss.AesContext          Data  20001054      0xf1      4  LoRaMacCrypto.o
+  .bss.m_advertising       Data  20001148      0xd8      4  main.o
+  .bss.mempool_nrf_balloc_pool_mem
+                           Data  20001220      0xc0      4  nrf_log_frontend.o
+  .bss.Channels            Data  200012e0      0xc0      4  RegionEU868.o
+  .bss.SX1276              Data  200013a0      0xc0      4  sx1276.o
+  .bss.m_fifo_data         Data  20001460      0x8c      4  nrf_fstorage_sd.o
+  .bss.irq_handlers        Data  200014ec      0x80      4  gpio-board.o
+  .bss.MacCommandsBuffer   Data  2000156c      0x80      4  LoRaMac.o
+  .bss.MacCommandsBufferToRepeat
+                           Data  200015ec      0x80      4  LoRaMac.o
+  .bss._SEGGER_RTT         Data  2000166c      0x78      4  SEGGER_RTT.o
+  .bss.m_cb                Data  200016e4      0x58      4  nrf_drv_gpiote.o
+  .bss.g_lora_cfg          Data  2000173c      0x48      4  main.o
+  .bss.m_string_buff       Data  20001784      0x40      4  nrf_log_backend_rtt.o
+  .bss.LoRaMacParams       Data  200017c4      0x38      4  LoRaMac.o
+  .bss.LoRaMacParamsDefaults
+                           Data  200017fc      0x38      4  LoRaMac.o
+  .bss.TxNextPacketTimer   Data  20001834      0x28      4  app_lora.o
+  .bss.MacStateCheckTimer  Data  2000185c      0x28      4  LoRaMac.o
+  .bss.TxDelayedTimer      Data  20001884      0x28      4  LoRaMac.o
+  .bss.RxWindowTimer1      Data  200018ac      0x28      4  LoRaMac.o
+  .bss.RxWindowTimer2      Data  200018d4      0x28      4  LoRaMac.o
+  .bss.AckTimeoutTimer     Data  200018fc      0x28      4  LoRaMac.o
+  .bss.TxTimeoutTimer      Data  20001924      0x28      4  sx1276.o
+  .bss.RxTimeoutTimer      Data  2000194c      0x28      4  sx1276.o
+  .bss.RxTimeoutSyncWord   Data  20001974      0x28      4  sx1276.o
+  .bss.m_cb                Data  2000199c      0x24      4  nrf_drv_spi.o
+  .bss.m_cb                Data  200019c0      0x20      4  nrf_drv_uart.o
+  .bss.m_detection_delay_timer_id_data
+                           Data  200019e0      0x20      4  app_button.o
+  .bss.m_leds_timer_id_data
+                           Data  20001a00      0x20      4  bsp.o
+  .bss.m_alert_timer_id_data
+                           Data  20001a20      0x20      4  bsp.o
+  .bss.m_button_timer_id_data
+                           Data  20001a40      0x20      4  bsp.o
+  .bss.m_timer_data        Data  20001a60      0x20      4  ble_conn_params.o
+  .bss.m_nus               Data  20001a80      0x1c      4  main.o
+  .bss.RadioEvents         Data  20001a9c      0x1c      4  LoRaMac.o
+  .bss.m_conn_params_config
+                           Data  20001ab8      0x1c      4  ble_conn_params.o
+  .bss.McpsIndication      Data  20001ad4      0x18      4  LoRaMac.o
+  .bss.m_flags             Data  20001aec      0x14      4  nrf_fstorage_sd.o
+  .bss.m_gatt              Data  20001b00      0x14      4  main.o
+  .bss.ComplianceTest      Data  20001b14      0x14      4  app_lora.o
+  .bss.RxWindow1Config     Data  20001b28      0x14      4  LoRaMac.o
+  .bss.RxWindow2Config     Data  20001b3c      0x14      4  LoRaMac.o
+  .bss.McpsConfirm         Data  20001b50      0x14      4  LoRaMac.o
+  .bss.m_conn_params_instances
+                           Data  20001b64      0x14      4  ble_conn_params.o
+  .bss.m_fifo_inst         Data  20001b78      0x10      4  nrf_fstorage_sd.o
+  .bss.m_rx_fifo           Data  20001b88      0x10      4  app_uart_fifo.o
+  .bss.m_tx_fifo           Data  20001b98      0x10      4  app_uart_fifo.o
+  .bss.LoRaMacNwkSKey      Data  20001ba8      0x10      4  LoRaMac.o
+  .bss.LoRaMacAppSKey      Data  20001bb8      0x10      4  LoRaMac.o
+  .bss.Mic                 Data  20001bc8      0x10      4  LoRaMacCrypto.o
+  .bss.sBlock              Data  20001bd8      0x10      4  LoRaMacCrypto.o
+  .bss._acDownBuffer       Data  20001be8      0x10      4  SEGGER_RTT.o
+  .bss.nrf_nvic_state      Data  20001bf8       0xc      4  app_util_platform.o
+  .bss.LoRaMacPrimitives   Data  20001c04       0xc      4  app_lora.o
+  .bss.mibReq              Data  20001c10       0xc      4  app_lora.o
+  .bss.MlmeConfirm         Data  20001c1c       0xc      4  LoRaMac.o
+  .bss.mempool_nrf_balloc_pool_stack
+                           Data  20001c28       0x8      4  nrf_log_frontend.o
+  .bss.mempool_nrf_balloc_cb
+                           Data  20001c30       0x8      4  nrf_log_frontend.o
+  .bss.AntSwitchHf_RADIO_RF_CTX
+                           Data  20001c38       0x8      4  sx1276-board.o
+  .bss.AntSwitchHf_RADIO_RF_CPS
+                           Data  20001c40       0x8      4  sx1276-board.o
+  .bss.m_preferred_conn_params
+                           Data  20001c48       0x8      4  ble_conn_params.o
+  .bss.mp_buttons          Data  20001c50       0x4      4  app_button.o
+  .bss.m_detection_delay   Data  20001c54       0x4      4  app_button.o
+  .bss.m_pin_state         Data  20001c58       0x4      4  app_button.o
+  .bss.m_pin_transition    Data  20001c5c       0x4      4  app_button.o
+  .bss.m_p_cur_op          Data  20001c60       0x4      4  nrf_fstorage_sd.o
+  .bss.m_iget_ctx          Data  20001c64       0x4      4  nrf_fstorage_sd.o
+  .bss.m_event_handler     Data  20001c68       0x4      4  app_uart_fifo.o
+  .bss.mp_timer_id_head    Data  20001c6c       0x4      4  app_timer.o
+  .bss.m_ticks_latest      Data  20001c70       0x4      4  app_timer.o
+  .bss.m_indication_type   Data  20001c74       0x4      4  bsp.o
+  .bss.m_registered_callback
+                           Data  20001c78       0x4      4  bsp.o
+  .bss.IrqNestLevel        Data  20001c7c       0x4      4  board.o
+  .bss.timestamp_base      Data  20001c80       0x4      4  rtc-board.o
+  .bss.wakeup_clbk         Data  20001c84       0x4      4  rtc-board.o
+  .bss.TxDutyCycleTime     Data  20001c88       0x4      4  app_lora.o
+  .bss.LoRaMacCallbacks    Data  20001c8c       0x4      4  app_lora.o
+  .bss.LoRaMacDevEui       Data  20001c90       0x4      4  LoRaMac.o
+  .bss.LoRaMacAppEui       Data  20001c94       0x4      4  LoRaMac.o
+  .bss.LoRaMacAppKey       Data  20001c98       0x4      4  LoRaMac.o
+  .bss.LoRaMacNetID        Data  20001c9c       0x4      4  LoRaMac.o
+  .bss.LoRaMacDevAddr      Data  20001ca0       0x4      4  LoRaMac.o
+  .bss.MulticastChannels   Data  20001ca4       0x4      4  LoRaMac.o
+  .bss.UpLinkCounter       Data  20001ca8       0x4      4  LoRaMac.o
+  .bss.DownLinkCounter     Data  20001cac       0x4      4  LoRaMac.o
+  .bss.AdrAckCounter       Data  20001cb0       0x4      4  LoRaMac.o
+  .bss.AggregatedLastTxDoneTime
+                           Data  20001cb4       0x4      4  LoRaMac.o
+  .bss.AggregatedTimeOff   Data  20001cb8       0x4      4  LoRaMac.o
+  .bss.LoRaMacInitializationTime
+                           Data  20001cbc       0x4      4  LoRaMac.o
+  .bss.LoRaMacState        Data  20001cc0       0x4      4  LoRaMac.o
+  .bss.LoRaMacPrimitives   Data  20001cc4       0x4      4  LoRaMac.o
+  .bss.LoRaMacCallbacks    Data  20001cc8       0x4      4  LoRaMac.o
+  .bss.RxWindow1Delay      Data  20001ccc       0x4      4  LoRaMac.o
+  .bss.RxWindow2Delay      Data  20001cd0       0x4      4  LoRaMac.o
+  .bss.TxTimeOnAir         Data  20001cd4       0x4      4  LoRaMac.o
+  .bss.RadioEvents         Data  20001cd8       0x4      4  sx1276.o
+  .bss.m_handlers          Data  20001cdc       0x4      4  nrf_drv_rtc.o
+  .bss.libc.__user_format_extender
+                           Data  20001ce0       0x4      4  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+  .bss.m_events_list       Data  20001ce4       0x3      4  bsp.o
+  .bss.m_cb                Data  20001ce8       0x3      4  nrf_drv_rtc.o
+  .bss.LoRaMacDevNonce     Data  20001052       0x2      2  LoRaMac.o
+  .bss.LoRaMacBufferPktLen
+                           Data  20001146       0x2      2  LoRaMac.o
+  .bss.AggregatedDCycle    Data  20001cec       0x2      2  LoRaMac.o
+  .bss.ChannelsMask        Data  20001cf0       0x2      4  RegionEU868.o
+  .bss.ChannelsDefaultMask
+                           Data  20001cf4       0x2      4  RegionEU868.o
+  .bss.m_button_count      Data  20000d6b       0x1      1  app_button.o
+  .bss.m_rx_ovf            Data  20000e6b       0x1      1  app_uart_fifo.o
+  .bss.m_ticks_elapsed_q_read_ind
+                           Data  20001145       0x1      1  app_timer.o
+  .bss.m_ticks_elapsed_q_write_ind
+                           Data  20001ce7       0x1      1  app_timer.o
+  .bss.m_rtc1_running      Data  20001ceb       0x1      1  app_timer.o
+  .bss.loraconfigupdataflg
+                           Data  20001cee       0x1      1  main.o
+  .bss.index.13186         Data  20001cef       0x1      1  main.o
+  .bss.m_stable_state      Data  20001cf2       0x1      1  bsp.o
+  .bss.m_leds_clear        Data  20001cf3       0x1      1  bsp.o
+  .bss.m_alert_on          Data  20001cf6       0x1      1  bsp.o
+  .bss.current_long_push_pin_no.9214
+                           Data  20001cf7       0x1      1  bsp.o
+  .bss.IsExtPower          Data  20001cf8       0x1      1  board.o
+  .bss.RadioIsActive       Data  20001cf9       0x1      1  sx1276-board.o
+  .bss.IsTxConfirmed       Data  20001cfa       0x1      1  app_lora.o
+  .bss.AppLedStateOn       Data  20001cfb       0x1      1  app_lora.o
+  .bss.DeviceState         Data  20001cfc       0x1      1  app_lora.o
+  .bss.LoRaMacRegion       Data  20001cfd       0x1      1  LoRaMac.o
+  .bss.LoRaMacDeviceClass  Data  20001cfe       0x1      1  LoRaMac.o
+  .bss.PublicNetwork       Data  20001cff       0x1      1  LoRaMac.o
+  .bss.RepeaterSupport     Data  20001d00       0x1      1  LoRaMac.o
+  .bss.LoRaMacTxPayloadLen
+                           Data  20001d01       0x1      1  LoRaMac.o
+  .bss.IsUpLinkCounterFixed
+                           Data  20001d02       0x1      1  LoRaMac.o
+  .bss.IsLoRaMacNetworkJoined
+                           Data  20001d03       0x1      1  LoRaMac.o
+  .bss.AdrCtrlOn           Data  20001d04       0x1      1  LoRaMac.o
+  .bss.NodeAckRequested    Data  20001d05       0x1      1  LoRaMac.o
+  .bss.SrvAckRequested     Data  20001d06       0x1      1  LoRaMac.o
+  .bss.MacCommandsInNextTx
+                           Data  20001d07       0x1      1  LoRaMac.o
+  .bss.MacCommandsBufferIndex
+                           Data  20001d08       0x1      1  LoRaMac.o
+  .bss.MacCommandsBufferToRepeatIndex
+                           Data  20001d09       0x1      1  LoRaMac.o
+  .bss.ChannelsNbRepCounter
+                           Data  20001d0a       0x1      1  LoRaMac.o
+  .bss.MaxDCycle           Data  20001d0b       0x1      1  LoRaMac.o
+  .bss.DutyCycleOn         Data  20001d0c       0x1      1  LoRaMac.o
+  .bss.Channel             Data  20001d0d       0x1      1  LoRaMac.o
+  .bss.LastTxChannel       Data  20001d0e       0x1      1  LoRaMac.o
+  .bss.LastTxIsJoinRequest
+                           Data  20001d0f       0x1      1  LoRaMac.o
+  .bss.AckTimeoutRetry     Data  20001d10       0x1      1  LoRaMac.o
+  .bss.JoinRequestTrials   Data  20001d11       0x1      1  LoRaMac.o
+  .bss.MaxJoinRequestTrials
+                           Data  20001d12       0x1      1  LoRaMac.o
+  .bss.RxSlot              Data  20001d13       0x1      1  LoRaMac.o
+  .bss.m_nrf_sdh_enabled   Data  20001d14       0x1      1  nrf_sdh.o
+  .bss.m_nrf_sdh_suspended
+                           Data  20001d15       0x1      1  nrf_sdh.o
+  .bss.m_nrf_sdh_continue  Data  20001d16       0x1      1  nrf_sdh.o
+  .bss.tx_buffer           Data  20001d18       0x1      4  app_uart_fifo.o
+  .bss.rx_buffer           Data  20001d1c       0x1      4  app_uart_fifo.o
+  .bss.release_event_at_push.9215
+                           Data  20001d20       0x1      4  bsp.o
+  .bss.LoRaMacFlags        Data  20001d24       0x1      4  LoRaMac.o
+
+place in [0x20000000 to 0x2000ffff] with auto order
+
+  Section                  Type  Address       Size  Align  Object
+  -------                  ----  -------       ----  -----  ------
+
+
+***************************************************************************************
+***                                                                                 ***
+***                                 MODULE SUMMARY                                  ***
+***                                                                                 ***
+***************************************************************************************
+
+                                            Object      Code  RO Data  RW Data  ZI Data
+---------------------------------------------------------------------------------------
+                                Cortex_M_Startup.o       308                            
+                            SEGGER_THUMB_Startup.o       108                            
+                                            main.o      2584      481        8     1094 
+                                          boards.o       822                            
+                                             bsp.o      2192       20               112 
+                                     bsp_btn_ble.o        62                            
+                                    system_nrf52.o      1476                 4          
+                                           board.o       306                 2        5 
+                                      gpio-board.o       642        4               128 
+                                       rtc-board.o       282       14                 8 
+                                       spi-board.o       498                            
+                                    sx1276-board.o       876       92                17 
+                                           timer.o       328                            
+                                       utilities.o       496                 4          
+                                           utils.o       170                            
+                                        app_lora.o      2612      466       59      337 
+                                         LoRaMac.o     15212      237        3     1336 
+                                   LoRaMacCrypto.o      1016                32      553 
+                                          Region.o       944                            
+                                    RegionCommon.o      2672                            
+                                     RegionEU868.o      5598       92       80      196 
+                                          sx1276.o      8954      224       24      572 
+                                             aes.o      2928      768                   
+                                            cmac.o      1096                            
+                                 ble_advertising.o      1720                            
+                                     ble_advdata.o      2952                            
+                                 ble_conn_params.o       618                         88 
+                                    nrf_ble_gatt.o       188                            
+                                         ble_nus.o       918       16                   
+                                  nrf_drv_common.o       234                            
+                                  nrf_drv_gpiote.o      2572                         88 
+                                     nrf_drv_rtc.o       624                          7 
+                                     nrf_drv_spi.o      1804                         36 
+                                    nrf_drv_uart.o      3684                         32 
+                                      app_button.o       672        4                49 
+                                        app_fifo.o       338                            
+                                    nrf_fstorage.o       672                            
+                                 nrf_fstorage_sd.o      1464       44               184 
+                                   app_uart_fifo.o       756       32        8       39 
+                                    nrf_strerror.o       144     1035                   
+                                nrf_section_iter.o       108                            
+                                      nrf_memobj.o       792                            
+                                      nrf_atfifo.o       620                            
+                                      nrf_balloc.o       340                            
+                                     nrf_fprintf.o        96                            
+                              nrf_fprintf_format.o      1846       16                   
+                                       app_error.o        42                            
+                                  app_error_weak.o       140       25                   
+                               app_util_platform.o       276                         12 
+                                        retarget.o        28                            
+                                       app_timer.o      1306                        279 
+                        nrf_log_default_backends.o        60                12          
+                                nrf_log_frontend.o      2762       20              1276 
+                           nrf_log_str_formatter.o       788      146       56          
+                             nrf_log_backend_rtt.o       164       12                64 
+                          nrf_log_backend_serial.o       332                            
+                                      SEGGER_RTT.o       686       23               648 
+                                         nrf_sdh.o      1364       36                 3 
+                                     nrf_sdh_ble.o       738      589                12 
+libm_asm.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+                                                        1920                            
+  libm2.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)       384                            
+fdlibm.o (libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+                                                         160                            
+   libc.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)         4                            
+libc_asm.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+                                                         206                            
+  libc2.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)       910      581       20        8 
+libc2_asm.o (libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a)
+                                                         426                            
+     libvfprintf_v7em_fpv4_sp_d16_hard_t_le_eabi.o      1264                            
+                                                    ===================================
+                                            Total:     89304     4977      312     7183
+                                                    ===================================
+
+
+***************************************************************************************
+***                                                                                 ***
+***                                  LINK SUMMARY                                   ***
+***                                                                                 ***
+***************************************************************************************
+
+Link complete: 0 errors, 0 warnings, 0 remarks
+
+  Name             Range           Size       Allocated         Used   Loading  (Alignment loss)
+  ---------- -------- -------- --------   -------- -------- --------   -------  ----------------
+  FLASH      00000000 0007ffff   524288   00000000 00017057    94296    17.99%        15   0.02%
+  RAM        20000000 2000ffff    65536   20000000 2000ffff    65536   100.00%     56037  85.51%
+
+Section composition:
+
+     89304  RX       312  RW
+      4977  RO      9231  ZI
+  ------------   -----------
+     94281 ROM      9543 RAM
