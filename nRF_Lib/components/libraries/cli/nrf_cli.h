@@ -1,30 +1,30 @@
 /**
- * Copyright (c) 2017 - 2017, Nordic Semiconductor ASA
- * 
+ * Copyright (c) 2017 - 2019, Nordic Semiconductor ASA
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 #ifndef NRF_CLI_H__
 #define NRF_CLI_H__
@@ -47,6 +47,7 @@
 #include "nrf_queue.h"
 #include "nrf_log_ctrl.h"
 #include "app_util_platform.h"
+#include "nrf_memobj.h"
 
 #if NRF_MODULE_ENABLED(NRF_CLI_USES_TASK_MANAGER)
 #include "task_manager.h"
@@ -99,12 +100,12 @@ typedef struct nrf_cli_static_entry nrf_cli_static_entry_t;
  *          alphabetical order. If idx exceeds the available dynamic subcommands, the function must write
  *          to p_static->p_syntax NULL value. This will indicate to the CLI module that
  *          there are no more dynamic commands to read.
- **/
+ */
 typedef void (*nrf_cli_dynamic_get)(size_t idx, nrf_cli_static_entry_t * p_static);
 
 /**
  * @brief CLI command descriptor.
- **/
+ */
 struct nrf_cli_cmd_entry
 {
     bool is_dynamic;
@@ -117,12 +118,12 @@ struct nrf_cli_cmd_entry
 
 /**
  * @brief CLI command handler prototype.
- **/
+ */
 typedef void (*nrf_cli_cmd_handler)(nrf_cli_t const * p_cli, size_t argc, char **argv);
 
 /**
  * @brief CLI static command descriptor.
- **/
+ */
 struct nrf_cli_static_entry
 {
     char const * p_syntax;  //!< Command syntax strings.
@@ -142,7 +143,7 @@ struct nrf_cli_static_entry
  * @param[in] p_subcmd  Pointer to a subcommands array.
  * @param[in] p_help    Pointer to a command help string.
  * @param[in] p_handler Pointer to a function handler.
- * */
+ */
 #define NRF_CLI_CMD_REGISTER(p_syntax, p_subcmd, p_help, p_handler)     \
     nrf_cli_static_entry_t const CONCAT_3(nrf_cli_, p_syntax, _raw) =   \
         NRF_CLI_CMD(p_syntax, p_subcmd, p_help, p_handler);             \
@@ -157,7 +158,7 @@ struct nrf_cli_static_entry
  * @brief Macro for creating a subcommand set. It must be used outside of any function body.
  *
  * @param[in] name  Name of the subcommand set.
- * */
+ */
 #define NRF_CLI_CREATE_STATIC_SUBCMD_SET(name)                  \
     /*lint -save -e85 -e31*/                                    \
     static nrf_cli_static_entry_t const CONCAT_2(name, _raw)[]; \
@@ -170,7 +171,7 @@ struct nrf_cli_static_entry
 /**
  * @brief Define ending subcommands set.
  *
- * */
+ */
 #define NRF_CLI_SUBCMD_SET_END {NULL}
 
 /**
@@ -186,7 +187,6 @@ struct nrf_cli_static_entry
         .u.p_dynamic_get = p_get                \
 }; /*lint -restore*/
 
-
 /**
  * @brief Initializes a CLI command (@ref nrf_cli_static_entry).
  *
@@ -194,7 +194,7 @@ struct nrf_cli_static_entry
  * @param[in] _p_subcmd  Pointer to a subcommands array.
  * @param[in] _p_help    Pointer to a command help string.
  * @param[in] _p_handler Pointer to a function handler.
- **/
+ */
 #define NRF_CLI_CMD(_p_syntax, _p_subcmd, _p_help, _p_handler) { \
     .p_syntax = (const char *)  STRINGIFY(_p_syntax), \
     .p_subcmd =                 _p_subcmd,  \
@@ -203,19 +203,20 @@ struct nrf_cli_static_entry
 }
 
 /**
- * @brief Internal CLI state in response to data received from the terminal.
- * */
+ * @internal @brief Internal CLI state in response to data received from the terminal.
+ */
 typedef enum
 {
     NRF_CLI_RECEIVE_DEFAULT,
     NRF_CLI_RECEIVE_ESC,
-    NRF_CLI_RECEIVE_ESC_SEQ
+    NRF_CLI_RECEIVE_ESC_SEQ,
+    NRF_CLI_RECEIVE_TILDE_EXP
 } nrf_cli_receive_t;
 
 
 /**
- * @brief Internal CLI state.
- * */
+ * @internal @brief Internal CLI state.
+ */
 typedef enum
 {
     NRF_CLI_STATE_UNINITIALIZED,      //!< State uninitialized.
@@ -227,7 +228,7 @@ typedef enum
 
 /**
  * @brief Event type from CLI transport.
- * */
+ */
 typedef enum
 {
     NRF_CLI_TRANSPORT_EVT_RX_RDY,
@@ -240,7 +241,7 @@ typedef struct nrf_cli_transport_s nrf_cli_transport_t;
 
 /**
  * @brief Unified CLI transport interface.
- * */
+ */
 typedef struct
 {
     /**
@@ -252,7 +253,7 @@ typedef struct
      * @param[in] p_context     Pointer to the context passed to event handler.
      *
      * @return Standard error code.
-     * */
+     */
     ret_code_t (*init)(nrf_cli_transport_t const * p_transport,
                        void const *                p_config,
                        nrf_cli_transport_handler_t evt_handler,
@@ -264,7 +265,7 @@ typedef struct
      * @param[in] p_transport  Pointer to the transfer instance.
      *
      * @return Standard error code.
-     * */
+     */
     ret_code_t (*uninit)(nrf_cli_transport_t const * p_transport);
 
     /**
@@ -287,7 +288,7 @@ typedef struct
      * @param[in] p_cnt        Pointer to the sent bytes counter.
      *
      * @return Standard error code.
-     * */
+     */
     ret_code_t (*write)(nrf_cli_transport_t const * p_transport,
                         const void *                p_data,
                         size_t                      length,
@@ -302,7 +303,7 @@ typedef struct
      * @param[in] p_cnt        Pointer to the received bytes counter.
      *
      * @return Standard error code.
-     * */
+     */
     ret_code_t (*read)(nrf_cli_transport_t const * p_transport,
                        void *                      p_data,
                        size_t                      length,
@@ -318,7 +319,7 @@ struct nrf_cli_transport_s
 #if NRF_MODULE_ENABLED(NRF_CLI_HISTORY)
 /**
  * @brief CLI history object header.
- * */
+ */
 typedef PACKED_STRUCT
 {
     nrf_memobj_t * p_prev;  //!< Pointer to the next object.
@@ -335,19 +336,47 @@ typedef struct
 #endif
 
 /**
+ * @internal @brief Flags for internal CLI usage.
+ */
+typedef struct
+{
+    uint32_t insert_mode    : 1; //!< Enables or disables console insert mode for text introduction.
+    uint32_t show_help      : 1; //!< Shows help if the command was called with -h or --help parameter.
+    uint32_t use_colors     : 1; //!< Enables or disables colored syntax.
+    uint32_t echo           : 1; //!< Enables or disables CLI echo.
+    uint32_t processing     : 1; //!< CLI is executing process function.
+    uint32_t tx_rdy         : 1;
+    uint32_t last_nl        : 8; //!< The last received newline character.
+} nrf_cli_flag_t;
+STATIC_ASSERT(sizeof(nrf_cli_flag_t) == sizeof(uint32_t));
+
+/**
+ * @internal @brief Union for internal CLI usage.
+ */
+typedef union
+{
+    uint32_t value;
+    nrf_cli_flag_t flag;
+} nrf_cli_internal_t;
+
+/**
  * @brief CLI instance context.
- * */
+ */
 typedef struct
 {
     nrf_cli_state_t   state;            //!< Internal module state.
     nrf_cli_receive_t receive_state;    //!< Escape sequence indicator.
 
-    nrf_cli_static_entry_t const * p_current_stcmd; //!< Currently executed command.
+    nrf_cli_static_entry_t active_cmd;      //!< Currently executed command
 
     nrf_cli_vt100_ctx_t vt100_ctx;          //!< VT100 color and cursor position, terminal width.
 
     nrf_cli_cmd_len_t cmd_buff_len;         //!< Command length.
     nrf_cli_cmd_len_t cmd_buff_pos;         //!< Command buffer cursor position.
+
+#if NRF_MODULE_ENABLED(NRF_CLI_WILDCARD)
+    nrf_cli_cmd_len_t cmd_tmp_buff_len;     //!< Command length in tmp buffer
+#endif
 
     char cmd_buff[NRF_CLI_CMD_BUFF_SIZE];       //!< Command input buffer.
     char temp_buff[NRF_CLI_CMD_BUFF_SIZE];      //!< Temporary buffer used by various functions.
@@ -366,34 +395,26 @@ typedef struct
     nrf_memobj_t * p_cmd_list_tail;     //!< Pointer to the tail of history list.
     nrf_memobj_t * p_cmd_list_element;  //!< Pointer to an element of history list.
 #endif
-
-    volatile bool tx_rdy;
-
-    uint8_t insert_mode      : 1; //!< Enables / disables console insert mode for text introduction.
-    uint8_t show_help        : 1; //!< Shows help if command was called with -h or --help parameter.
-    uint8_t use_colors       : 1; //!< Enables / disables colored syntax.
-    uint8_t echo             : 1; //!< Enables / disables CLI echo.
-    uint8_t unused           : 4;
+    volatile nrf_cli_internal_t internal;   //!< Internal CLI data
 } nrf_cli_ctx_t;
 
 extern const nrf_log_backend_api_t nrf_log_backend_cli_api;
 
 typedef struct
 {
-    nrf_log_backend_t   backend;
     nrf_queue_t const * p_queue;
     void *              p_context;
     nrf_cli_t const *   p_cli;
 } nrf_cli_log_backend_t;
 
 #if NRF_CLI_LOG_BACKEND && NRF_MODULE_ENABLED(NRF_LOG)
-#define NRF_LOG_BACKEND_CLI_DEF(_name_, _queue_size_)                                       \
-        NRF_QUEUE_DEF(nrf_log_entry_t,                                                      \
-                      CONCAT_2(_name_, _queue),_queue_size_, NRF_QUEUE_MODE_NO_OVERFLOW);   \
-        static nrf_cli_log_backend_t _name_ = {                                             \
-                .backend = {.p_api = &nrf_log_backend_cli_api},                             \
-                .p_queue = &CONCAT_2(_name_, _queue),                                       \
-        }
+#define NRF_LOG_BACKEND_CLI_DEF(_name_, _queue_size_)                                          \
+        NRF_QUEUE_DEF(nrf_log_entry_t,                                                         \
+                      CONCAT_2(_name_, _queue),_queue_size_, NRF_QUEUE_MODE_NO_OVERFLOW);      \
+        static nrf_cli_log_backend_t CONCAT_2(cli_log_backend,_name_) = {                      \
+                .p_queue = &CONCAT_2(_name_, _queue),                                          \
+        };                                                                                     \
+        NRF_LOG_BACKEND_DEF(_name_, nrf_log_backend_cli_api, &CONCAT_2(cli_log_backend,_name_))
 
 #define NRF_CLI_BACKEND_PTR(_name_) &CONCAT_2(_name_, _log_backend)
 #else
@@ -421,17 +442,16 @@ typedef struct
  * @brief CLI instance internals.
  *
  * @ref nrf_cli_t
- * */
+ */
 struct nrf_cli
 {
     char const * const p_name; //!< Terminal name.
 
     nrf_cli_transport_t const * p_iface;        //!< Transport interface.
     nrf_cli_ctx_t *             p_ctx;          //!< Internal context.
-    nrf_cli_log_backend_t *     p_log_backend;  //!< Logger backend.
+    nrf_log_backend_t const *   p_log_backend;  //!< Logger backend.
     nrf_fprintf_ctx_t *         p_fprintf_ctx;  //!< fprintf context.
     nrf_memobj_pool_t const *   p_cmd_hist_mempool; //!< Memory reserved for commands history.
-    char const newline_char;   //!< New line character, only allowed values: \\n and \\r.
 };
 
 /**
@@ -440,9 +460,9 @@ struct nrf_cli
  * @param[in] name              Instance name.
  * @param[in] cli_prefix        CLI prefix string.
  * @param[in] p_transport_iface Pointer to the transport interface.
- * @param[in] newline_ch        New line character - only allowed values are '\\n' or '\\r'.
+ * @param[in] newline_ch        Deprecated parameter, not used any more. Any uint8_t value can be used.
  * @param[in] log_queue_size    Logger processing queue size.
- * */
+ */
 #define NRF_CLI_DEF(name, cli_prefix, p_transport_iface, newline_ch, log_queue_size)    \
         static nrf_cli_t const name;                                            \
         static nrf_cli_ctx_t CONCAT_2(name, _ctx);                              \
@@ -462,7 +482,6 @@ struct nrf_cli
             .p_log_backend = NRF_CLI_BACKEND_PTR(name),                         \
             .p_fprintf_ctx = &CONCAT_2(name, _fprintf_ctx),                     \
             .p_cmd_hist_mempool = NRF_CLI_MEMOBJ_PTR(name),                     \
-            .newline_char = newline_ch                                          \
         } /*lint -restore*/
 
 /**
@@ -475,7 +494,7 @@ struct nrf_cli
  * @param[in] init_lvl              Default severity level for the logger.
  *
  * @return Standard error code.
- * */
+ */
 ret_code_t nrf_cli_init(nrf_cli_t const *   p_cli,
                         void const *        p_transport_config,
                         bool                use_colors,
@@ -486,11 +505,13 @@ ret_code_t nrf_cli_task_create(nrf_cli_t const * p_cli);
 
 /**
  * @brief Function for uninitializing a transport layer and internal CLI state.
+ *        If function returns NRF_ERROR_BUSY, you must call @ref nrf_cli_process before calling
+ *        nrf_cli_uninit again.
  *
  * @param p_cli Pointer to CLI instance.
  *
  * @return Standard error code.
- * */
+ */
 ret_code_t nrf_cli_uninit(nrf_cli_t const * p_cli);
 
 /**
@@ -499,7 +520,7 @@ ret_code_t nrf_cli_uninit(nrf_cli_t const * p_cli);
  * @param p_cli Pointer to the CLI instance.
  *
  * @return Standard error code.
- * */
+ */
 ret_code_t nrf_cli_start(nrf_cli_t const * p_cli);
 
 /**
@@ -508,9 +529,12 @@ ret_code_t nrf_cli_start(nrf_cli_t const * p_cli);
  * @param p_cli Pointer to CLI instance.
  *
  * @return Standard error code.
- * */
+ */
 ret_code_t nrf_cli_stop(nrf_cli_t const * p_cli);
 
+/**
+ * @brief CLI colors for @ref nrf_cli_fprintf function.
+ */
 #define NRF_CLI_DEFAULT  NRF_CLI_VT100_COLOR_DEFAULT    /**< Turn off character attributes. */
 #define NRF_CLI_NORMAL   NRF_CLI_VT100_COLOR_WHITE      /**< Normal color printf.           */
 #define NRF_CLI_INFO     NRF_CLI_VT100_COLOR_GREEN      /**< Info color printf.             */
@@ -526,23 +550,71 @@ ret_code_t nrf_cli_stop(nrf_cli_t const * p_cli);
  * @param[in] color Printf color.
  * @param[in] p_fmt Format string.
  * @param[in] ...   List of parameters to print.
- * */
+ */
 void nrf_cli_fprintf(nrf_cli_t const *      p_cli,
                      nrf_cli_vt100_color_t  color,
                      char const *           p_fmt,
                                             ...);
 
 /**
+ * @brief Print an info message to the CLI.
+ *
+ * See @ref nrf_cli_fprintf.
+ *
+ * @param[in] _p_cli    Pointer to the CLI instance.
+ * @param[in] _ft       Format string.
+ * @param[in] ...       List of parameters to print.
+ */
+#define nrf_cli_info(_p_cli, _ft, ...) \
+        nrf_cli_fprintf(_p_cli, NRF_CLI_INFO, _ft "\n", ##__VA_ARGS__)
+
+/**
+ * @brief Print a normal message to the CLI.
+ *
+ * See @ref nrf_cli_fprintf.
+ *
+ * @param[in] _p_cli    Pointer to the CLI instance.
+ * @param[in] _ft       Format string.
+ * @param[in] ...       List of parameters to print.
+ */
+#define nrf_cli_print(_p_cli, _ft, ...) \
+        nrf_cli_fprintf(_p_cli, NRF_CLI_DEFAULT, _ft "\n", ##__VA_ARGS__)
+
+/**
+ * @brief Print a warning message to the CLI.
+ *
+ * See @ref nrf_cli_fprintf.
+ *
+ * @param[in] _p_cli    Pointer to the CLI instance.
+ * @param[in] _ft       Format string.
+ * @param[in] ...       List of parameters to print.
+ */
+#define nrf_cli_warn(_p_cli, _ft, ...) \
+        nrf_cli_fprintf(_p_cli, NRF_CLI_WARNING, _ft "\n", ##__VA_ARGS__)
+
+/**
+ * @brief Print an error message to the CLI.
+ *
+ * See @ref nrf_cli_fprintf.
+ *
+ * @param[in] _p_cli    Pointer to the CLI instance.
+ * @param[in] _ft       Format string.
+ * @param[in] ...       List of parameters to print.
+ */
+#define nrf_cli_error(_p_cli, _ft, ...) \
+        nrf_cli_fprintf(_p_cli, NRF_CLI_ERROR, _ft "\n", ##__VA_ARGS__)
+
+/**
  * @brief Process function, which should be executed when data is ready in the transport interface.
  *
  * @param[in] p_cli Pointer to the CLI instance.
- * */
+ */
 void nrf_cli_process(nrf_cli_t const * p_cli);
 
 
 /**
  * @brief Option descriptor.
- * */
+ */
 typedef struct nrf_cli_getopt_option
 {
     char const * p_optname;         //!< Option long name.
@@ -557,7 +629,7 @@ typedef struct nrf_cli_getopt_option
  * @param[in] _p_optname    Option name long.
  * @param[in] _p_shortname  Option name short.
  * @param[in] _p_help       Option help string.
- * */
+ */
 #define NRF_CLI_OPT(_p_optname, _p_shortname, _p_help) { \
         .p_optname       = _p_optname,   \
         .p_optname_short = _p_shortname, \
@@ -570,36 +642,37 @@ typedef struct nrf_cli_getopt_option
  * @param[in] p_cli Pointer to the CLI instance.
  *
  * @return          True if help has been requested.
- * */
+ */
 __STATIC_INLINE bool nrf_cli_help_requested(nrf_cli_t const * p_cli);
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 __STATIC_INLINE bool nrf_cli_help_requested(nrf_cli_t const * p_cli)
 {
-    return p_cli->p_ctx->show_help;
+    return p_cli->p_ctx->internal.flag.show_help;
 }
 #endif
 
 /**
- * @brief       Prints actual command help if user called it with -h or --help option.
+ * @brief       Prints the current command help.
  * @details     Function will print a help string with: the currently entered command, its options,
  *              and subcommands (if they exist).
  *
  * @param[in] p_cli     Pointer to the CLI instance.
  * @param[in] p_opt     Pointer to the optional option array.
  * @param[in] opt_len   Option array size.
- * */
+ */
 void nrf_cli_help_print(nrf_cli_t const *               p_cli,
                         nrf_cli_getopt_option_t const * p_opt,
                         size_t                          opt_len);
 
 /**
- * @brief This function shall not be used directly, it is required by the nrf_fprintf module.
+ * @internal @brief This function shall not be used directly, it is required by the
+ *                  nrf_fprintf module.
  *
  * @param[in] p_user_ctx    Pointer to the context for the CLI instance.
  * @param[in] p_data        Pointer to the data buffer.
  * @param[in] data_len      Data buffer size.
- * */
+ */
 void nrf_cli_print_stream(void const * p_user_ctx, char const * p_data, size_t data_len);
 
 /** @} */

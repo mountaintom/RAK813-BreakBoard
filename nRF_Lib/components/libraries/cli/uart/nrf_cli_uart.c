@@ -1,30 +1,30 @@
 /**
- * Copyright (c) 2017 - 2017, Nordic Semiconductor ASA
- * 
+ * Copyright (c) 2017 - 2019, Nordic Semiconductor ASA
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 #include "sdk_common.h"
 #if NRF_MODULE_ENABLED(NRF_CLI_UART)
@@ -89,10 +89,10 @@ static void uart_event_handler(nrf_drv_uart_event_t * p_event, void * p_context)
     {
         case NRF_DRV_UART_EVT_ERROR:
             NRF_LOG_WARNING("id:%d, evt: ERROR:%d",
-                            p_internal->p_uart->drv_inst_idx,
+                            p_internal->p_uart->inst_idx,
                             p_event->data.error.error_mask);
             err_code = nrf_ringbuf_put(p_internal->p_rx_ringbuf, p_event->data.error.rxtx.bytes);
-            ASSERT(err_code == NRF_SUCCESS);
+            ASSERT((err_code == NRF_SUCCESS) || (err_code == NRF_ERROR_NO_MEM));
             err_code = rx_try(p_internal);
             ASSERT(err_code == NRF_SUCCESS);
 
@@ -100,12 +100,12 @@ static void uart_event_handler(nrf_drv_uart_event_t * p_event, void * p_context)
 
         case NRF_DRV_UART_EVT_RX_DONE:
             err_code = nrf_ringbuf_put(p_internal->p_rx_ringbuf, p_event->data.rxtx.bytes);
-            ASSERT(err_code == NRF_SUCCESS);
+            ASSERT((err_code == NRF_SUCCESS) || (err_code == NRF_ERROR_NO_MEM));
 
             if (p_event->data.rxtx.bytes)
             {
                 NRF_LOG_INFO("id:%d, evt: RXRDY len:%d",
-                             p_internal->p_uart->drv_inst_idx,
+                             p_internal->p_uart->inst_idx,
                              p_event->data.rxtx.bytes);
                 NRF_LOG_HEXDUMP_DEBUG(p_event->data.rxtx.p_data, p_event->data.rxtx.bytes);
                 p_internal->p_cb->handler(NRF_CLI_TRANSPORT_EVT_RX_RDY,
@@ -124,13 +124,13 @@ static void uart_event_handler(nrf_drv_uart_event_t * p_event, void * p_context)
             ASSERT(err_code == NRF_SUCCESS);
             if (len)
             {
-                NRF_LOG_INFO("id:%d, evt uart_tx, len:%d", p_internal->p_uart->drv_inst_idx, len);
+                NRF_LOG_INFO("id:%d, evt uart_tx, len:%d", p_internal->p_uart->inst_idx, len);
                 err_code = nrf_drv_uart_tx(p_internal->p_uart, p_data, len);
             ASSERT(err_code == NRF_SUCCESS);
             }
             p_internal->p_cb->handler(NRF_CLI_TRANSPORT_EVT_TX_RDY, p_internal->p_cb->p_context);
             NRF_LOG_INFO("id:%d, evt: TXRDY, len:%d",
-                         p_internal->p_uart->drv_inst_idx,
+                         p_internal->p_uart->inst_idx,
                          p_event->data.rxtx.bytes);
             break;
 
@@ -143,7 +143,7 @@ static void uart_event_handler(nrf_drv_uart_event_t * p_event, void * p_context)
 static void timer_handler(void * p_context)
 {
     nrf_cli_uart_internal_t * p_internal = (nrf_cli_uart_internal_t *)p_context;
-    NRF_LOG_DEBUG("id:%d, evt: Timeout", p_internal->p_uart->drv_inst_idx);
+    NRF_LOG_DEBUG("id:%d, evt: Timeout", p_internal->p_uart->inst_idx);
     nrf_drv_uart_rx_abort(p_internal->p_uart);
 }
 
@@ -254,7 +254,7 @@ static ret_code_t cli_uart_read(nrf_cli_transport_t const * p_transport,
 
     if (*p_cnt)
     {
-        NRF_LOG_INFO("id:%d, read:%d", p_instance->p_uart->drv_inst_idx, *p_cnt);
+        NRF_LOG_INFO("id:%d, read:%d", p_instance->p_uart->inst_idx, *p_cnt);
     }
 
     return err_code;
@@ -274,7 +274,7 @@ static ret_code_t cli_uart_write(nrf_cli_transport_t const * p_transport,
     if (err_code == NRF_SUCCESS)
     {
         NRF_LOG_INFO("id:%d, write, req:%d, done:%d",
-                     p_instance->p_uart->drv_inst_idx,
+                     p_instance->p_uart->inst_idx,
                      length,
                      *p_cnt);
 
@@ -284,7 +284,7 @@ static ret_code_t cli_uart_write(nrf_cli_transport_t const * p_transport,
             size_t len = 255;
             if (nrf_ringbuf_get(p_instance->p_tx_ringbuf, &p_buf, &len, true) == NRF_SUCCESS)
             {
-                NRF_LOG_INFO("id:%d, uart_tx, len:%d", p_instance->p_uart->drv_inst_idx, len);
+                NRF_LOG_INFO("id:%d, uart_tx, len:%d", p_instance->p_uart->inst_idx, len);
 
                 err_code = nrf_drv_uart_tx(p_instance->p_uart, p_buf, len);
                 if (p_instance->p_cb->blocking && (err_code == NRF_SUCCESS))

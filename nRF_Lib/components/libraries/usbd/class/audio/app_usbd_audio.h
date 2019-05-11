@@ -1,30 +1,30 @@
 /**
- * Copyright (c) 2016 - 2017, Nordic Semiconductor ASA
- * 
+ * Copyright (c) 2017 - 2019, Nordic Semiconductor ASA
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 #ifndef APP_USBD_AUDIO_H__
 #define APP_USBD_AUDIO_H__
@@ -113,14 +113,20 @@ typedef enum app_usbd_audio_user_event_e {
 
 /*lint -restore*/
 
-
 /**
- * @brief Global definition of app_usbd_audio_t class instance
+ * @brief Global definition of app_usbd_audio_t class instance.
  *
- * @param instance_name             Name of global instance
- * @param interfaces_configs        Interfaces configurations
- * @param user_ev_handler           User event handler (optional)
- * @param raw_descriptors           Raw descriptor table
+ * @param instance_name             Name of global instance.
+ * @param interfaces_configs        Interfaces configurations.
+ * @param user_ev_handler           User event handler.
+ * @param format_descriptor         Audio class Format descriptor.
+ * @param input_descriptor          Audio class Input Terminal descriptor.
+ * @param output_descriptor         Audio class Output Terminal descriptor.
+ * @param feature_descriptor        Audio class Feature Unit descriptor.
+ * @param delay                     Streaming delay.
+ * @param format                    FormatTag (@ref app_usbd_audio_as_iface_format_tag_t).
+ * @param ep_size                   Endpoint size.
+ * @param type_str                  Streaming type MIDISTREAMING/AUDIOSTREAMING.
  *
  * @note This macro is just simplified version of @ref APP_USBD_AUDIO_GLOBAL_DEF_INTERNAL
  *
@@ -128,17 +134,108 @@ typedef enum app_usbd_audio_user_event_e {
 #define APP_USBD_AUDIO_GLOBAL_DEF(instance_name,            \
                                   interfaces_configs,       \
                                   user_ev_handler,          \
-                                  raw_descriptors)          \
+                                  format_descriptor,        \
+                                  input_descriptor,         \
+                                  output_descriptor,        \
+                                  feature_descriptor,       \
+                                  delay,                    \
+                                  format,                   \
+                                  ep_size,                  \
+                                  type_str)                 \
     APP_USBD_AUDIO_GLOBAL_DEF_INTERNAL(instance_name,       \
                                        interfaces_configs,  \
                                        user_ev_handler,     \
-                                       raw_descriptors)
+                                       format_descriptor,   \
+                                       input_descriptor,    \
+                                       output_descriptor,   \
+                                       feature_descriptor,  \
+                                       delay,               \
+                                       format,              \
+                                       ep_size,             \
+                                       type_str)
+
 
 /**
- * @@brief Helper function to get class instance from Audio class
+ * @brief Initializer of Audio Format descriptor.
  *
- * @param[in] p_audio Audio class instance (declared by @ref APP_USBD_AUDIO_GLOBAL_DEF)
- * @return Base class instance
+ * @param name  Format descriptor name.
+ * @param ...   Format descriptor data.
+*/
+
+#define APP_USBD_AUDIO_FORMAT_DESCRIPTOR(name, ...)             \
+    static uint8_t const CONCAT_2(name,  _data)[] =             \
+    {                                                           \
+        __VA_ARGS__                                             \
+    };                                                          \
+    static const app_usbd_audio_subclass_desc_t name =          \
+    {                                                           \
+        sizeof(CONCAT_2(name, _data)),                          \
+        APP_USBD_AUDIO_AS_IFACE_SUBTYPE_FORMAT_TYPE,            \
+        CONCAT_2(name,_data)                                    \
+    }
+
+/**
+ * @brief Initializer of Audio Input descriptor.
+ *
+ * @param name  Input descriptor name.
+ * @param ...   Input descriptor data.
+*/
+
+#define APP_USBD_AUDIO_INPUT_DESCRIPTOR(name, ...)              \
+    static uint8_t const CONCAT_2(name,  _data)[] =             \
+    {                                                           \
+        __VA_ARGS__                                             \
+    };                                                          \
+    static const app_usbd_audio_subclass_desc_t name =          \
+    {                                                           \
+        sizeof(CONCAT_2(name, _data)),                          \
+        APP_USBD_AUDIO_AC_IFACE_SUBTYPE_INPUT_TERMINAL,         \
+        CONCAT_2(name,_data)                                    \
+    }
+
+/**
+ * @brief Initializer of Audio Output descriptor.
+ *
+ * @param name  Output descriptor name.
+ * @param ...   Output descriptor data.
+*/
+
+#define APP_USBD_AUDIO_OUTPUT_DESCRIPTOR(name, ...)             \
+    static uint8_t const CONCAT_2(name,  _data)[] =             \
+    {                                                           \
+        __VA_ARGS__                                             \
+    };                                                          \
+    static const app_usbd_audio_subclass_desc_t name =          \
+    {                                                           \
+        sizeof(CONCAT_2(name, _data)),                          \
+        APP_USBD_AUDIO_AC_IFACE_SUBTYPE_OUTPUT_TERNINAL,        \
+        CONCAT_2(name,_data)                                    \
+    }
+
+/**
+ * @brief Initializer of Feture Output descriptor.
+ *
+ * @param name  Feture descriptor name.
+ * @param ...   Feture descriptor data.
+*/
+
+#define APP_USBD_AUDIO_FEATURE_DESCRIPTOR(name, ...)            \
+    static uint8_t const CONCAT_2(name,  _data)[] =             \
+    {                                                           \
+        __VA_ARGS__                                             \
+    };                                                          \
+    static const app_usbd_audio_subclass_desc_t name =          \
+    {                                                           \
+        sizeof(CONCAT_2(name, _data)),                          \
+        APP_USBD_AUDIO_AC_IFACE_SUBTYPE_FEATURE_UNIT,           \
+        CONCAT_2(name,_data)                                    \
+    }
+
+/**
+ * @@brief Helper function to get class instance from Audio class.
+ *
+ * @param[in] p_audio Audio class instance (declared by @ref APP_USBD_AUDIO_GLOBAL_DEF).
+ * @return Base class instance.
  */
 static inline app_usbd_class_inst_t const *
 app_usbd_audio_class_inst_get(app_usbd_audio_t const * p_audio)
@@ -147,10 +244,10 @@ app_usbd_audio_class_inst_get(app_usbd_audio_t const * p_audio)
 }
 
 /**
- * @brief Helper function to get audio specific request from audio class
+ * @brief Helper function to get audio specific request from audio class.
  *
- * @param[in] p_audio Audio class instance (declared by @ref APP_USBD_AUDIO_GLOBAL_DEF)
- * @return Audio class specific request
+ * @param[in] p_audio Audio class instance (declared by @ref APP_USBD_AUDIO_GLOBAL_DEF).
+ * @return Audio class specific request.
  */
 static inline app_usbd_audio_req_t *
 app_usbd_audio_class_request_get(app_usbd_audio_t const * p_audio)
@@ -159,10 +256,10 @@ app_usbd_audio_class_request_get(app_usbd_audio_t const * p_audio)
 }
 
 /**
- * @brief Helper function to get audio from base class instance
+ * @brief Helper function to get audio from base class instance.
  *
- * @param[in] p_inst Base class instance
- * @return Audio class handle
+ * @param[in] p_inst Base class instance.
+ * @return Audio class handle.
  */
 static inline app_usbd_audio_t const *
 app_usbd_audio_class_get(app_usbd_class_inst_t const * p_inst)
@@ -223,6 +320,20 @@ ret_code_t app_usbd_audio_class_tx_start(
     const void * p_buff,
     size_t size);
 
+/**
+ * @brief Register audio instance as the one that requires SOF events in interrupt.
+ *
+ * This function should be called before appending the instance.
+ *
+ * @param p_inst  Audio instance that requires SOF event.
+ * @param handler Handler to SOF event
+ *
+ * @retval NRF_SUCCESS Instance linked into SOF processing list.
+ *
+ * @sa app_usbd_class_sof_interrupt_register
+ */
+ret_code_t app_usbd_audio_sof_interrupt_register(app_usbd_class_inst_t const * p_inst,
+                                                 app_usbd_sof_interrupt_handler_t handler);
 /** @} */
 
 #ifdef __cplusplus

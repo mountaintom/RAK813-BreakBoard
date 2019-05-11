@@ -1,30 +1,30 @@
 /**
- * Copyright (c) 2016 - 2017, Nordic Semiconductor ASA
- * 
+ * Copyright (c) 2016 - 2019, Nordic Semiconductor ASA
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,12 +35,11 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 #include "sdk_common.h"
 #if NRF_MODULE_ENABLED(NRF_SERIAL)
 #include "nrf_serial.h"
-#include "nrf_drv_common.h"
 
 #if defined (UART_PRESENT)
 
@@ -205,7 +204,7 @@ ret_code_t nrf_serial_init(nrf_serial_t const * p_serial,
     nrf_drv_uart_config_t drv_config;
     memcpy(&drv_config, p_drv_uart_config, sizeof(nrf_drv_uart_config_t));
     drv_config.p_context = (void *)p_serial;
-#ifdef UARTE_PRESENT
+#if defined(UARTE_PRESENT) && defined(UART_PRESENT)
     drv_config.use_easy_dma = (p_config->mode == NRF_SERIAL_MODE_DMA);
 #endif
     ret = nrf_drv_uart_init(&p_serial->instance,
@@ -263,7 +262,7 @@ ret_code_t nrf_serial_uninit(nrf_serial_t const * p_serial)
     if (!p_serial->p_ctx->p_config)
     {
         /*Already uninitialized.*/
-        return NRF_ERROR_MODULE_NOT_INITIALZED;
+        return NRF_ERROR_MODULE_NOT_INITIALIZED;
     }
 
     if (!nrf_mtx_trylock(&p_serial->p_ctx->write_lock))
@@ -333,7 +332,7 @@ ret_code_t nrf_serial_write(nrf_serial_t const * p_serial,
     ASSERT(p_serial);
     if (!p_serial->p_ctx->p_config)
     {
-        return NRF_ERROR_MODULE_NOT_INITIALZED;
+        return NRF_ERROR_MODULE_NOT_INITIALIZED;
     }
 
     if (!(p_serial->p_ctx->flags & NRF_SERIAL_TX_ENABLED_FLAG))
@@ -346,7 +345,7 @@ ret_code_t nrf_serial_write(nrf_serial_t const * p_serial,
         return NRF_SUCCESS;
     }
 
-    if (!nrf_drv_is_in_RAM(p_data) &&
+    if (!nrfx_is_in_ram(p_data) &&
          p_serial->p_ctx->p_config->mode == NRF_SERIAL_MODE_DMA)
     {
         return NRF_ERROR_INVALID_ADDR;
@@ -420,7 +419,7 @@ ret_code_t nrf_serial_read(nrf_serial_t const * p_serial,
     ASSERT(p_serial);
     if (!p_serial->p_ctx->p_config)
     {
-        return NRF_ERROR_MODULE_NOT_INITIALZED;
+        return NRF_ERROR_MODULE_NOT_INITIALIZED;
     }
 
     if (!(p_serial->p_ctx->flags & NRF_SERIAL_RX_ENABLED_FLAG))
@@ -507,7 +506,7 @@ ret_code_t nrf_serial_flush(nrf_serial_t const * p_serial, uint32_t timeout_ms)
     ASSERT(p_serial);
     if (!p_serial->p_ctx->p_config)
     {
-        return NRF_ERROR_MODULE_NOT_INITIALZED;
+        return NRF_ERROR_MODULE_NOT_INITIALIZED;
     }
 
     if (!(p_serial->p_ctx->flags & NRF_SERIAL_TX_ENABLED_FLAG))
@@ -574,7 +573,7 @@ ret_code_t nrf_serial_tx_abort(nrf_serial_t const * p_serial)
     ASSERT(p_serial);
     if (!p_serial->p_ctx->p_config)
     {
-        return NRF_ERROR_MODULE_NOT_INITIALZED;
+        return NRF_ERROR_MODULE_NOT_INITIALIZED;
     }
 
     if (!(p_serial->p_ctx->flags & NRF_SERIAL_TX_ENABLED_FLAG))
@@ -602,7 +601,7 @@ ret_code_t nrf_serial_rx_drain(nrf_serial_t const * p_serial)
     ASSERT(p_serial);
     if (!p_serial->p_ctx->p_config)
     {
-        return NRF_ERROR_MODULE_NOT_INITIALZED;
+        return NRF_ERROR_MODULE_NOT_INITIALIZED;
     }
 
     if (!(p_serial->p_ctx->flags & NRF_SERIAL_RX_ENABLED_FLAG))

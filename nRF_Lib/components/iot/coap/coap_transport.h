@@ -1,30 +1,30 @@
 /**
- * Copyright (c) 2014 - 2017, Nordic Semiconductor ASA
- * 
+ * Copyright (c) 2014 - 2019, Nordic Semiconductor ASA
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 /** @file coap_transport.h
  *
@@ -79,6 +79,7 @@ typedef struct
 typedef struct
 {
     coap_port_t     * p_port_table;                 /**< Information about the ports being registered. Count is assumed to be COAP_PORT_COUNT. */
+    void            * p_arg;                        /**< Public. Miscellaneous pointer to application provided data that should be passed to the transport. */
 } coap_transport_init_t;
 
 
@@ -113,21 +114,23 @@ uint32_t coap_transport_write(const coap_port_t    * p_port,
  * This API is not implemented by the transport layer, but assumed to exist. This approach
  * avoids unnecessary registering of callback and remembering it in the transport layer.
  *
- * @param[in] p_port    Port on which the data is to be sent.
- * @param[in] p_remote  Remote endpoint to which the data is targeted.
+ * @param[in] p_port    Port on which the data is received.
+ * @param[in] p_remote  Remote endpoint from which the data is received.
+ * @param[in] p_local   Local endpoint on which the data is received.
  * @param[in] result    Indicates if the data was processed successfully by lower layers.
  *                      Possible failures could be NRF_SUCCESS,
  *                                                 UDP_BAD_CHECKSUM,
  *                                                 UDP_TRUNCATED_PACKET, or
  *                                                 UDP_MALFORMED_PACKET.
- * @param[in] p_data    Pointer to the data to be sent.
- * @param[in] datalen   Length of the data to be sent.
+ * @param[in] p_data    Pointer to the data received.
+ * @param[in] datalen   Length of the data received.
  *
  * @retval NRF_SUCCESS If the data was handled successfully. Otherwise, an error code that indicates the reason for the failure is returned.
  *
  */
 uint32_t coap_transport_read(const coap_port_t    * p_port,
                              const coap_remote_t  * p_remote,
+                             const coap_remote_t  * p_local,
                              uint32_t               result,
                              const uint8_t        * p_data,
                              uint16_t               datalen);

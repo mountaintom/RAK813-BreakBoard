@@ -1,30 +1,30 @@
 /**
- * Copyright (c) 2012 - 2017, Nordic Semiconductor ASA
- * 
+ * Copyright (c) 2012 - 2019, Nordic Semiconductor ASA
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 /** @file
  *
@@ -60,6 +60,7 @@
 #include "ble_srv_common.h"
 #include "nrf_sdh_ble.h"
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -69,9 +70,6 @@ extern "C" {
  * @details Priority of this module's SoC event handler.
  */
 #define BLE_DFU_SOC_OBSERVER_PRIO   1
-
-
-#define BOOTLOADER_DFU_START                (0xB1)      /**< Value to set in GPREGRET to boot to DFU mode. */
 
 #define BLE_DFU_BUTTONLESS_CHAR_UUID        (0x0003)    /**< Value combined with vendor-specific base to create Unbonded Buttonless characteristic UUID. */
 #define BLE_DFU_BUTTONLESS_BONDED_CHAR_UUID (0x0004)    /**< Value combined with vendor-specific base to create Bonded Buttonless characteristic UUID. */
@@ -88,7 +86,8 @@ extern "C" {
 
 /**@brief Nordic Buttonless DFU Service event type .
  */
-typedef enum {
+typedef enum
+{
     BLE_DFU_EVT_BOOTLOADER_ENTER_PREPARE,   /**< Event indicating that the device is preparing to enter bootloader.*/
     BLE_DFU_EVT_BOOTLOADER_ENTER,           /**< Event indicating that the bootloader will be entered after return of this event.*/
     BLE_DFU_EVT_BOOTLOADER_ENTER_FAILED,    /**< Failure to enter bootloader mode.*/
@@ -104,13 +103,12 @@ typedef void (*ble_dfu_buttonless_evt_handler_t) (ble_dfu_buttonless_evt_type_t 
 typedef enum
 {
     DFU_RSP_INVALID               = 0x00,                                           /**< Invalid op code. */
-    DFU_RSP_SUCCESS               = 0x01,                                        /**< Success. */
+    DFU_RSP_SUCCESS               = 0x01,                                           /**< Success. */
     DFU_RSP_OP_CODE_NOT_SUPPORTED = 0x02,                                           /**< Op code not supported. */
     DFU_RSP_OPERATION_FAILED      = 0x04,                                           /**< Operation failed. */
     DFU_RSP_ADV_NAME_INVALID      = 0x05,                                           /**< Requested advertisement name is too short or too long. */
     DFU_RSP_BUSY                  = 0x06,                                           /**< Ongoing async operation. */
     DFU_RSP_NOT_BONDED            = 0x07,                                           /**< Buttonless unavailable due to device not bonded. */
-    DFU_RSP_CCCD_CONFIG_IMPROPER  = BLE_GATT_STATUS_ATTERR_CPS_CCCD_CONFIG_ERROR /**< CCCD is improperly configured. */
 } ble_dfu_buttonless_rsp_code_t;
 
 
@@ -120,7 +118,7 @@ typedef enum
 {
     DFU_OP_RESERVED         = 0x00, /**< Reserved for future use. */
     DFU_OP_ENTER_BOOTLOADER = 0x01, /**< Enter bootloader. */
-    DFU_OP_SET_ADV_NAME                     = 0x02,             /**< Set advertisement name to use in DFU mode. */
+    DFU_OP_SET_ADV_NAME     = 0x02, /**< Set advertisement name to use in DFU mode. */
     DFU_OP_RESPONSE_CODE    = 0x20  /**< Response code. */
 } ble_dfu_buttonless_op_code_t;
 
@@ -129,22 +127,23 @@ typedef enum
   */
 typedef struct
 {
-    uint8_t                     uuid_type;                      /**< UUID type for DFU UUID. */
-    uint16_t                            service_handle;                             /**< Service Handle of DFU (as provided by the SoftDevice). */
-    uint16_t                            conn_handle;                                /**< Connection handle for the current peer. */
-    ble_gatts_char_handles_t    control_point_char;             /**< Handles related to the DFU Control Point characteristic. */
-    uint32_t                            peers_count;                                /**< Counter to see how many persistently stored peers must be updated for Service Changed indication. This value will be counted down when comparing write requests. */
-    ble_dfu_buttonless_evt_handler_t    evt_handler;                                /**< Event handler that is called upon Buttonless DFU events. See @ref ble_dfu_buttonless_evt_type_t. */
-    bool                                is_ctrlpt_indication_enabled;               /**< Flag indicating that indication is enabled for the control point. */
-    bool                        is_waiting_for_reset;           /**< Flag indicating that the device will enter bootloader. */
-    bool                                is_waiting_for_svci;                        /**< Flag indicating that the device is waiting for async SVCI operation */
+    uint8_t                             uuid_type;                      /**< UUID type for DFU UUID. */
+    uint16_t                            service_handle;                 /**< Service Handle of DFU (as provided by the SoftDevice). */
+    uint16_t                            conn_handle;                    /**< Connection handle for the current peer. */
+    ble_gatts_char_handles_t            control_point_char;             /**< Handles related to the DFU Control Point characteristic. */
+    uint32_t                            peers_count;                    /**< Counter to see how many persistently stored peers must be updated for Service Changed indication. This value will be counted down when comparing write requests. */
+    ble_dfu_buttonless_evt_handler_t    evt_handler;                    /**< Event handler that is called upon Buttonless DFU events. See @ref ble_dfu_buttonless_evt_type_t. */
+    bool                                is_ctrlpt_indication_enabled;   /**< Flag indicating that indication is enabled for the control point. */
+    bool                                is_waiting_for_reset;           /**< Flag indicating that the device will enter bootloader. */
+    bool                                is_waiting_for_svci;            /**< Flag indicating that the device is waiting for async SVCI operation */
 } ble_dfu_buttonless_t;
 
 
 /**@brief Type used to initialize the Secure DFU Buttonless Service.
  */
-typedef struct {
-    ble_dfu_buttonless_evt_handler_t    evt_handler;                                /**< Bootloader event handler. */
+typedef struct
+{
+    ble_dfu_buttonless_evt_handler_t evt_handler;                       /**< Bootloader event handler. */
 } ble_dfu_buttonless_init_t;
 
 
@@ -175,7 +174,7 @@ uint32_t ble_dfu_buttonless_async_svci_init(void);
  *        supports bonds or not.
  *
  * @note    Do not call this function directly. It is called internally by @ref ble_dfu_buttonless_init.
- *           
+ *
  * @param[in] p_dfu     Nordic DFU Service structure.
  *
  * @return NRF_SUCCESS  On sucessfully initializing, otherwise an error code.

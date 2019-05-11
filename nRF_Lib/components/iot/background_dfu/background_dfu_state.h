@@ -1,30 +1,30 @@
 /**
- * Copyright (c) 2017 - 2017, Nordic Semiconductor ASA
- * 
+ * Copyright (c) 2017 - 2019, Nordic Semiconductor ASA
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 
 /** @file
@@ -79,7 +79,7 @@ typedef enum
     BACKGROUND_DFU_EVENT_TRANSFER_CONTINUE,
     BACKGROUND_DFU_EVENT_TRANSFER_ERROR,
     BACKGROUND_DFU_EVENT_PROCESSING_ERROR,
-} background_dfu_even_t;
+} background_dfu_event_t;
 
 /** @brief DFU mode definitions. */
 typedef enum
@@ -99,7 +99,7 @@ typedef PACKED_STRUCT
 } background_dfu_trigger_t;
 
 /**@brief Structure with DFU diagnostic information. */
-typedef PACKED_STRUCT
+typedef PACKED_STRUCT background_dfu_diagnostic
 {
     uint32_t build_id;                      /**< Build identifier, based on compilation time. */
     uint8_t  state;                         /**< Current DFU state. */
@@ -183,7 +183,7 @@ background_dfu_block_result_t background_dfu_process_block(background_dfu_contex
  * @return NRF_SUCCESS or error code
  */
 uint32_t background_dfu_handle_event(background_dfu_context_t * p_dfu_ctx,
-                                     background_dfu_even_t      event);
+                                     background_dfu_event_t     event);
 
 /**@brief Reset state machine state.
  *
@@ -203,7 +203,7 @@ void background_dfu_state_init(background_dfu_context_t * p_dfu_ctx);
  *
  * @return String representing the event.
  */
-const char * background_dfu_event_to_string(const background_dfu_even_t event);
+const char * background_dfu_event_to_string(const background_dfu_event_t event);
 
 /**@brief Convert a DFU state enum value to a string description.
  *

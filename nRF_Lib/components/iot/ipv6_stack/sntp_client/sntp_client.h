@@ -1,30 +1,30 @@
 /**
- * Copyright (c) 2015 - 2017, Nordic Semiconductor ASA
- * 
+ * Copyright (c) 2015 - 2019, Nordic Semiconductor ASA
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 /** @file
  *
@@ -136,8 +136,8 @@ uint32_t sntp_client_init(const sntp_client_init_param_t * p_sntp_client_init_pa
  * @details This procedure frees up the UDP socket previously allocated to the module.
  *          Any pending retransmissions are cleared and no more callbacks will be executed.
  *
- * @retval NRF_SUCCESS                    Module successfully uninitialized.
- * @retval SDK_ERR_MODULE_NOT_INITIALZED  The module was not initialized.
+ * @retval NRF_SUCCESS                      Module successfully uninitialized.
+ * @retval SDK_ERR_MODULE_NOT_INITIALIZED   The module was not initialized.
  *
  */
 uint32_t sntp_client_uninitialize(void);
@@ -155,10 +155,10 @@ uint32_t sntp_client_uninitialize(void);
  * @param[in] sync_local_time       A boolean value telling the module whether to synchronize its
  *                                  local clock with any response received from the NTP server.
  *
- * @retval NRF_SUCCESS                    SNTP query successfully sent.
- * @retval SDK_ERR_MODULE_NOT_INITIALZED  The module was not initialized.
- * @retval NRF_ERROR_NULL                 If @b p_ntp_server_address or @b ntp_server_udp_port
- *                                        is a NULL pointer.
+ * @retval NRF_SUCCESS                      SNTP query successfully sent.
+ * @retval SDK_ERR_MODULE_NOT_INITIALIZED   The module was not initialized.
+ * @retval NRF_ERROR_NULL                   If @b p_ntp_server_address or @b ntp_server_udp_port
+ *                                          is a NULL pointer.
  *
  */
 uint32_t sntp_client_server_query(ipv6_addr_t * p_ntp_server_address, \
@@ -174,7 +174,7 @@ uint32_t sntp_client_server_query(ipv6_addr_t * p_ntp_server_address, \
  * @param[out] p_current_time  Local unix time.
  *
  * @retval NRF_SUCCESS                    Getting locally stored unix time successful.
- * @retval SDK_ERR_MODULE_NOT_INITIALZED  The module was not initialized.
+ * @retval SDK_ERR_MODULE_NOT_INITIALIZED  The module was not initialized.
  * @retval NRF_ERROR_NULL                 If @b p_current_time is a NULL pointer.
  *
  */

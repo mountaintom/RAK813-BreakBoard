@@ -1,30 +1,30 @@
 /**
- * Copyright (c) 2016 - 2017, Nordic Semiconductor ASA
- * 
+ * Copyright (c) 2016 - 2019, Nordic Semiconductor ASA
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 #include "sdk_common.h"
 
@@ -69,6 +69,7 @@ static nrf_atomic_flag_t m_flash_operation_ongoing;
 /* Send event to the event handler. */
 static void event_send(nrf_fstorage_t        const * p_fs,
                        nrf_fstorage_evt_id_t         evt_id,
+                       void const *                  p_src,
                        uint32_t                      addr,
                        uint32_t                      len,
                        void                        * p_param)
@@ -84,6 +85,7 @@ static void event_send(nrf_fstorage_t        const * p_fs,
         .result  = NRF_SUCCESS,
         .id      = evt_id,
         .addr    = addr,
+        .p_src   = p_src,
         .len     = len,
         .p_param = p_param,
     };
@@ -139,7 +141,7 @@ static ret_code_t write(nrf_fstorage_t const * p_fs,
     /* Clear the flag before sending the event, to allow API calls in the event context. */
     (void) nrf_atomic_flag_clear(&m_flash_operation_ongoing);
 
-    event_send(p_fs, NRF_FSTORAGE_EVT_WRITE_RESULT, dest, len, p_param);
+    event_send(p_fs, NRF_FSTORAGE_EVT_WRITE_RESULT, p_src, dest, len, p_param);
 
     return NRF_SUCCESS;
 }
@@ -166,7 +168,7 @@ static ret_code_t erase(nrf_fstorage_t const * p_fs,
     /* Clear the flag before sending the event, to allow API calls in the event context. */
     (void) nrf_atomic_flag_clear(&m_flash_operation_ongoing);
 
-    event_send(p_fs, NRF_FSTORAGE_EVT_ERASE_RESULT, page_addr, len, p_param);
+    event_send(p_fs, NRF_FSTORAGE_EVT_ERASE_RESULT, NULL, page_addr, len, p_param);
 
     return NRF_SUCCESS;
 }

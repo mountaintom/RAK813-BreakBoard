@@ -1,30 +1,30 @@
 /**
- * Copyright (c) 2017 - 2017, Nordic Semiconductor ASA
- * 
+ * Copyright (c) 2017 - 2019, Nordic Semiconductor ASA
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 
 /** @file
@@ -84,6 +84,17 @@ NRF_SDH_BLE_OBSERVER(_name ## _obs,                                             
                      NRF_BLE_GATTS_C_BLE_OBSERVER_PRIO,                                             \
                      nrf_ble_gatts_c_on_ble_evt, &_name)
 
+/** @brief Macro for defining multiple nrf_ble_gatts_c instances.
+ *
+ * @param   _name   Name of the array of instances.
+ * @param   _cnt    Number of instances to define.
+ * @hideinitializer
+ */
+#define NRF_BLE_GATTS_C_ARRAY_DEF(_name, _cnt)                 \
+static nrf_ble_gatts_c_t _name[_cnt];                          \
+NRF_SDH_BLE_OBSERVERS(_name ## _obs,                           \
+                      NRF_BLE_GATTS_C_BLE_OBSERVER_PRIO,       \
+                      nrf_ble_gatts_c_on_ble_evt, &_name, _cnt)
 
 /**@brief   Type of the GATT Service client event. */
 typedef enum
@@ -98,12 +109,12 @@ typedef enum
  */
 typedef struct
 {
-    nrf_ble_gatts_c_evt_type_t evt_type;    /**< Type of event. See @ref nrf_ble_gatts_c_evt_type_t. */
-    uint16_t                   conn_handle; /**< Handle of the connection for which this event has occurred. */
+    nrf_ble_gatts_c_evt_type_t evt_type;           /**< Type of event. See @ref nrf_ble_gatts_c_evt_type_t. */
+    uint16_t                   conn_handle;        /**< Handle of the connection for which this event has occurred. */
     union
     {
-        ble_gatt_db_srv_t        service;      /**< Handles that the GATT service occupies in the peer device. Will be filled if the event type is @ref NRF_BLE_GATTS_C_EVT_DISCOVERY_COMPLETE.*/
-        ble_gattc_handle_range_t handle_range; /**< The affected attribute handle range where the service has changed. Will be provided if the event type is @ref NRF_BLE_GATTS_C_EVT_SRV_CHANGED.*/
+        ble_gatt_db_char_t       srv_changed_char;   /**< Handles for the Service Changed characteristic. Will be filled if the event type is @ref NRF_BLE_GATTS_C_EVT_DISCOVERY_COMPLETE. */
+        ble_gattc_handle_range_t handle_range;       /**< The affected attribute handle range where the service has changed. Will be provided if the event type is @ref NRF_BLE_GATTS_C_EVT_SRV_CHANGED.*/
     } params;
 } nrf_ble_gatts_c_evt_t;
 

@@ -1,30 +1,30 @@
 /**
- * Copyright (c) 2015 - 2017, Nordic Semiconductor ASA
- * 
+ * Copyright (c) 2015 - 2019, Nordic Semiconductor ASA
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 #include "sdk_common.h"
 #if NRF_MODULE_ENABLED(FDS)
@@ -326,10 +326,19 @@ static void page_scan(uint32_t const *       p_addr,
 }
 
 
-static void page_offsets_update(fds_page_t * const p_page, uint16_t length_words)
+static void page_offsets_update(fds_page_t * const p_page, fds_op_t const * p_op)
 {
-    p_page->write_offset   += (FDS_HEADER_SIZE + length_words);
-    p_page->words_reserved -= (FDS_HEADER_SIZE + length_words);
+    // If the first part of the header has been written correctly, update the offset as normal.
+    // Even if the record has not been written completely, fds is still able to continue normal
+    // operation. Incomplete records will be deleted the next time garbage collection is run.
+    // If we failed at the very beginning of the write operation, restore the offset
+    // to the previous value so that no holes will be left in the flash.
+    if (p_op->write.step > FDS_OP_WRITE_RECORD_ID)
+    {
+        p_page->write_offset += (FDS_HEADER_SIZE + p_op->write.header.length_words);
+    }
+
+    p_page->words_reserved -= (FDS_HEADER_SIZE + p_op->write.header.length_words);
 }
 
 
@@ -1207,7 +1216,7 @@ static ret_code_t write_execute(uint32_t prev_ret, fds_op_t * const p_op)
     if (prev_ret != NRF_SUCCESS)
     {
         // The previous operation has timed out, update offsets.
-        page_offsets_update(p_page, p_op->write.header.length_words);
+        page_offsets_update(p_page, p_op);
         return FDS_ERR_OPERATION_TIMEOUT;
     }
 
@@ -1277,7 +1286,7 @@ static ret_code_t write_execute(uint32_t prev_ret, fds_op_t * const p_op)
     if (ret != FDS_OP_EXECUTING)
     {
         // There won't be another callback for this operation, so update the page offset now.
-        page_offsets_update(p_page, p_op->write.header.length_words);
+        page_offsets_update(p_page, p_op);
     }
 
     return ret;
@@ -1436,23 +1445,15 @@ static void queue_process(ret_code_t result)
         // - free the operation buffer
         // - execute any other queued operations
 
-        fds_evt_t evt;
-        memset(&evt, 0x00, sizeof(evt));
-
-        if (result == FDS_OP_COMPLETED)
+        fds_evt_t evt =
         {
-            evt.result = FDS_SUCCESS;
-            result     = NRF_SUCCESS;
-        }
-        else
-        {
-            // The operation failed for one of the following reasons:
+            // The operation might have failed for one of the following reasons:
             // FDS_ERR_BUSY              - flash subsystem can't accept the operation
             // FDS_ERR_OPERATION_TIMEOUT - flash subsystem timed out
             // FDS_ERR_CRC_CHECK_FAILED  - a CRC check failed
             // FDS_ERR_NOT_FOUND         - no record found (delete/update)
-            evt.result = result;
-        }
+            .result = (result == FDS_OP_COMPLETED) ? FDS_SUCCESS : result,
+        };
 
         event_prepare(m_p_cur_op, &evt);
         event_send(&evt);
@@ -1460,6 +1461,10 @@ static void queue_process(ret_code_t result)
         // Zero the pointer to the current operation so that this function
         // will fetch a new one from the queue next time it is run.
         m_p_cur_op = NULL;
+
+        // The result of the operation must be reset upon re-entering the loop to ensure
+        // the next operation won't be affected by eventual errors in previous operations.
+        result = NRF_SUCCESS;
 
         // Free the queue element used by the current operation.
         queue_free(&m_iget_ctx);
@@ -1623,16 +1628,21 @@ ret_code_t fds_register(fds_cb_t cb)
 
 static uint32_t flash_end_addr(void)
 {
-    uint32_t const bootloader_addr = NRF_UICR->NRFFW[0];
+    uint32_t const bootloader_addr = BOOTLOADER_ADDRESS;
     uint32_t const page_sz         = NRF_FICR->CODEPAGESIZE;
-#ifndef NRF52810_XXAA
-    uint32_t const code_sz         = NRF_FICR->CODESIZE;
+
+#if defined(NRF52810_XXAA) || defined(NRF52811_XXAA)
+    // Hardcode the number of flash pages, necessary for SoC emulation.
+    // nRF52810 on nRF52832 and
+    // nRF52811 on nRF52840
+    uint32_t const code_sz = 48;
 #else
-    // Number of flash pages, necessary to emulate the NRF52810 on NRF52832.
-    uint32_t const code_sz         = 48;
+   uint32_t const code_sz = NRF_FICR->CODESIZE;
 #endif
 
-    return (bootloader_addr != 0xFFFFFFFF) ? bootloader_addr : (code_sz * page_sz);
+    uint32_t end_addr = (bootloader_addr != 0xFFFFFFFF) ? bootloader_addr : (code_sz * page_sz);
+
+    return end_addr - (FDS_PHY_PAGES_RESERVED * FDS_PHY_PAGE_SIZE * sizeof(uint32_t));
 }
 
 

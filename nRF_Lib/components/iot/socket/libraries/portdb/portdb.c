@@ -1,30 +1,30 @@
 /**
- * Copyright (c) 2016 - 2017, Nordic Semiconductor ASA
- * 
+ * Copyright (c) 2016 - 2019, Nordic Semiconductor ASA
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 #include "portdb.h"
 #include <string.h>
@@ -50,22 +50,36 @@
 static uint16_t * m_portdb;                                                                         /**< A pointer to the port database. */
 static uint32_t   m_portdb_len;                                                                     /**< Length of the port database. */
 
+
+
+static __INLINE uint32_t db_size_get(void)
+{
+    return m_portdb_len * sizeof(uint16_t);
+}
+
+
+static __INLINE void db_reset(void)
+{
+    memset(&m_portdb[0], 0, db_size_get());
+}
+
+
 uint32_t portdb_init(uint32_t max_ports)
 {
     uint32_t err_code = NRF_SUCCESS;
     m_portdb_len = max_ports;
-    uint32_t sz = max_ports * sizeof(uint16_t);
-    m_portdb = nrf_malloc(sz);
+    m_portdb = nrf_malloc(db_size_get());
     if (m_portdb == NULL)
     {
         err_code = NRF_ERROR_NO_MEM;
     }
     else
     {
-        memset(&m_portdb[0], 0, sz);
+        db_reset();
     }
     return err_code;
 }
+
 
 void portdb_deinit(void)
 {
@@ -73,6 +87,13 @@ void portdb_deinit(void)
     m_portdb = NULL;
     m_portdb_len = 0;
 }
+
+
+void portdb_reset(void)
+{
+    db_reset();
+}
+
 
 static inline uint32_t check_port_in_use(uint16_t port)
 {

@@ -1,30 +1,30 @@
 /**
- * Copyright (c) 2016 - 2017, Nordic Semiconductor ASA
- * 
+ * Copyright (c) 2016 - 2019, Nordic Semiconductor ASA
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 
 #include "nrf_dfu_flash.h"
@@ -56,17 +56,16 @@ void dfu_fstorage_evt_handler(nrf_fstorage_evt_t * p_evt);
 
 NRF_FSTORAGE_DEF(nrf_fstorage_t m_fs) =
 {
-    .evt_handler    = dfu_fstorage_evt_handler,
-    .start_addr     = MBR_SIZE,
-    .end_addr       = BOOTLOADER_SETTINGS_ADDRESS + CODE_PAGE_SIZE
+    .evt_handler = dfu_fstorage_evt_handler,
+    .start_addr  = MBR_SIZE,
+    .end_addr    = BOOTLOADER_SETTINGS_ADDRESS + BOOTLOADER_SETTINGS_PAGE_SIZE
 };
 
-static uint32_t volatile m_flash_operations_pending;
-
+static uint32_t m_flash_operations_pending;
 
 void dfu_fstorage_evt_handler(nrf_fstorage_evt_t * p_evt)
 {
-    if (m_flash_operations_pending > 0)
+    if (NRF_LOG_ENABLED && (m_flash_operations_pending > 0))
     {
         m_flash_operations_pending--;
     }
@@ -86,9 +85,9 @@ void dfu_fstorage_evt_handler(nrf_fstorage_evt_t * p_evt)
 
     if (p_evt->p_param)
     {
-        NRF_LOG_DEBUG("This operation had a callback, calling back to %p.", p_evt->p_param);
-        //lint -e611 (Suspicious cast)
-        ((dfu_flash_callback_t)(p_evt->p_param))(p_evt);
+        //lint -save -e611 (Suspicious cast)
+        ((nrf_dfu_flash_callback_t)(p_evt->p_param))((void*)p_evt->p_src);
+        //lint -restore
     }
 }
 
@@ -97,11 +96,8 @@ ret_code_t nrf_dfu_flash_init(bool sd_irq_initialized)
 {
     nrf_fstorage_api_t * p_api_impl;
 
-    NRF_LOG_DEBUG("Calling nrf_dfu_flash_init(sd_irq_initialized=%s)...",
-                  sd_irq_initialized ? "true" : "false");
-
     /* Setup the desired API implementation. */
-#ifdef BLE_STACK_SUPPORT_REQD
+#if defined(BLE_STACK_SUPPORT_REQD) || defined(ANT_STACK_SUPPORT_REQD)
     if (sd_irq_initialized)
     {
         NRF_LOG_DEBUG("Initializing nrf_fstorage_sd backend.");
@@ -118,20 +114,25 @@ ret_code_t nrf_dfu_flash_init(bool sd_irq_initialized)
 }
 
 
-ret_code_t nrf_dfu_flash_store(uint32_t                     dest,
-                               void                 const * p_src,
-                               uint32_t                     len,
-                               dfu_flash_callback_t         callback)
+ret_code_t nrf_dfu_flash_store(uint32_t                   dest,
+                               void               const * p_src,
+                               uint32_t                   len,
+                               nrf_dfu_flash_callback_t   callback)
 {
     ret_code_t rc;
 
-    m_flash_operations_pending++;
-    NRF_LOG_DEBUG("nrf_fstorage_write(addr=%p, len=0x%x bytes), queue usage: %d",
-                  dest, len, m_flash_operations_pending);
+    NRF_LOG_DEBUG("nrf_fstorage_write(addr=%p, src=%p, len=%d bytes), queue usage: %d",
+                  dest, p_src, len, m_flash_operations_pending);
 
-    rc = nrf_fstorage_write(&m_fs, dest, p_src, len, (void*)callback);
+    //lint -save -e611 (Suspicious cast)
+    rc = nrf_fstorage_write(&m_fs, dest, p_src, len, (void *)callback);
+    //lint -restore
 
-    if (rc != NRF_SUCCESS)
+    if ((NRF_LOG_ENABLED) && (rc == NRF_SUCCESS))
+    {
+        m_flash_operations_pending++;
+    }
+    else
     {
         NRF_LOG_WARNING("nrf_fstorage_write() failed with error 0x%x.", rc);
     }
@@ -140,23 +141,27 @@ ret_code_t nrf_dfu_flash_store(uint32_t                     dest,
 }
 
 
-ret_code_t nrf_dfu_flash_erase(uint32_t             page_addr,
-                               uint32_t             num_pages,
-                               dfu_flash_callback_t callback)
+ret_code_t nrf_dfu_flash_erase(uint32_t                 page_addr,
+                               uint32_t                 num_pages,
+                               nrf_dfu_flash_callback_t callback)
 {
     ret_code_t rc;
 
-    m_flash_operations_pending++;
     NRF_LOG_DEBUG("nrf_fstorage_erase(addr=0x%p, len=%d pages), queue usage: %d",
                   page_addr, num_pages, m_flash_operations_pending);
 
-    rc = nrf_fstorage_erase(&m_fs, page_addr, num_pages, (void*)callback);
+    //lint -save -e611 (Suspicious cast)
+    rc = nrf_fstorage_erase(&m_fs, page_addr, num_pages, (void *)callback);
+    //lint -restore
 
-    if (rc != NRF_SUCCESS)
+    if ((NRF_LOG_ENABLED) && (rc == NRF_SUCCESS))
+    {
+        m_flash_operations_pending++;
+    }
+    else
     {
         NRF_LOG_WARNING("nrf_fstorage_erase() failed with error 0x%x.", rc);
     }
 
     return rc;
 }
-

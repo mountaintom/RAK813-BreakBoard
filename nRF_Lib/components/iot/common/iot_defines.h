@@ -1,30 +1,30 @@
 /**
- * Copyright (c) 2014 - 2017, Nordic Semiconductor ASA
- * 
+ * Copyright (c) 2014 - 2019, Nordic Semiconductor ASA
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 /** @file iot_defines.h
  *
@@ -53,10 +53,30 @@
 
 #include <stdint.h>
 #include <sdk_config.h>
+#include <nrf.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**@brief Host to network byte-orders on half word. */
+//lint -emacro((572),HTONS) // Suppress warning 572 "Excessive shift value"
+#define HTONS(val)  ((uint16_t)((((val) & 0xff00) >> 8) | ((((val) & 0x00ff) << 8))))
+
+/**@brief Host to network byte-orders on full word. */
+//lint -emacro((572),HTONL) // Suppress warning 572 "Excessive shift value"
+#define HTONL(val)  ((((uint32_t) (val) & 0xff000000) >> 24)  |                                    \
+                     (((uint32_t) (val) & 0x00ff0000) >> 8)   |                                    \
+                     (((uint32_t) (val) & 0x0000ff00) << 8)   |                                    \
+                     (((uint32_t) (val) & 0x000000ff) << 24))
+
+/**@brief Network to host byte-orders on half word. */
+#define NTOHS(val)  HTONS(val)
+
+/**@brief Network to host byte-orders on full word. */
+#define NTOHL(val)  HTONL(val)
+
+#if defined(NRF52) || defined(NRF52_SERIES)
 
 #define EUI_64_ADDR_SIZE                        8                                                   /**< Size of EUI-64. */
 #define IPV6_ADDR_SIZE                          16                                                  /**< Size of IPv6 128-bit address. */
@@ -105,23 +125,6 @@ extern "C" {
 #define ICMP6_TYPE_NEIGHBOR_SOLICITATION        135                                                 /**< ICMPv6: Neighbor discovery, neighbor solicitation message. */
 #define ICMP6_TYPE_NEIGHBOR_ADVERTISEMENT       136                                                 /**< ICMPv6: Neighbor discovery, neighbor advertisement message. */
 /** @} */
-
-/**@brief Host to network byte-orders on half word. */
-//lint -emacro((572),HTONS) // Suppress warning 572 "Excessive shift value"
-#define HTONS(val)  ((uint16_t)((((val) & 0xff00) >> 8) | ((((val) & 0x00ff) << 8))))
-
-/**@brief Host to network byte-orders on full word. */
-//lint -emacro((572),HTONL) // Suppress warning 572 "Excessive shift value"
-#define HTONL(val)  ((((uint32_t) (val) & 0xff000000) >> 24)  |                                    \
-                     (((uint32_t) (val) & 0x00ff0000) >> 8)   |                                    \
-                     (((uint32_t) (val) & 0x0000ff00) << 8)   |                                    \
-                     (((uint32_t) (val) & 0x000000ff) << 24))
-
-/**@brief Network to host byte-orders on half word. */
-#define NTOHS(val)  HTONS(val)
-
-/**@brief Network to host byte-orders on full word. */
-#define NTOHL(val)  HTONL(val)
 
 /**@brief Initializes IPv6 address. */
 #define IPV6_ADDRESS_INITIALIZE(ADDR)                                                              \
@@ -306,6 +309,8 @@ typedef struct
         } echo;
     } sp;
 } icmp6_header_t;
+
+#endif // NRF52
 
 #ifdef __cplusplus
 }
