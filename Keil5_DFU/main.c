@@ -77,7 +77,8 @@
 
 #include "fds.h"
 #include "ble_dfu.h"
-#include "nrf_dfu_svci.h"
+// zzz-testmod
+// #include "nrf_dfu_svci.h"
 #include "nrf_svci_async_function.h"
 #include "nrf_svci_async_handler.h"
 
@@ -694,8 +695,10 @@ static void advertising_init(void)
 static void buttons_leds_init(bool * p_erase_bonds)
 {
     bsp_event_t startup_event;
-    
-    uint32_t err_code = bsp_init(BSP_INIT_LED, bsp_event_handler);
+
+// zzz-testmod    
+//    uint32_t err_code = bsp_init(BSP_INIT_LED, bsp_event_handler);
+    uint32_t err_code = bsp_init(BSP_INIT_LEDS, bsp_event_handler);
     APP_ERROR_CHECK(err_code);
     
     bsp_board_buttons_init();

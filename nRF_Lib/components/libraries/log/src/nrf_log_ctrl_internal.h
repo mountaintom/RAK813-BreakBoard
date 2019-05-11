@@ -52,6 +52,11 @@
 #define NRF_LOG_LFCLK_FREQ 32768
 
 #ifdef APP_TIMER_CONFIG_RTC_FREQUENCY
+//#define LOG_TIMESTAMP_DEFAULT_FREQUENCY ((NRF_LOG_TIMESTAMP_DEFAULT_FREQUENCY == 0) ?              \
+//                                       (NRF_LOG_LFCLK_FREQ/(APP_TIMER_CONFIG_RTC_FREQUENCY + 1)) : \
+//                                        NRF_LOG_TIMESTAMP_DEFAULT_FREQUENCY)
+//#else
+// zzz-testmod
 #define LOG_TIMESTAMP_DEFAULT_FREQUENCY ((NRF_LOG_TIMESTAMP_DEFAULT_FREQUENCY == 0) ?              \
                                        (NRF_LOG_LFCLK_FREQ/(APP_TIMER_CONFIG_RTC_FREQUENCY + 1)) : \
                                         NRF_LOG_TIMESTAMP_DEFAULT_FREQUENCY)
