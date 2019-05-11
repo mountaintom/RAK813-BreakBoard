@@ -1,12 +1,11 @@
-Output/rak813_breakboard\ Target\ 1/Obj/main.o: \
- /Users/toms1/Projects/IoT/LoRa/RAK815-board/RAK813-BreakBoard/Keil5_DFU/main.c \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.16/include/stdint.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.16/include/string.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.16/include/__crossworks.h \
- ../Board/lora_board/board.h \
+Output/rak813_breakboard\ Target\ 1/Obj/board.o: \
+ /Users/toms1/Projects/IoT/LoRa/RAK815-board/RAK813-BreakBoard/Board/lora_board/board.c \
+ /Users/toms1/Projects/IoT/LoRa/RAK815-board/RAK813-BreakBoard/Board/lora_board/board.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.16/include/stdbool.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.16/include/stdint.h \
  ../nRF_Lib/components/libraries/util/app_error.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.16/include/stdio.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.16/include/__crossworks.h \
  ../nRF_Lib/modules/nrfx/mdk/nrf.h ../nRF_Lib/modules/nrfx/mdk/nrf52.h \
  ../nRF_Lib/components/toolchain/cmsis/include/core_cm4.h \
  ../nRF_Lib/components/toolchain/cmsis/include/core_cmInstr.h \
@@ -23,8 +22,9 @@ Output/rak813_breakboard\ Target\ 1/Obj/main.o: \
  ../nRF_Lib/components/libraries/util/nordic_common.h \
  ../nRF_Lib/components/libraries/util/app_error_weak.h \
  ../nRF_Lib/components/libraries/log/nrf_log.h \
- ../nRF_Lib/components/libraries/util/sdk_common.h ../Apps/sdk_config.h \
- ../Board/lora_board/app_config.h \
+ ../nRF_Lib/components/libraries/util/sdk_common.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.16/include/string.h \
+ ../Apps/sdk_config.h ../Board/lora_board/app_config.h \
  ../nRF_Lib/modules/nrfx/mdk/compiler_abstraction.h \
  ../nRF_Lib/components/libraries/util/sdk_os.h \
  ../nRF_Lib/components/libraries/util/app_util.h \
@@ -41,10 +41,12 @@ Output/rak813_breakboard\ Target\ 1/Obj/main.o: \
  ../nRF_Lib/components/libraries/log/nrf_log_types.h \
  ../nRF_Lib/components/libraries/log/nrf_log_types.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.16/include/stdlib.h \
- ../Board/lora_board/utilities.h ../Board/lora_board/timer.h \
+ /Users/toms1/Projects/IoT/LoRa/RAK815-board/RAK813-BreakBoard/Board/lora_board/utilities.h \
+ /Users/toms1/Projects/IoT/LoRa/RAK815-board/RAK813-BreakBoard/Board/lora_board/timer.h \
  ../nRF_Lib/components/libraries/timer/app_timer.h \
- ../Board/lora_board/gpio-board.h ../Board/lora_board/pinName-board.h \
- ../Board/lora_board/spi-board.h \
+ /Users/toms1/Projects/IoT/LoRa/RAK815-board/RAK813-BreakBoard/Board/lora_board/gpio-board.h \
+ /Users/toms1/Projects/IoT/LoRa/RAK815-board/RAK813-BreakBoard/Board/lora_board/pinName-board.h \
+ /Users/toms1/Projects/IoT/LoRa/RAK815-board/RAK813-BreakBoard/Board/lora_board/spi-board.h \
  ../nRF_Lib/integration/nrfx/legacy/nrf_drv_spi.h \
  ../nRF_Lib/modules/nrfx/nrfx.h ../nRF_Lib/integration/nrfx/nrfx_config.h \
  ../nRF_Lib/modules/nrfx/drivers/nrfx_common.h \
@@ -71,11 +73,13 @@ Output/rak813_breakboard\ Target\ 1/Obj/main.o: \
  ../nRF_Lib/modules/nrfx/drivers/include/nrfx_spim.h \
  ../nRF_Lib/modules/nrfx/hal/nrf_spim.h \
  ../nRF_Lib/modules/nrfx/drivers/include/nrfx_spi.h \
- ../nRF_Lib/modules/nrfx/hal/nrf_spi.h ../Board/lora_board/rtc-board.h \
+ ../nRF_Lib/modules/nrfx/hal/nrf_spi.h \
+ /Users/toms1/Projects/IoT/LoRa/RAK815-board/RAK813-BreakBoard/Board/lora_board/rtc-board.h \
  ../LoRa_Lib/radio/radio.h ../LoRa_Lib/radio/sx1276/sx1276.h \
  ../LoRa_Lib/radio/sx1276/sx1276Regs-Fsk.h \
  ../LoRa_Lib/radio/sx1276/sx1276Regs-LoRa.h \
- ../Board/lora_board/sx1276-board.h ../nRF_Lib/components/boards/boards.h \
+ /Users/toms1/Projects/IoT/LoRa/RAK815-board/RAK813-BreakBoard/Board/lora_board/sx1276-board.h \
+ ../nRF_Lib/components/boards/boards.h \
  ../nRF_Lib/modules/nrfx/hal/nrf_gpio.h ../Board/custom_board.h \
  ../nRF_Lib/components/libraries/uart/app_uart.h \
  ../nRF_Lib/external/segger_rtt/SEGGER_RTT.h \
@@ -99,41 +103,16 @@ Output/rak813_breakboard\ Target\ 1/Obj/main.o: \
  ../nRF_Lib/components/softdevice/s132/headers/ble_gatts.h \
  ../nRF_Lib/components/libraries/fstorage/nrf_fstorage_sd.h \
  ../nRF_Lib/components/libraries/fstorage/nrf_fstorage.h \
- ../Apps/Commissioning.h ../LoRa_Lib/system/gps.h \
- ../Board/lora_board/utils.h \
- ../nRF_Lib/components/softdevice/s132/headers/ble_hci.h \
- ../nRF_Lib/components/ble/common/ble_advdata.h \
- ../nRF_Lib/components/ble/ble_advertising/ble_advertising.h \
- ../nRF_Lib/components/softdevice/s132/headers/ble_gap.h \
- ../nRF_Lib/components/softdevice/s132/headers/ble_gattc.h \
- ../nRF_Lib/components/ble/ble_db_discovery/ble_db_discovery.h \
- ../nRF_Lib/components/ble/common/ble_gatt_db.h \
- ../nRF_Lib/components/ble/common/ble_conn_params.h \
- ../nRF_Lib/components/ble/common/ble_srv_common.h \
- ../nRF_Lib/components/softdevice/s132/headers/ble_types.h \
- ../nRF_Lib/components/softdevice/s132/headers/ble_gatt.h \
- ../nRF_Lib/components/softdevice/common/nrf_sdh_soc.h \
- ../nRF_Lib/components/ble/nrf_ble_gatt/nrf_ble_gatt.h \
- ../nRF_Lib/components/ble/ble_services/ble_nus/ble_nus.h \
- ../nRF_Lib/components/ble/common/ble_srv_common.h \
- ../nRF_Lib/components/ble/ble_link_ctx_manager/ble_link_ctx_manager.h \
- ../nRF_Lib/components/ble/common/ble_conn_state.h \
- ../nRF_Lib/components/libraries/atomic/nrf_atomic.h \
- ../nRF_Lib/components/libraries/bsp/bsp_btn_ble.h \
- ../nRF_Lib/components/libraries/bsp/bsp.h \
- ../nRF_Lib/components/libraries/button/app_button.h \
- ../nRF_Lib/components/ble/peer_manager/peer_manager.h \
- ../nRF_Lib/components/ble/peer_manager/peer_manager_types.h \
- ../nRF_Lib/components/ble/peer_manager/peer_database.h \
- ../nRF_Lib/components/ble/peer_manager/peer_manager_internal.h \
+ ../Apps/Commissioning.h ../nRF_Lib/modules/nrfx/mdk/nrf52.h \
+ /Users/toms1/Projects/IoT/LoRa/RAK815-board/RAK813-BreakBoard/Board/lora_board/app_config.h \
+ ../nRF_Lib/integration/nrfx/legacy/nrf_drv_gpiote.h \
+ ../nRF_Lib/modules/nrfx/drivers/include/nrfx_gpiote.h \
+ ../nRF_Lib/modules/nrfx/hal/nrf_gpiote.h \
+ ../nRF_Lib/modules/nrfx/hal/nrf_gpio.h \
+ ../nRF_Lib/integration/nrfx/legacy/nrf_drv_wdt.h \
+ ../nRF_Lib/modules/nrfx/drivers/include/nrfx_wdt.h \
+ ../nRF_Lib/modules/nrfx/hal/nrf_wdt.h \
+ ../nRF_Lib/components/libraries/mem_manager/mem_manager.h \
  ../nRF_Lib/components/libraries/log/nrf_log_ctrl.h \
  ../nRF_Lib/components/libraries/log/src/nrf_log_ctrl_internal.h \
- ../nRF_Lib/components/libraries/log/nrf_log_backend_interface.h \
- ../nRF_Lib/components/libraries/log/nrf_log_default_backends.h \
- ../nRF_Lib/components/libraries/fds/fds.h \
- ../nRF_Lib/components/ble/ble_services/ble_dfu/ble_dfu.h \
- ../nRF_Lib/components/libraries/svc/nrf_svci_async_function.h \
- ../nRF_Lib/components/libraries/svc/nrf_svci.h \
- ../nRF_Lib/components/libraries/svc/nrf_svci_async_handler.h \
- ../nRF_Lib/components/libraries/svc/nrf_svc_function.h \
- ../nRF_Lib/components/libraries/svc/nrf_svci_async_handler.h
+ ../nRF_Lib/components/libraries/log/nrf_log_backend_interface.h

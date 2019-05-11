@@ -37,10 +37,8 @@
       <file file_name="../nRF_Lib/components/libraries/bsp/bsp.c" />
       <file file_name="../nRF_Lib/components/libraries/bsp/bsp_btn_ble.c" />
       <file file_name="../nRF_Lib/components/libraries/bsp/bsp_nfc.c" />
-      <file file_name="../nRF_Lib/components/toolchain/arm/arm_startup_nrf52.s">
-        <configuration Name="Internal" build_exclude_from_build="Yes" />
-      </file>
-      <file file_name="../nRF_Lib/components/toolchain/system_nrf52.c" />
+      <file file_name="../nRF_Lib/modules/nrfx/mdk/system_nrf52.c" />
+      <file file_name="../nRF_Lib/modules/nrfx/mdk/gcc_startup_nrf52.S" />
     </folder>
     <folder Name="Board/lora_board">
       <file file_name="../Board/lora_board/board.c" />
@@ -172,5 +170,8 @@
       linker_additional_options="--cpu;Cortex-M4" />
   </project>
   <configuration Name="Internal" hidden="Yes" />
-  <configuration Name="Target 1" inherited_configurations="Internal" />
+  <configuration
+    Name="Target 1"
+    arm_assembler_variant="clang"
+    inherited_configurations="Internal" />
 </solution>

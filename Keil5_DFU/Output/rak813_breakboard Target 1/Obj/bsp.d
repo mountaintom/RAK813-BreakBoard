@@ -63,7 +63,6 @@ Output/rak813_breakboard\ Target\ 1/Obj/bsp.o: \
  ../nRF_Lib/components/libraries/util/app_util.h \
  ../nRF_Lib/components/libraries/util/sdk_macros.h \
  ../nRF_Lib/components/libraries/experimental_section_vars/nrf_section.h \
- ../nRF_Lib/components/libraries/strerror/nrf_strerror.h \
  ../nRF_Lib/components/libraries/log/src/nrf_log_internal.h \
  ../nRF_Lib/components/libraries/log/nrf_log_instance.h \
  ../nRF_Lib/components/libraries/log/nrf_log_types.h \
