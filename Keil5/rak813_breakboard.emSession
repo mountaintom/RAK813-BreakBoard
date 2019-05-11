@@ -40,10 +40,10 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="145" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/components/device/nrf52.h" selected="0" top="136" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="19" useTextEdit="1" useBinaryEdit="0" left="375" path="rak813_breakboard.emProject" selected="0" top="5" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="45" y="100" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/components/libraries/uart/retarget.c" selected="1" top="144" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="19" useTextEdit="1" useBinaryEdit="0" left="0" path="rak813_breakboard.emProject" selected="0" top="5" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="100" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/components/libraries/uart/retarget.c" selected="0" top="78" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="772" useTextEdit="1" useBinaryEdit="0" left="0" path="/Applications/SEGGER Embedded Studio for ARM 4.16/include/stdio.h" selected="0" top="748" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="42" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/components/boards/boards.h" selected="1" top="12" codecName="Default"/>
  </Files>
  <ARMCrossStudioWindow activeProject="rak813_breakboard" fileDialogDefaultFilter="*.xml;*.xsd;*.xsl;*.xslt" autoConnectTarget="J-Link" buildConfiguration="Target 1" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="/Users/toms1/Projects/IoT/Nordic/SDK/nRF5_SDK_15.3.0_59ac345/examples/ble_peripheral/ble_app_hts/pca10056/s140/ses" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>
