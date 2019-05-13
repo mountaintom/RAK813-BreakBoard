@@ -4104,7 +4104,8 @@
  
 
 #ifndef NRFX_RTC2_ENABLED
-#define NRFX_RTC2_ENABLED 0
+//#define NRFX_RTC2_ENABLED 0
+#define NRFX_RTC2_ENABLED 1  // zzz-testmod
 #endif
 
 // <o> NRFX_RTC_MAXIMUM_LATENCY_US - Maximum possible time[us] in highest priority interrupt 
@@ -4544,7 +4545,8 @@
 // <e> NRFX_SPI_ENABLED - nrfx_spi - SPI peripheral driver
 //==========================================================
 #ifndef NRFX_SPI_ENABLED
-#define NRFX_SPI_ENABLED 0
+//#define NRFX_SPI_ENABLED 0
+#define NRFX_SPI_ENABLED 1 //zzz-testmod
 #endif
 // <q> NRFX_SPI0_ENABLED  - Enable SPI0 instance
  
@@ -6212,7 +6214,8 @@
  
 
 #ifndef RTC2_ENABLED
-#define RTC2_ENABLED 0
+//#define RTC2_ENABLED 0
+#define RTC2_ENABLED 1 // zzz-testmod - this is the legacy version of the switch
 #endif
 
 // <o> NRF_MAXIMUM_LATENCY_US - Maximum possible time[us] in highest priority interrupt 
@@ -6376,7 +6379,8 @@
 // <e> SPI_ENABLED - nrf_drv_spi - SPI/SPIM peripheral driver - legacy layer
 //==========================================================
 #ifndef SPI_ENABLED
-#define SPI_ENABLED 0
+//#define SPI_ENABLED 0
+#define SPI_ENABLED 1 // zzz-testmod - set for legacy also
 #endif
 // <o> SPI_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
  

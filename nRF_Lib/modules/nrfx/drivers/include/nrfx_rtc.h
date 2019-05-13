@@ -78,6 +78,7 @@ typedef struct
     uint8_t         cc_channel_count; /**< Number of capture/compare channels. */
 } nrfx_rtc_t;
 
+
 /**@brief Macro for creating RTC driver instance.*/
 #define NRFX_RTC_INSTANCE(id)                                   \
 {                                                               \
