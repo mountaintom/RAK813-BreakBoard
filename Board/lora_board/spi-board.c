@@ -6,9 +6,13 @@ void SpiInit( Spi_t *obj, PinNames mosi, PinNames miso, PinNames sclk, PinNames 
 {
         // TODO: Fix this obsolete structure to use instance creation macro
         // as it is not even compatible with the legacy layer. 
-	obj->Instance.p_registers = NRF_SPI0;
-	obj->Instance.irq = SPI0_IRQ;
-	obj->Instance.drv_inst_idx = SPI0_INSTANCE_INDEX;
+//----
+        //obj->Instance = NRF_DRV_SPI_INSTANCE(0);
+//----
+//zzz-testmod
+	//obj->Instance.p_registers = NRF_SPI0;
+	//obj->Instance.irq = SPI0_IRQ;
+	//obj->Instance.drv_inst_idx = SPI0_INSTANCE_INDEX;
 	obj->Instance.use_easy_dma = SPI0_USE_EASY_DMA;
 
 	obj->Config.sck_pin			= sclk;

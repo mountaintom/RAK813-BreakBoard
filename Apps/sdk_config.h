@@ -4105,7 +4105,8 @@
 
 #ifndef NRFX_RTC2_ENABLED
 //#define NRFX_RTC2_ENABLED 0
-#define NRFX_RTC2_ENABLED 1  // zzz-testmod
+#define NRFX_RTC2_ENABLED 1  
+// zzz-testmod
 #endif
 
 // <o> NRFX_RTC_MAXIMUM_LATENCY_US - Maximum possible time[us] in highest priority interrupt 
@@ -4546,7 +4547,8 @@
 //==========================================================
 #ifndef NRFX_SPI_ENABLED
 //#define NRFX_SPI_ENABLED 0
-#define NRFX_SPI_ENABLED 1 //zzz-testmod
+#define NRFX_SPI_ENABLED 1 
+//zzz-testmod
 #endif
 // <q> NRFX_SPI0_ENABLED  - Enable SPI0 instance
  
@@ -6215,7 +6217,8 @@
 
 #ifndef RTC2_ENABLED
 //#define RTC2_ENABLED 0
-#define RTC2_ENABLED 1 // zzz-testmod - this is the legacy version of the switch
+#define RTC2_ENABLED 1 
+// zzz-testmod - this is the legacy version of the switch
 #endif
 
 // <o> NRF_MAXIMUM_LATENCY_US - Maximum possible time[us] in highest priority interrupt 
@@ -6380,7 +6383,8 @@
 //==========================================================
 #ifndef SPI_ENABLED
 //#define SPI_ENABLED 0
-#define SPI_ENABLED 1 // zzz-testmod - set for legacy also
+#define SPI_ENABLED 1 
+// zzz-testmod - set for legacy also
 #endif
 // <o> SPI_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
  
@@ -6412,7 +6416,9 @@
 // <e> SPI0_ENABLED - Enable SPI0 instance
 //==========================================================
 #ifndef SPI0_ENABLED
-#define SPI0_ENABLED 0
+//#define SPI0_ENABLED 0
+//zzz-testmod
+#define SPI0_ENABLED 1 
 #endif
 // <q> SPI0_USE_EASY_DMA  - Use EasyDMA
  
@@ -6426,7 +6432,9 @@
 // <e> SPI1_ENABLED - Enable SPI1 instance
 //==========================================================
 #ifndef SPI1_ENABLED
-#define SPI1_ENABLED 0
+//#define SPI1_ENABLED 0
+#define SPI1_ENABLED 1
+//zzz-testmod
 #endif
 // <q> SPI1_USE_EASY_DMA  - Use EasyDMA
  
@@ -6712,7 +6720,9 @@
 // <e> TWI1_ENABLED - Enable TWI1 instance
 //==========================================================
 #ifndef TWI1_ENABLED
-#define TWI1_ENABLED 0
+//#define TWI1_ENABLED 0
+#define TWI1_ENABLED 1
+//zzz-testmod
 #endif
 // <q> TWI1_USE_EASY_DMA  - Use EasyDMA (if present)
  
@@ -12039,7 +12049,8 @@
 // <e> NRF_SDH_BLE_ENABLED - nrf_sdh_ble - SoftDevice BLE event handler
 //==========================================================
 #ifndef NRF_SDH_BLE_ENABLED
-// #define NRF_SDH_BLE_ENABLED 0 // zzz-testmod
+// #define NRF_SDH_BLE_ENABLED 0 
+// zzz-testmod
 #define NRF_SDH_BLE_ENABLED 1
 #endif
 // <h> BLE Stack configuration - Stack configuration parameters
@@ -12598,7 +12609,8 @@
 // <e> NRF_SDH_SOC_ENABLED - nrf_sdh_soc - SoftDevice SoC event handler
 //==========================================================
 #ifndef NRF_SDH_SOC_ENABLED
-//#define NRF_SDH_SOC_ENABLED 0 // zzz-testmod
+//#define NRF_SDH_SOC_ENABLED 0 
+// zzz-testmod
 #define NRF_SDH_SOC_ENABLED 1
 #endif
 // <h> SoC Observers - Observers and priority levels

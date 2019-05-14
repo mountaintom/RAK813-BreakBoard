@@ -18,6 +18,8 @@
   <ProjectSessionItem path="rak813_breakboard;rak813_breakboard;Apps"/>
   <ProjectSessionItem path="rak813_breakboard;rak813_breakboard;Board"/>
   <ProjectSessionItem path="rak813_breakboard;rak813_breakboard;Board/lora_board"/>
+  <ProjectSessionItem path="rak813_breakboard;rak813_breakboard;nRF_Lib/ble"/>
+  <ProjectSessionItem path="rak813_breakboard;rak813_breakboard;nRF_Lib/DFU"/>
  </Project>
  <Register1/>
  <Register2/>
@@ -42,7 +44,27 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="1" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="main.c" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="10" y="9" useTextEdit="1" useBinaryEdit="0" left="0" path="../Board/lora_board/spi-board.c" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="25" useTextEdit="1" useBinaryEdit="0" left="0" path="../Board/lora_board/spi-board.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="36" y="119" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/integration/nrfx/legacy/nrf_drv_spi.h" selected="0" top="106" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="64" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/modules/nrfx/drivers/include/nrfx_spim.h" selected="0" top="56" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1122" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/modules/nrfx/mdk/nrf52.h" selected="0" top="1093" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="64" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/modules/nrfx/drivers/include/nrfx_spi.h" selected="0" top="48" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="45" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/modules/nrfx/nrfx.h" selected="0" top="32" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/integration/nrfx/nrfx_config.h" selected="0" top="22" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/integration/nrfx/nrfx_glue.h" selected="0" top="304" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="../Board/lora_board/board.c" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="../Board/lora_board/board.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="13" y="6724" useTextEdit="1" useBinaryEdit="0" left="0" path="../Apps/sdk_config.h" selected="0" top="6705" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="9" y="18" useTextEdit="1" useBinaryEdit="0" left="0" path="../Board/lora_board/utilities.c" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="269" y="29" useTextEdit="1" useBinaryEdit="0" left="170" path="rak813_breakboard.emProject" selected="0" top="10" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="130" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/integration/nrfx/legacy/nrf_drv_twi.h" selected="0" top="105" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="44" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/components/ble/common/ble_conn_state.c" selected="0" top="17" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="43" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/components/ble/ble_services/ble_dfu/ble_dfu_bonded.c" selected="0" top="16" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="257" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/components/ble/ble_services/ble_dfu/ble_dfu_unbonded.c" selected="1" top="231" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="54" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/components/ble/ble_services/ble_dfu/ble_dfu.c" selected="0" top="28" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="173" useTextEdit="1" useBinaryEdit="0" left="0" path="../nRF_Lib/components/libraries/svc/nrf_svci_async_function.h" selected="0" top="156" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="rak813_breakboard" fileDialogDefaultFilter="*.S" autoConnectTarget="J-Link" buildConfiguration="Target 1" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="/Users/toms1/Projects/IoT/LoRa/RAK815-board/RAK813-BreakBoard/nRF_Lib/modules/nrfx/mdk" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <ARMCrossStudioWindow activeProject="rak813_breakboard" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Target 1" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="/Users/toms1/Projects/IoT/LoRa/RAK815-board/RAK813-BreakBoard/nRF_Lib/modules/nrfx/mdk" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>
